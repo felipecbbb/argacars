@@ -1018,6 +1018,10 @@ strong{ color: var(--fg); font-weight: 700; }
   z-index: 0;
 }
 
+/* image-first about block: bigger image column on desktop, stacks on mobile */
+.about-grid--img-first{ grid-template-columns: 1.1fr 1fr; }
+@media (max-width: 980px){ .about-grid--img-first{ grid-template-columns: 1fr; } }
+
 /* about image: full-bleed cover (people centered) */
 .about-img .media{ object-fit: cover; object-position: center; }
 .about-img.has-photo{ background: var(--bg-elev); }
