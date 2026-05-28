@@ -1005,3 +1005,68 @@ strong{ color: var(--fg); font-weight: 700; }
   *,*::before,*::after{ animation-duration: .01ms !important; transition: none !important; }
   .hero-big-word, .footer-bigword{ animation: none !important; }
 }
+
+/* =========================================================
+   REAL PHOTOS — fill media blocks while keeping overlays
+   ========================================================= */
+
+/* <img class="media"> fills its media block */
+.proj-img .media,
+.about-img .media{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+/* about image: full-bleed cover (people centered) */
+.about-img .media{ object-fit: cover; object-position: center; }
+.about-img.has-photo{ background: var(--bg-elev); }
+.about-img.has-photo::after{
+  content:""; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.5) 100%);
+}
+.about-img .chips{ z-index: 2; }
+
+/* car / detail cards: portrait frame, photo fills it, centered */
+.proj-img.has-photo{ aspect-ratio: 4/5; background: var(--bg-elev); }
+.proj-img .media{ object-fit: cover; object-position: center; }
+.proj-img.has-photo::after{
+  content:""; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 58%, rgba(0,0,0,.32) 100%);
+  pointer-events:none;
+}
+.proj-img .arrow-corner{ z-index: 2; }
+
+/* blog post covers: full-bleed photo behind the label */
+.post-cover .media{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  z-index: 0;
+}
+.post-cover.has-photo::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background: linear-gradient(180deg, rgba(0,0,0,.1) 35%, rgba(0,0,0,.72) 100%);
+}
+.post-cover::after{ z-index: 2; }
+
+/* background-image media (process slides) */
+.media-cover{
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+/* HERO photo background (index only) */
+.hero-bg.photo{
+  background: url('../img/life/hero-lineup.jpg') center/cover no-repeat;
+}
+.hero-bg.photo::after{
+  background:
+    radial-gradient(85% 60% at 50% 16%, rgba(0,0,0,.2), transparent 70%),
+    linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 40%, rgba(0,0,0,.66) 100%);
+}
+[data-theme="dark"] .hero-bg.photo::after{
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.3) 38%, rgba(0,0,0,.75) 100%);
+}

@@ -18,12 +18,29 @@
   @keyframes drift-marquee{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
   .crit-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
   @media (max-width: 720px){ .crit-grid{ grid-template-columns: 1fr; } }
-  .crit-card{ background: var(--bg-soft); border:1px solid var(--border); border-radius: var(--r-lg); padding: var(--space-5); display:flex; gap: var(--space-4); align-items: flex-start; }
-  .crit-card .ic{ width: 36px; height: 36px; border-radius: var(--r-full); display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight: 800; }
-  .crit-card .check{ background: rgba(34,197,94,.12); color: #16a34a; border:1px solid rgba(34,197,94,.3); }
-  .crit-card .cross{ background: rgba(239,68,68,.12); color: #dc2626; border:1px solid rgba(239,68,68,.3); }
-  .crit-card strong{ display:block; font-size: 16px; margin-bottom: 4px; }
-  .crit-card p{ color: var(--fg-muted); font-size: 14px; line-height: 1.5; margin: 0; }
+  .crit-card{
+    position: relative; overflow: hidden;
+    background: var(--bg-card);
+    border:1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: var(--space-5) var(--space-6);
+    display:flex; gap: var(--space-4); align-items: flex-start;
+    transition: transform .35s var(--ease-spring), border-color .3s var(--ease-smooth), box-shadow .3s var(--ease-smooth);
+  }
+  .crit-card::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background: var(--gold); }
+  .crit-card:hover{ transform: translateY(-3px); border-color: var(--border-strong); box-shadow: var(--shadow-card); }
+  .crit-card .ic{
+    width: 32px; height: 32px; border-radius: var(--r-full);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-size: 13px; font-weight: 800; line-height: 1; margin-top: 1px;
+  }
+  .crit-card .check{ background: var(--gold); color: #0a0a0a; }
+  .crit-card .cross{ background: transparent; color: var(--fg-muted); border:1px solid var(--border-strong); }
+  .crit-card:has(.cross){ background: var(--bg-soft); }
+  .crit-card:has(.cross)::before{ background: var(--border-strong); }
+  .crit-card:has(.cross) strong{ color: var(--fg-muted); }
+  .crit-card strong{ display:block; font-size: 16px; margin-bottom: 5px; letter-spacing: -.01em; color: var(--fg); }
+  .crit-card p{ color: var(--fg-muted); font-size: 14px; line-height: 1.55; margin: 0; }
 </style>
 </head>
 <body>
@@ -73,14 +90,13 @@
     </div>
 
     <div class="grid-4 stagger">
-      <article class="proj-card"><div class="proj-img" style="aspect-ratio: 4/5;"><span class="arrow-corner">01</span></div><div class="proj-body"><h3>DEPORTIVOS</h3><p>Porsche 911, BMW M, Mercedes-AMG, Ford Mustang…</p></div></article>
-      <article class="proj-card"><div class="proj-img v2" style="aspect-ratio: 4/5;"><span class="arrow-corner">02</span></div><div class="proj-body"><h3>SUV & TODOTERRENO</h3><p>Mercedes G63, BMW X3/X5, Audi Q5/Q7, VW Touareg…</p></div></article>
-      <article class="proj-card"><div class="proj-img v3" style="aspect-ratio: 4/5;"><span class="arrow-corner">03</span></div><div class="proj-body"><h3>BERLINAS PREMIUM</h3><p>BMW Serie 3/5/7, Mercedes Clase C/E/S, Audi A4/A6/A8…</p></div></article>
-      <article class="proj-card"><div class="proj-img v4" style="aspect-ratio: 4/5;"><span class="arrow-corner">04</span></div><div class="proj-body"><h3>ELÉCTRICOS E HÍBRIDOS</h3><p>Mercedes EQE, Audi e-tron, BMW i, Porsche Taycan…</p></div></article>
-      <article class="proj-card"><div class="proj-img v5" style="aspect-ratio: 4/5;"><span class="arrow-corner">05</span></div><div class="proj-body"><h3>FAMILIARES & TOURING</h3><p>BMW Serie 3 Touring, Mercedes Estate, Audi Avant…</p></div></article>
-      <article class="proj-card"><div class="proj-img v6" style="aspect-ratio: 4/5;"><span class="arrow-corner">06</span></div><div class="proj-body"><h3>COMPACTOS</h3><p>VW Golf GTI/R, Audi A3, BMW Serie 1, Mercedes Clase A…</p></div></article>
-      <article class="proj-card"><div class="proj-img" style="aspect-ratio: 4/5;"><span class="arrow-corner">07</span></div><div class="proj-body"><h3>CABRIOS</h3><p>BMW Z4, Mercedes SLK/SL, Porsche Boxster, Audi TT Roadster…</p></div></article>
-      <article class="proj-card"><div class="proj-img v2" style="aspect-ratio: 4/5;"><span class="arrow-corner">08</span></div><div class="proj-body"><h3>MONOVOLUMEN</h3><p>Mercedes Clase V/Vito, VW Multivan, BMW Serie 2 AT…</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/911gts.jpg" alt="Deportivos" loading="lazy"><span class="arrow-corner">01</span></div><div class="proj-body"><h3>DEPORTIVOS</h3><p>Porsche 911, BMW M, Mercedes-AMG, Ferrari…</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/x4m.jpg" alt="SUV y todoterreno" loading="lazy"><span class="arrow-corner">02</span></div><div class="proj-body"><h3>SUV & TODOTERRENO</h3><p>Mercedes G63, BMW X4/X5, Audi Q5/Q7, Lamborghini Urus…</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/m340i.jpg" alt="Berlinas premium" loading="lazy"><span class="arrow-corner">03</span></div><div class="proj-body"><h3>BERLINAS PREMIUM</h3><p>Porsche Panamera, Mercedes Clase E/S, Audi A6/A8…</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/panamera-h.jpg" alt="Eléctricos e híbridos" loading="lazy"><span class="arrow-corner">04</span></div><div class="proj-body"><h3>ELÉCTRICOS E HÍBRIDOS</h3><p>Mercedes GLE 350de, BMW X5 45e, Porsche E-Hybrid…</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/rs6.jpg" alt="Familiares y touring" loading="lazy"><span class="arrow-corner">05</span></div><div class="proj-body"><h3>FAMILIARES & TOURING</h3><p>Audi RS6 Avant, BMW Touring, Mercedes Estate…</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/golfr.jpg" alt="Compactos" loading="lazy"><span class="arrow-corner">06</span></div><div class="proj-body"><h3>COMPACTOS</h3><p>VW Golf R/GTI, Mercedes-AMG A45/CLA45, BMW M2/M240i…</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/cabrio.jpg" alt="Cabrios y descapotables" loading="lazy"><span class="arrow-corner">07</span></div><div class="proj-body"><h3>CABRIOS</h3><p>Porsche 911 Cabrio, Ferrari Spider, Mercedes SL…</p></div></article>
     </div>
   </div>
 </section>
@@ -135,12 +151,12 @@
     </div>
 
     <div class="grid-3 stagger">
-      <article class="proj-card"><div class="proj-img"><span class="arrow-corner">01</span></div><div class="proj-body"><h3 style="color:#fff;">CHAPA Y PINTURA</h3><p style="color:rgba(255,255,255,.65);">Análisis exhaustivo en busca de retoques, golpes ocultos o reparaciones previas.</p></div></article>
-      <article class="proj-card"><div class="proj-img v2"><span class="arrow-corner">02</span></div><div class="proj-body"><h3 style="color:#fff;">CHASIS</h3><p style="color:rgba(255,255,255,.65);">Comprobación de la integridad estructural del vehículo.</p></div></article>
-      <article class="proj-card"><div class="proj-img v3"><span class="arrow-corner">03</span></div><div class="proj-body"><h3 style="color:#fff;">MECÁNICA</h3><p style="color:rgba(255,255,255,.65);">Revisión de elementos generales y mecánicos del coche.</p></div></article>
-      <article class="proj-card"><div class="proj-img v4"><span class="arrow-corner">04</span></div><div class="proj-body"><h3 style="color:#fff;">INTERIOR</h3><p style="color:rgba(255,255,255,.65);">Inspección del estado completo del habitáculo.</p></div></article>
-      <article class="proj-card"><div class="proj-img v5"><span class="arrow-corner">05</span></div><div class="proj-body"><h3 style="color:#fff;">DIAGNOSIS ELECTRÓNICA</h3><p style="color:rgba(255,255,255,.65);">Detección de fallos pasados o actuales y posibles manipulaciones de kilometraje.</p></div></article>
-      <article class="proj-card"><div class="proj-img v6"><span class="arrow-corner">06</span></div><div class="proj-body"><h3 style="color:#fff;">PRUEBA DE CONDUCCIÓN</h3><p style="color:rgba(255,255,255,.65);">Test real en carretera para validar comportamiento y respuesta.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/det-911.jpg" alt="Inspección de chapa y pintura" loading="lazy"><span class="arrow-corner">01</span></div><div class="proj-body"><h3 style="color:#fff;">CHAPA Y PINTURA</h3><p style="color:rgba(255,255,255,.65);">Análisis exhaustivo en busca de retoques, golpes ocultos o reparaciones previas.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/gt3.jpg" alt="Comprobación de chasis" loading="lazy"><span class="arrow-corner">02</span></div><div class="proj-body"><h3 style="color:#fff;">CHASIS</h3><p style="color:rgba(255,255,255,.65);">Comprobación de la integridad estructural del vehículo.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/m2cs.jpg" alt="Revisión mecánica" loading="lazy"><span class="arrow-corner">03</span></div><div class="proj-body"><h3 style="color:#fff;">MECÁNICA</h3><p style="color:rgba(255,255,255,.65);">Revisión de elementos generales y mecánicos del coche.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-urus.jpg" alt="Inspección de interior" loading="lazy"><span class="arrow-corner">04</span></div><div class="proj-body"><h3 style="color:#fff;">INTERIOR</h3><p style="color:rgba(255,255,255,.65);">Inspección del estado completo del habitáculo.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-rs6.jpg" alt="Diagnosis electrónica" loading="lazy"><span class="arrow-corner">05</span></div><div class="proj-body"><h3 style="color:#fff;">DIAGNOSIS ELECTRÓNICA</h3><p style="color:rgba(255,255,255,.65);">Detección de fallos pasados o actuales y posibles manipulaciones de kilometraje.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-gt3rs.jpg" alt="Prueba de conducción" loading="lazy"><span class="arrow-corner">06</span></div><div class="proj-body"><h3 style="color:#fff;">PRUEBA DE CONDUCCIÓN</h3><p style="color:rgba(255,255,255,.65);">Test real en carretera para validar comportamiento y respuesta.</p></div></article>
     </div>
   </div>
 </section>
@@ -162,21 +178,20 @@
       <button class="filter-pill" data-filter="deportivo">Deportivos</button>
       <button class="filter-pill" data-filter="suv">SUV</button>
       <button class="filter-pill" data-filter="berlina">Berlinas</button>
-      <button class="filter-pill" data-filter="electrico">Eléctricos</button>
+      <button class="filter-pill" data-filter="electrico">Eléctricos e híbridos</button>
       <button class="filter-pill" data-filter="compacto">Compactos</button>
-      <button class="filter-pill" data-filter="hibrido">Híbridos</button>
     </div>
 
     <div class="grid-3 stagger">
-      <article class="proj-card" data-cat="deportivo"><div class="proj-img"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Porsche 911 Carrera GTS</h3><p>992.1 · Coupé · Gasolina · Auto · 2024 · 120 km</p></div></article>
-      <article class="proj-card" data-cat="suv"><div class="proj-img v2"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Mercedes G63 AMG</h3><p>SUV · Gasolina · Automático · 2020 · 32.000 km</p></div></article>
-      <article class="proj-card" data-cat="electrico"><div class="proj-img v3"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Mercedes-Benz EQE 350 AMG</h3><p>Eléctrico · Automático · 2023 · 17.000 km</p></div></article>
-      <article class="proj-card" data-cat="berlina"><div class="proj-img v4"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>BMW 730d xDrive</h3><p>Serie 7 · Diésel · Automático · 2020 · 119.000 km</p></div></article>
-      <article class="proj-card" data-cat="compacto"><div class="proj-img v5"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>VW Golf GTI Clubsport</h3><p>Hatchback · Gasolina · Automático · 2021 · 25.600 km</p></div></article>
-      <article class="proj-card" data-cat="hibrido"><div class="proj-img v6"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>BMW 330e Touring</h3><p>Familiar · Híbrido enchufable · 2021 · 32.600 km</p></div></article>
-      <article class="proj-card" data-cat="suv"><div class="proj-img"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>VW T-Roc R</h3><p>SUV · Gasolina · Automático · 2020 · 50.000 km</p></div></article>
-      <article class="proj-card" data-cat="deportivo"><div class="proj-img v2"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Ford Mustang GT 5.0</h3><p>Coupé · Gasolina · Automático · 2017 · 109.500 km</p></div></article>
-      <article class="proj-card" data-cat="electrico"><div class="proj-img v3"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Audi Q6 e-tron</h3><p>SUV · Eléctrico · Automático · 2025 · Reciente</p></div></article>
+      <article class="proj-card" data-cat="deportivo"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/gt3rs.jpg" alt="Porsche 911 GT3 RS naranja" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Porsche 911 GT3 RS</h3><p>Deportivo · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="suv"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/g63.jpg" alt="Mercedes-AMG G63 negro" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Mercedes-AMG G63</h3><p>SUV · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="berlina"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/panamera.jpg" alt="Porsche Panamera Turbo gris" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Porsche Panamera Turbo</h3><p>Berlina · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="electrico"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/gle.jpg" alt="Mercedes GLE 350de blanco" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Mercedes GLE 350de</h3><p>Híbrido enchufable · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="compacto"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/m440i.jpg" alt="BMW M440i negro" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>BMW M440i</h3><p>Coupé · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="deportivo"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/f430.jpg" alt="Ferrari F430 Spider negro" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Ferrari F430 Spider</h3><p>Deportivo · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="suv"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/urus.jpg" alt="Lamborghini Urus gris" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Lamborghini Urus</h3><p>SUV · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="berlina"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/cla45.jpg" alt="Mercedes-AMG CLA 45 S gris" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>Mercedes-AMG CLA 45 S</h3><p>Berlina · Importado de Alemania</p></div></article>
+      <article class="proj-card" data-cat="compacto"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/m2.jpg" alt="BMW M2 negro" loading="lazy"><span class="arrow-corner"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></div><div class="proj-body"><h3>BMW M2</h3><p>Compacto · Importado de Alemania</p></div></article>
     </div>
 
     <p class="muted" style="margin-top: var(--space-6); text-align:center; font-size: 13px;">* Ejemplos de vehículos importados para clientes. No constituyen un catálogo de venta.</p>
