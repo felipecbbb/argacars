@@ -3,29 +3,26 @@
 //  Vanilla JS, Framer-Motion-like easings and behavior
 // =========================================================
 
-// Default theme: light (axioma-style)
-(function(){
-  try{
-    var t = localStorage.getItem('arga-theme');
-    document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
-  }catch(e){
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
-})();
+// Theme: always light (axioma-style)
+document.documentElement.setAttribute('data-theme', 'light');
 
 document.addEventListener('DOMContentLoaded', () => {
 
   // -------------------------------------------------------
-  //  Theme toggle
+  //  Header color toggle (invierte SOLO los colores del header)
   // -------------------------------------------------------
-  document.querySelectorAll('.theme-toggle').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      const next = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      try{ localStorage.setItem('arga-theme', next); }catch(e){}
+  const header = document.querySelector('.site-header');
+  if (header){
+    try{
+      if (localStorage.getItem('arga-header') === 'light') header.classList.add('is-light');
+    }catch(e){}
+    document.querySelectorAll('.header-theme-toggle').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const isLight = header.classList.toggle('is-light');
+        try{ localStorage.setItem('arga-header', isLight ? 'light' : 'dark'); }catch(e){}
+      });
     });
-  });
+  }
 
   // -------------------------------------------------------
   //  Mobile nav (drawer)
@@ -189,6 +186,38 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateDisabled);
     // Initial state once layout settles
     requestAnimationFrame(updateDisabled);
+
+    // -----------------------------------------------------
+    //  Auto-scroll al pasar el cursor por los extremos
+    // -----------------------------------------------------
+    let edgeVel = 0;       // px por frame (negativo = izquierda)
+    let edgeRaf = null;
+    const EDGE_ZONE = 0.18; // 18% del ancho a cada lado
+    const EDGE_MAX = 16;    // velocidad máxima en px/frame
+
+    function edgeLoop(){
+      if (edgeVel !== 0){
+        track.scrollLeft += edgeVel;
+        edgeRaf = requestAnimationFrame(edgeLoop);
+      } else {
+        edgeRaf = null;
+        track.style.scrollSnapType = '';
+      }
+    }
+    track.addEventListener('mousemove', (e) => {
+      const r = track.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const zone = r.width * EDGE_ZONE;
+      let v = 0;
+      if (x < zone)               v = -EDGE_MAX * (1 - x / zone);
+      else if (x > r.width - zone) v =  EDGE_MAX * (1 - (r.width - x) / zone);
+      edgeVel = v;
+      if (v !== 0){
+        track.style.scrollSnapType = 'none';
+        if (edgeRaf === null) edgeLoop();
+      }
+    });
+    track.addEventListener('mouseleave', () => { edgeVel = 0; });
 
   });
 

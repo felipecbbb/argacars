@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="es">
 <head>
-<script>(function(){try{var t=localStorage.getItem('arga-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<script>document.documentElement.setAttribute('data-theme','light');</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Coches — ARGA Premium Cars</title>
-<meta name="description" content="Qué tipo de coches importamos desde Alemania: marcas, tipos de vehículo, criterios de selección y ejemplos reales." />
+<meta name="description" content="Qué coches importamos desde Alemania: marcas, criterios de selección, revisión profesional y ejemplos reales de vehículos importados." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
@@ -41,6 +41,18 @@
   .crit-card:has(.cross) strong{ color: var(--fg-muted); }
   .crit-card strong{ display:block; font-size: 16px; margin-bottom: 5px; letter-spacing: -.01em; color: var(--fg); }
   .crit-card p{ color: var(--fg-muted); font-size: 14px; line-height: 1.55; margin: 0; }
+  .brand-marquee{ overflow:hidden; }
+  .brand-strip{ display:flex; align-items:center; gap: clamp(40px, 6vw, 90px); width:max-content; animation: drift-marquee 40s linear infinite; }
+  .brand-marquee:hover .brand-strip{ animation-play-state: paused; }
+  .brand-logo{
+    width: clamp(36px, 4vw, 48px); height: clamp(36px, 4vw, 48px);
+    flex:0 0 auto;
+    background-color: var(--fg-dim);
+    -webkit-mask: var(--logo) center / contain no-repeat;
+    mask: var(--logo) center / contain no-repeat;
+    transition: background-color .3s var(--ease-smooth), transform .35s var(--ease-spring);
+  }
+  .brand-logo:hover{ background-color: var(--gold); transform: scale(1.12); }
 </style>
 </head>
 <body>
@@ -50,8 +62,11 @@
     <a href="index.html" class="logo" aria-label="ARGA Premium Cars"><img src="assets/img/logo.png" alt="ARGA Premium Cars" /></a>
     <nav class="pill-nav"><a href="index.html">Inicio</a><a href="sobre-nosotros.html">Sobre nosotros</a><a href="como-lo-hacemos.html">Cómo lo hacemos</a><a href="coches.html">Coches</a><a href="contacto.html">Contacto</a></nav>
     <div class="header-actions">
+      <button class="header-theme-toggle" aria-label="Invertir colores del header" title="Invertir colores del header">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
       <a href="https://www.instagram.com/argapremiumcars" target="_blank" rel="noopener" class="social-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-      <button class="theme-toggle"><svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
       <a href="contacto.html" class="pill-cta is-dark">Pide tu coche<span class="arrow-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
       <button class="burger"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     </div>
@@ -63,11 +78,11 @@
   <a href="index.html"><span>00</span>Inicio</a><a href="sobre-nosotros.html"><span>01</span>Sobre nosotros</a><a href="como-lo-hacemos.html"><span>02</span>Cómo lo hacemos</a><a href="coches.html"><span>03</span>Coches</a><a href="contacto.html"><span>04</span>Contacto</a><a href="blog/index.html"><span>05</span>Blog</a>
 </aside>
 
-<section class="section">
+<section class="section" style="padding-top: clamp(24px, 4vw, 48px);">
   <div class="container">
     <div class="section-head">
       <div class="left">
-        <span class="section-marker reveal">03 — coches</span>
+        <span class="section-marker reveal">01 — coches</span>
         <h1 class="h1 reveal" data-i="1" style="margin-top: var(--space-5);">NO ES UN CATÁLOGO.<br>ES <span class="gold">A TU MEDIDA</span></h1>
       </div>
       <div class="right reveal" data-i="2">
@@ -84,91 +99,11 @@
   <div class="container">
     <div class="section-head">
       <div class="left">
-        <span class="section-marker reveal">04 — tipos</span>
-        <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">SEA CUAL SEA EL COCHE, <span class="gold">LO CONSEGUIMOS</span></h2>
-      </div>
-    </div>
-
-    <div class="grid-4 stagger">
-      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/911gts.jpg" alt="Deportivos" loading="lazy"><span class="arrow-corner">01</span></div><div class="proj-body"><h3>DEPORTIVOS</h3><p>Porsche 911, BMW M, Mercedes-AMG, Ferrari…</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/x4m.jpg" alt="SUV y todoterreno" loading="lazy"><span class="arrow-corner">02</span></div><div class="proj-body"><h3>SUV & TODOTERRENO</h3><p>Mercedes G63, BMW X4/X5, Audi Q5/Q7, Lamborghini Urus…</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/m340i.jpg" alt="Berlinas premium" loading="lazy"><span class="arrow-corner">03</span></div><div class="proj-body"><h3>BERLINAS PREMIUM</h3><p>Porsche Panamera, Mercedes Clase E/S, Audi A6/A8…</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/panamera-h.jpg" alt="Eléctricos e híbridos" loading="lazy"><span class="arrow-corner">04</span></div><div class="proj-body"><h3>ELÉCTRICOS E HÍBRIDOS</h3><p>Mercedes GLE 350de, BMW X5 45e, Porsche E-Hybrid…</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/rs6.jpg" alt="Familiares y touring" loading="lazy"><span class="arrow-corner">05</span></div><div class="proj-body"><h3>FAMILIARES & TOURING</h3><p>Audi RS6 Avant, BMW Touring, Mercedes Estate…</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/golfr.jpg" alt="Compactos" loading="lazy"><span class="arrow-corner">06</span></div><div class="proj-body"><h3>COMPACTOS</h3><p>VW Golf R/GTI, Mercedes-AMG A45/CLA45, BMW M2/M240i…</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/cabrio.jpg" alt="Cabrios y descapotables" loading="lazy"><span class="arrow-corner">07</span></div><div class="proj-body"><h3>CABRIOS</h3><p>Porsche 911 Cabrio, Ferrari Spider, Mercedes SL…</p></div></article>
-    </div>
-  </div>
-</section>
-
-<section style="padding: var(--space-7) 0;">
-  <div class="container" style="text-align: center; margin-bottom: var(--space-5);">
-    <span class="section-marker reveal">marcas con las que trabajamos</span>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <span class="marquee-item">PORSCHE</span><span class="marquee-item">MERCEDES-BENZ</span><span class="marquee-item">BMW</span><span class="marquee-item">AUDI</span><span class="marquee-item">VOLKSWAGEN</span><span class="marquee-item">FERRARI</span><span class="marquee-item">LAMBORGHINI</span><span class="marquee-item">ASTON MARTIN</span><span class="marquee-item">MASERATI</span><span class="marquee-item">MCLAREN</span><span class="marquee-item">BENTLEY</span><span class="marquee-item">ROLLS-ROYCE</span>
-      <span class="marquee-item">PORSCHE</span><span class="marquee-item">MERCEDES-BENZ</span><span class="marquee-item">BMW</span><span class="marquee-item">AUDI</span><span class="marquee-item">VOLKSWAGEN</span><span class="marquee-item">FERRARI</span><span class="marquee-item">LAMBORGHINI</span><span class="marquee-item">ASTON MARTIN</span><span class="marquee-item">MASERATI</span><span class="marquee-item">MCLAREN</span><span class="marquee-item">BENTLEY</span><span class="marquee-item">ROLLS-ROYCE</span>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div class="left">
-        <span class="section-marker reveal">05 — cómo elegimos</span>
-        <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">LO QUE SÍ (Y LO QUE NO) <span class="gold">IMPORTAMOS</span></h2>
-      </div>
-      <div class="right reveal" data-i="2">
-        <p class="lead">No traemos coches en mal estado, dañados o de procedencia dudosa. Solo trabajamos con vehículos de calidad, en excelente estado y con historial claro.</p>
-      </div>
-    </div>
-
-    <div class="crit-grid stagger">
-      <div class="crit-card"><span class="ic check">✓</span><div><strong>Vehículos en excelente estado</strong><p>Chapa, pintura, chasis, mecánica e interior revisados a fondo.</p></div></div>
-      <div class="crit-card"><span class="ic check">✓</span><div><strong>Historial documentado</strong><p>Mantenimiento al día, informe CarVertical y peritaje de más de 40 páginas.</p></div></div>
-      <div class="crit-card"><span class="ic check">✓</span><div><strong>Concesionarios oficiales</strong><p>Y, ocasionalmente, compraventas profesionales con buena reputación.</p></div></div>
-      <div class="crit-card"><span class="ic check">✓</span><div><strong>Garantía europea</strong><p>1 ó 2 años habitualmente, en ocasiones más.</p></div></div>
-      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin vendedores particulares</strong><p>No trabajamos directamente con particulares por seguridad y garantías.</p></div></div>
-      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin coches &lt; 15.000€</strong><p>El servicio integral solo tiene sentido a partir de cierto presupuesto.</p></div></div>
-      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin más de 150.000 km</strong><p>Solo vehículos con kilometraje controlado y vida útil clara por delante.</p></div></div>
-      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin procedencia dudosa</strong><p>Cero coches dañados, accidentados o con historial poco claro.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-dark">
-  <div class="container">
-    <div class="section-head">
-      <div class="left">
-        <span class="section-marker reveal">06 — peritaje</span>
-        <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">+40 PÁGINAS DE INFORME, ANTES DE CUALQUIER <span class="gold">PAGO</span></h2>
-      </div>
-      <div class="right reveal" data-i="2">
-        <p class="lead">Revisamos en profundidad cada vehículo con peritos profesionales ubicados en Alemania. Estas son las comprobaciones que hacemos antes de darte luz verde.</p>
-      </div>
-    </div>
-
-    <div class="grid-3 stagger">
-      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/det-911.jpg" alt="Inspección de chapa y pintura" loading="lazy"><span class="arrow-corner">01</span></div><div class="proj-body"><h3 style="color:#fff;">CHAPA Y PINTURA</h3><p style="color:rgba(255,255,255,.65);">Análisis exhaustivo en busca de retoques, golpes ocultos o reparaciones previas.</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/gt3.jpg" alt="Comprobación de chasis" loading="lazy"><span class="arrow-corner">02</span></div><div class="proj-body"><h3 style="color:#fff;">CHASIS</h3><p style="color:rgba(255,255,255,.65);">Comprobación de la integridad estructural del vehículo.</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/m2cs.jpg" alt="Revisión mecánica" loading="lazy"><span class="arrow-corner">03</span></div><div class="proj-body"><h3 style="color:#fff;">MECÁNICA</h3><p style="color:rgba(255,255,255,.65);">Revisión de elementos generales y mecánicos del coche.</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-urus.jpg" alt="Inspección de interior" loading="lazy"><span class="arrow-corner">04</span></div><div class="proj-body"><h3 style="color:#fff;">INTERIOR</h3><p style="color:rgba(255,255,255,.65);">Inspección del estado completo del habitáculo.</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-rs6.jpg" alt="Diagnosis electrónica" loading="lazy"><span class="arrow-corner">05</span></div><div class="proj-body"><h3 style="color:#fff;">DIAGNOSIS ELECTRÓNICA</h3><p style="color:rgba(255,255,255,.65);">Detección de fallos pasados o actuales y posibles manipulaciones de kilometraje.</p></div></article>
-      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-gt3rs.jpg" alt="Prueba de conducción" loading="lazy"><span class="arrow-corner">06</span></div><div class="proj-body"><h3 style="color:#fff;">PRUEBA DE CONDUCCIÓN</h3><p style="color:rgba(255,255,255,.65);">Test real en carretera para validar comportamiento y respuesta.</p></div></article>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <div class="left">
-        <span class="section-marker reveal">07 — ejemplos</span>
+        <span class="section-marker reveal">02 — ejemplos</span>
         <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">UNA MUESTRA DE LO QUE <span class="gold">HEMOS IMPORTADO</span></h2>
+        <p class="section-subtitle reveal" data-i="2">Sea cual sea el coche, lo conseguimos.</p>
       </div>
-      <div class="right reveal" data-i="2">
+      <div class="right reveal" data-i="3">
         <p class="lead">Ejemplos reales de coches que hemos traído desde Alemania para clientes en España. No son un catálogo de venta — cada importación es a medida.</p>
       </div>
     </div>
@@ -198,11 +133,80 @@
   </div>
 </section>
 
+<section style="padding: var(--space-7) 0;">
+  <div class="container" style="text-align: center; margin-bottom: var(--space-5);">
+    <span class="section-marker reveal">marcas con las que trabajamos</span>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">PORSCHE</span><span class="marquee-item">MERCEDES-BENZ</span><span class="marquee-item">BMW</span><span class="marquee-item">AUDI</span><span class="marquee-item">VOLKSWAGEN</span><span class="marquee-item">FERRARI</span><span class="marquee-item">LAMBORGHINI</span><span class="marquee-item">ASTON MARTIN</span><span class="marquee-item">MASERATI</span><span class="marquee-item">MCLAREN</span><span class="marquee-item">BENTLEY</span><span class="marquee-item">ROLLS-ROYCE</span>
+      <span class="marquee-item">PORSCHE</span><span class="marquee-item">MERCEDES-BENZ</span><span class="marquee-item">BMW</span><span class="marquee-item">AUDI</span><span class="marquee-item">VOLKSWAGEN</span><span class="marquee-item">FERRARI</span><span class="marquee-item">LAMBORGHINI</span><span class="marquee-item">ASTON MARTIN</span><span class="marquee-item">MASERATI</span><span class="marquee-item">MCLAREN</span><span class="marquee-item">BENTLEY</span><span class="marquee-item">ROLLS-ROYCE</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="left">
+        <span class="section-marker reveal">03 — cómo elegimos</span>
+        <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">LO QUE SÍ (Y LO QUE NO) <span class="gold">IMPORTAMOS</span></h2>
+      </div>
+      <div class="right reveal" data-i="2">
+        <p class="lead">No traemos coches en mal estado, dañados o de procedencia dudosa. Solo trabajamos con vehículos de calidad, en excelente estado y con historial claro.</p>
+      </div>
+    </div>
+
+    <div class="crit-grid stagger">
+      <div class="crit-card"><span class="ic check">✓</span><div><strong>Vehículos en excelente estado</strong><p>Chapa, pintura, chasis, mecánica e interior revisados a fondo.</p></div></div>
+      <div class="crit-card"><span class="ic check">✓</span><div><strong>Historial documentado</strong><p>Mantenimiento al día, informe CarVertical y revisión profesional completa en Alemania.</p></div></div>
+      <div class="crit-card"><span class="ic check">✓</span><div><strong>Concesionarios oficiales y verificados</strong><p>Casas oficiales y compraventas profesionales con buena reputación.</p></div></div>
+      <div class="crit-card"><span class="ic check">✓</span><div><strong>Libres de accidentes</strong><p>Sin golpes estructurales ni daños previos.</p></div></div>
+      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin vicios ocultos</strong><p>Sin manipulaciones de kilometraje ni daños no declarados.</p></div></div>
+      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin coches &lt; 15.000€</strong><p>El servicio integral solo tiene sentido a partir de cierto presupuesto.</p></div></div>
+      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin más de 200.000 km</strong><p>Solo vehículos con kilometraje controlado y vida útil clara por delante.</p></div></div>
+      <div class="crit-card"><span class="ic cross">✕</span><div><strong>Sin procedencia dudosa</strong><p>Evitamos vendedores que no son transparentes y vehículos con historial poco claro.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="container">
+    <div class="section-head">
+      <div class="left">
+        <span class="section-marker reveal">04 — revisión</span>
+        <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">+3H DE REVISIÓN, ANTES DE CUALQUIER <span class="gold">PAGO</span></h2>
+      </div>
+      <div class="right reveal" data-i="2">
+        <p class="lead">Revisamos en profundidad cada vehículo con revisores profesionales en Alemania: más de 3h de revisión, con más de 40 fotos y vídeos en HD. Estas son las comprobaciones que hacemos antes de darte luz verde.</p>
+      </div>
+    </div>
+
+    <div class="grid-3 stagger">
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/det-911.jpg" alt="Inspección de chapa y pintura" loading="lazy"><span class="arrow-corner">01</span></div><div class="proj-body"><h3 style="color:#fff;">CHAPA Y PINTURA</h3><p style="color:rgba(255,255,255,.65);">Análisis exhaustivo en busca de imperfecciones, repintados, golpes ocultos o reparaciones previas.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/gt3.jpg" alt="Comprobación de chasis" loading="lazy"><span class="arrow-corner">02</span></div><div class="proj-body"><h3 style="color:#fff;">CHASIS</h3><p style="color:rgba(255,255,255,.65);">Comprobación de la integridad estructural del vehículo.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/m2cs.jpg" alt="Revisión mecánica" loading="lazy"><span class="arrow-corner">03</span></div><div class="proj-body"><h3 style="color:#fff;">MECÁNICA</h3><p style="color:rgba(255,255,255,.65);">Revisión de elementos generales y mecánicos del coche.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-urus.jpg" alt="Inspección de interior" loading="lazy"><span class="arrow-corner">04</span></div><div class="proj-body"><h3 style="color:#fff;">INTERIOR</h3><p style="color:rgba(255,255,255,.65);">Inspección del estado completo del habitáculo y posibles desgastes excesivos.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-rs6.jpg" alt="Diagnosis electrónica" loading="lazy"><span class="arrow-corner">05</span></div><div class="proj-body"><h3 style="color:#fff;">DIAGNOSIS ELECTRÓNICA</h3><p style="color:rgba(255,255,255,.65);">Detección de fallos pasados o actuales y posibles manipulaciones de kilometraje.</p></div></article>
+      <article class="proj-card"><div class="proj-img has-photo"><img class="media" src="assets/img/cars/int-gt3rs.jpg" alt="Prueba de conducción" loading="lazy"><span class="arrow-corner">06</span></div><div class="proj-body"><h3 style="color:#fff;">PRUEBA DE CONDUCCIÓN</h3><p style="color:rgba(255,255,255,.65);">Test real en carretera para validar comportamiento y respuesta.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- TIRA DE LOGOS DE MARCAS -->
+<section style="padding: clamp(44px, 6vw, 80px) 0;">
+  <div class="brand-marquee">
+    <div class="brand-strip">
+      <span class="brand-logo" style="--logo:url('assets/img/brands/porsche.svg')" title="Porsche" aria-label="Porsche"></span><span class="brand-logo" style="--logo:url('assets/img/brands/mercedes.svg')" title="Mercedes-Benz" aria-label="Mercedes-Benz"></span><span class="brand-logo" style="--logo:url('assets/img/brands/bmw.svg')" title="BMW" aria-label="BMW"></span><span class="brand-logo" style="--logo:url('assets/img/brands/audi.svg')" title="Audi" aria-label="Audi"></span><span class="brand-logo" style="--logo:url('assets/img/brands/volkswagen.svg')" title="Volkswagen" aria-label="Volkswagen"></span><span class="brand-logo" style="--logo:url('assets/img/brands/ferrari.svg')" title="Ferrari" aria-label="Ferrari"></span><span class="brand-logo" style="--logo:url('assets/img/brands/lamborghini.svg')" title="Lamborghini" aria-label="Lamborghini"></span><span class="brand-logo" style="--logo:url('assets/img/brands/astonmartin.svg')" title="Aston Martin" aria-label="Aston Martin"></span><span class="brand-logo" style="--logo:url('assets/img/brands/maserati.svg')" title="Maserati" aria-label="Maserati"></span><span class="brand-logo" style="--logo:url('assets/img/brands/mclaren.svg')" title="McLaren" aria-label="McLaren"></span><span class="brand-logo" style="--logo:url('assets/img/brands/bentley.svg')" title="Bentley" aria-label="Bentley"></span><span class="brand-logo" style="--logo:url('assets/img/brands/rollsroyce.svg')" title="Rolls-Royce" aria-label="Rolls-Royce"></span><span class="brand-logo" style="--logo:url('assets/img/brands/porsche.svg')" title="Porsche" aria-label="Porsche"></span><span class="brand-logo" style="--logo:url('assets/img/brands/mercedes.svg')" title="Mercedes-Benz" aria-label="Mercedes-Benz"></span><span class="brand-logo" style="--logo:url('assets/img/brands/bmw.svg')" title="BMW" aria-label="BMW"></span><span class="brand-logo" style="--logo:url('assets/img/brands/audi.svg')" title="Audi" aria-label="Audi"></span><span class="brand-logo" style="--logo:url('assets/img/brands/volkswagen.svg')" title="Volkswagen" aria-label="Volkswagen"></span><span class="brand-logo" style="--logo:url('assets/img/brands/ferrari.svg')" title="Ferrari" aria-label="Ferrari"></span><span class="brand-logo" style="--logo:url('assets/img/brands/lamborghini.svg')" title="Lamborghini" aria-label="Lamborghini"></span><span class="brand-logo" style="--logo:url('assets/img/brands/astonmartin.svg')" title="Aston Martin" aria-label="Aston Martin"></span><span class="brand-logo" style="--logo:url('assets/img/brands/maserati.svg')" title="Maserati" aria-label="Maserati"></span><span class="brand-logo" style="--logo:url('assets/img/brands/mclaren.svg')" title="McLaren" aria-label="McLaren"></span><span class="brand-logo" style="--logo:url('assets/img/brands/bentley.svg')" title="Bentley" aria-label="Bentley"></span><span class="brand-logo" style="--logo:url('assets/img/brands/rollsroyce.svg')" title="Rolls-Royce" aria-label="Rolls-Royce"></span>
+    </div>
+  </div>
+</section>
+
 <section class="hero" style="padding-top: 0;">
   <div class="contact-frame">
     <div class="contact-inner" style="grid-template-columns: 1fr; text-align: center; place-items: center;">
       <div style="max-width: 60ch;">
-        <span class="section-marker reveal" style="background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.25);">08 — ¿lo tuyo?</span>
+        <span class="section-marker reveal" style="background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.25);">05 — ¿lo tuyo?</span>
         <h2 class="h2 reveal" data-i="1" style="margin: var(--space-5) 0;">¿TIENES UN COCHE<br>EN MENTE?</h2>
         <p class="lead reveal" data-i="2" style="margin: 0 auto;">Cuéntanos qué buscas (o solo el concepto) y lo encontramos por ti.</p>
         <div class="reveal" data-i="3" style="margin-top: var(--space-7);">

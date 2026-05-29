@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
-<script>(function(){try{var t=localStorage.getItem('arga-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+<script>document.documentElement.setAttribute('data-theme','light');</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Sobre nosotros — ARGA Premium Cars</title>
@@ -20,8 +20,11 @@
       <a href="index.html">Inicio</a><a href="sobre-nosotros.html">Sobre nosotros</a><a href="como-lo-hacemos.html">Cómo lo hacemos</a><a href="coches.html">Coches</a><a href="contacto.html">Contacto</a>
     </nav>
     <div class="header-actions">
+      <button class="header-theme-toggle" aria-label="Invertir colores del header" title="Invertir colores del header">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
       <a href="https://www.instagram.com/argapremiumcars" target="_blank" rel="noopener" class="social-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-      <button class="theme-toggle"><svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
       <a href="contacto.html" class="pill-cta is-dark">Pide tu coche<span class="arrow-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
       <button class="burger"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     </div>
@@ -38,7 +41,7 @@
   <a href="blog/index.html"><span>05</span>Blog</a>
 </aside>
 
-<section class="section">
+<section class="section" id="sobre">
   <div class="container">
     <div class="about-grid">
       <div class="about-left">
@@ -51,35 +54,36 @@
       </div>
       <div class="about-img reveal has-photo" data-i="2">
         <img class="media" src="assets/img/life/hermanos.jpg" alt="Los dos hermanos fundadores de ARGA junto a un Lamborghini Urus y un Mercedes G63" loading="lazy">
-        <div class="chips"><span class="chip">Transparencia</span><span class="chip">Integridad</span><span class="chip">Honestidad</span></div>
+        <div class="chips"><span class="chip">Transparencia</span><span class="chip">Garantía</span><span class="chip">Seguridad</span></div>
       </div>
     </div>
-    <p class="mix reveal" style="margin-top: var(--space-12);"><em>ARGA combina conocimiento profundo del mercado alemán</em> con un trato cercano para <em>redefinir cómo se compra un coche de importación</em> — elevando <em>transparencia, calidad</em> y <em>tranquilidad</em> a una sola experiencia.</p>
+    <p class="mix reveal" style="margin-top: clamp(80px, 12vw, 160px);"><em>Importamos el coche que buscas</em>, 100% a tu gusto.</p>
   </div>
 </section>
 
 <section class="section section-dark">
   <div class="container">
-    <div class="section-head">
-      <div class="left">
-        <span class="section-marker reveal">02 — historia</span>
-        <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">PASIÓN, <span class="gold">APRENDIZAJE</span> Y MEJORA</h2>
+    <div style="margin-bottom: var(--space-8);">
+      <span class="section-marker reveal">02 — historia</span>
+      <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">PASIÓN, <span class="gold">APRENDIZAJE</span><br>Y MEJORA</h2>
+    </div>
+
+    <div class="reveal historia-text" data-i="2" style="margin-bottom: var(--space-10);">
+      <div class="col">
+        <p class="lead">Al cumplir los 18 años, con el carnet recién sacado, algo de dinero ahorrado y muchas ganas de cambiar el Fiat Punto que compartíamos, comenzó nuestra historia con la importación.</p>
+        <p class="lead">Descubrimos en Instagram una publicación de una compraventa sobre la importación de coches desde Alemania. Tras unas semanas de investigación, decidimos arriesgarlo todo e invertir nuestros ahorros en nuestro primer coche importado: un <strong style="color:#fff;">Golf 7 GTI Performance</strong>.</p>
+        <p class="lead">La experiencia fue un poco agridulce: aunque el coche era una maravilla, el servicio de la empresa que nos ayudó no cumplió nuestras expectativas. Tuvimos que encargarnos nosotros de casi todo, pagamos de más y la comunicación era pésima. Pero eso solo encendió más nuestra curiosidad por aprender y hacerlo mejor.</p>
       </div>
-      <div class="right reveal" data-i="2">
-        <p class="lead">Al cumplir 18 años con el carnet recién sacado, buscábamos cambiar el Fiat Punto compartido. Nuestro primer coche fue un <strong style="color:#fff;">Golf 7 GTI Performance importado desde Alemania</strong> tras investigar en Instagram.</p>
-        <p class="lead" style="margin-top: var(--space-4);">La experiencia fue agridulce: el coche era una maravilla, pero el servicio no cumplió expectativas. Lo vendimos con rentabilidad, importamos más por cuenta propia, ofrecimos el servicio a familiares… hasta el primer encargo real. Salió de maravilla.</p>
-        <p class="lead" style="margin-top: var(--space-4);">Hoy, tras años de experiencia y cientos de coches importados, seguimos haciendo lo mismo: lo que nos gustaría que hicieran por nosotros.</p>
+      <div class="col">
+        <p class="lead">Unos meses más tarde vendimos aquel GTI y le sacamos una buena rentabilidad. Volvimos a importar otro coche, esta vez por nuestra cuenta, y después otro más. Y así, poco a poco, con cada operación, fuimos ganando confianza, conocimiento y experiencia.</p>
+        <p class="lead">Con muchas ganas y algo de vergüenza, empezamos a subir contenido a Instagram para captar clientes. Nos llevó 4 meses conseguir el primero, pero a partir de ahí, el crecimiento fue imparable: llegando a importar <strong style="color:#fff;">más de 40 coches en los siguientes 12 meses</strong>. Y a día de hoy, tras años de experiencia y cientos de coches importados, podemos decir con orgullo que hemos desarrollado un servicio óptimo y perfeccionado, para hacer de la experiencia de importar tu coche de Alemania algo <strong style="color:#fff;">agradable, seguro y confiable</strong>.</p>
       </div>
     </div>
 
-    <div class="grid-4 stagger">
+    <div class="grid-3 stagger">
       <div class="glass" style="padding: var(--space-6); background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1);">
-        <div style="font-family: var(--f-display); font-weight: 800; font-size: clamp(40px, 4vw, 56px); line-height: 1; letter-spacing: -.03em; margin-bottom: var(--space-3);"><span data-count-to="4">0</span></div>
-        <div style="color: rgba(255,255,255,.65); font-size: 14px;">Meses hasta nuestro<br>primer cliente vía Instagram</div>
-      </div>
-      <div class="glass" style="padding: var(--space-6); background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1);">
-        <div style="font-family: var(--f-display); font-weight: 800; font-size: clamp(40px, 4vw, 56px); line-height: 1; letter-spacing: -.03em; margin-bottom: var(--space-3);"><span data-count-to="40">0</span></div>
-        <div style="color: rgba(255,255,255,.65); font-size: 14px;">Coches importados<br>en los 12 meses siguientes</div>
+        <div style="font-family: var(--f-display); font-weight: 800; font-size: clamp(40px, 4vw, 56px); line-height: 1; letter-spacing: -.03em; margin-bottom: var(--space-3);"><span data-count-to="12" data-suffix="M+">0</span></div>
+        <div style="color: rgba(255,255,255,.65); font-size: 14px;">Millones en coches<br>gestionados</div>
       </div>
       <div class="glass" style="padding: var(--space-6); background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.1);">
         <div style="font-family: var(--f-display); font-weight: 800; font-size: clamp(40px, 4vw, 56px); line-height: 1; letter-spacing: -.03em; margin-bottom: var(--space-3);"><span data-count-to="300" data-suffix="+">0</span></div>
@@ -108,11 +112,11 @@
       </article>
       <article class="proj-card">
         <div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/m340i.jpg" alt="Integridad" loading="lazy"><span class="arrow-corner">02</span></div>
-        <div class="proj-body"><h3>INTEGRIDAD</h3><p>Si un coche no vale la pena, te lo decimos sin rodeos.</p></div>
+        <div class="proj-body"><h3>INTEGRIDAD</h3><p>Tratamos cada compra como si fuera para nosotros mismos.</p></div>
       </article>
       <article class="proj-card">
         <div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/life/equipo.jpg" alt="Honestidad" loading="lazy"><span class="arrow-corner">03</span></div>
-        <div class="proj-body"><h3>HONESTIDAD</h3><p>Tratamos cada compra como si fuera para nosotros mismos.</p></div>
+        <div class="proj-body"><h3>HONESTIDAD</h3><p>Si un coche no vale la pena, te lo decimos sin rodeos.</p></div>
       </article>
       <article class="proj-card">
         <div class="proj-img has-photo" style="aspect-ratio: 4/5;"><img class="media" src="assets/img/cars/int-gt3.jpg" alt="Seguridad" loading="lazy"><span class="arrow-corner">04</span></div>
@@ -133,10 +137,62 @@
         <span class="section-marker reveal">04 — el mercado</span>
         <h2 class="h2 reveal" data-i="1">POR QUÉ<br><span class="gold">ALEMANIA</span></h2>
         <p class="lead reveal" data-i="2">Alemania destaca por ser <strong>el país europeo con la mayor oferta de vehículos</strong> y mejor equilibrio entre calidad, precio, variedad y transparencia. Coches bien cuidados, mantenimientos al día, historial documentado.</p>
-        <p class="muted reveal" data-i="3" style="font-size: 16px; line-height: 1.6;">¿Suiza? Si buscas kilometraje alto y más de 10 años, puede ser alternativa. Para menos de 10 años y kilometraje moderado, importar de Alemania de la mano de ARGA es tu mejor opción.</p>
-        <div class="reveal" data-i="4" style="margin-top: var(--space-5);">
+
+        <p class="lead reveal" data-i="4"><strong>¿Dubái?</strong> Si buscas coches inundados o con golpes estructurales a fin de ahorrar un poco más de dinero, puede resultarte interesante. Si lo que buscas es <strong>calidad y vehículos en estado impoluto</strong>, importar de Alemania de la mano de ARGA es tu mejor opción.</p>
+        <div class="reveal" data-i="5" style="margin-top: var(--space-5);">
           <a href="coches.html" class="pill-cta">Ver qué importamos<span class="arrow-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span></a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="mercado">
+  <div class="container">
+    <div class="section-head">
+      <div class="left">
+        <span class="section-marker reveal">05 — por qué Alemania</span>
+        <h2 class="h2 reveal" data-i="1" style="margin-top: var(--space-5);">LOS NÚMEROS <span class="gold">HABLAN SOLOS</span></h2>
+      </div>
+      <div class="right reveal" data-i="2">
+        <p class="lead">Alemania es la mayor potencia automotriz de Europa: un mercado inmenso, con coches mejor cuidados, mejor equipados y más baratos. Encontrar la unidad exacta que buscas es mucho más fácil que en España.</p>
+      </div>
+    </div>
+
+    <div class="market-stats stagger">
+      <div class="market-card reveal">
+        <div class="market-num"><span data-count-to="9">0</span><span class="u">M</span></div>
+        <div class="lbl">Coches vendidos en Alemania en 2025.<br><strong>3M en España.</strong></div>
+      </div>
+      <div class="market-card reveal">
+        <div class="market-num"><span data-count-to="2">0</span><span class="u">×</span></div>
+        <div class="lbl">Salario medio: <strong>63.288 €</strong> brutos/año, frente a 31.698 € en España (2025).</div>
+      </div>
+      <div class="market-card reveal">
+        <div class="market-num">15–25<span class="u">%</span></div>
+        <div class="lbl">Más baratos los vehículos que en el mercado español.</div>
+      </div>
+      <div class="market-card reveal">
+        <div class="market-num">5–7<span class="u">años</span></div>
+        <div class="lbl">Cada cuánto cambian de coche.<br><strong>12–15 años en España.</strong></div>
+      </div>
+    </div>
+
+    <p class="lead reveal" style="margin-top: var(--space-9); max-width: 80ch;">El automóvil está profundamente arraigado en la cultura alemana. Cuidan y mantienen sus coches al milímetro, con <strong>historiales completos en casa oficial</strong> y al día. Su mayor poder adquisitivo, sumado a unos precios más bajos, se traduce en <strong>configuraciones y equipamientos muy superiores</strong> a los del mercado español. El resultado: un enorme stock de seminuevos en estado impecable, muy equipados y con pocos años.</p>
+
+    <div class="market-adv stagger">
+      <div class="market-card reveal"><span class="adv-t">Mejor cuidados</span><span class="lbl">Historiales completos y mantenimiento al día en casa oficial.</span></div>
+      <div class="market-card reveal"><span class="adv-t">Más equipados</span><span class="lbl">Configuraciones y extras superiores al mercado español.</span></div>
+      <div class="market-card reveal"><span class="adv-t">Más baratos</span><span class="lbl">Hasta un 15–25 % menos que en España.</span></div>
+      <div class="market-card reveal"><span class="adv-t">Unidades exclusivas</span><span class="lbl">Mucho más fácil dar con la configuración exacta que buscas.</span></div>
+    </div>
+
+    <div class="market-example reveal">
+      <img src="assets/img/cars/gt3rs.jpg" alt="Porsche 911 GT3 RS importado de Alemania por ARGA en 2025" loading="lazy">
+      <div class="body">
+        <span class="section-marker" style="align-self:flex-start;">caso real · 2025</span>
+        <h3 style="font-family: var(--f-display); font-weight:800; font-size: clamp(22px, 2.4vw, 32px); letter-spacing:-.02em; line-height:1.1;">Porsche 911 (991.1) GT3 RS</h3>
+        <p class="lead" style="font-size: 16px;">El cliente llevaba <strong>meses buscando en España</strong>: solo había una unidad, <strong>20.000 € más cara</strong> y sin la configuración que quería. En Alemania encontramos <strong>más de 60 unidades</strong> —la mayoría más baratas y con menos kilómetros— y 9 o 10 encajaban a la perfección.</p>
       </div>
     </div>
   </div>
@@ -146,7 +202,7 @@
   <div class="contact-frame">
     <div class="contact-inner" style="grid-template-columns: 1fr; text-align: center; place-items: center;">
       <div style="max-width: 60ch;">
-        <span class="section-marker reveal" style="background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.25);">05 — más que un servicio</span>
+        <span class="section-marker reveal" style="background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.25);">06 — más que un servicio</span>
         <h2 class="h2 reveal" data-i="1" style="margin: var(--space-5) 0;">NO SOMOS UNA<br>COMPRAVENTA MÁS.</h2>
         <p class="lead reveal" data-i="2" style="margin: 0 auto;">Somos dos hermanos que con esfuerzo, ilusión y mucha carretera recorrida hemos creado un servicio en el que <strong style="color:#fff;">nosotros mismos confiaríamos</strong>.</p>
         <div class="reveal" data-i="3" style="margin-top: var(--space-7);">
