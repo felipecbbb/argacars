@@ -807,6 +807,14 @@ strong{ color: var(--fg); font-weight: 700; }
   pointer-events: none;
   z-index: 0;
 }
+.footer-bigword img{
+  display:block;
+  width: min(1100px, 92vw);
+  height: auto;
+  /* logo blanco -> negro tenue, como marca de agua del footer */
+  filter: invert(1);
+  opacity: .05;
+}
 .footer-inner{ position: relative; z-index: 1; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
 .footer-cta-row{
   display:grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-10);
