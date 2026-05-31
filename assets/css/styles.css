@@ -263,8 +263,9 @@ strong{ color: var(--fg); font-weight: 700; }
 /* === HEADER === */
 .site-header{
   position: sticky; top: 0; z-index: 100;
-  padding: var(--space-5) 0;
-  background: transparent;
+  padding: var(--space-5) 0 var(--space-7);
+  /* Fondo adaptativo: negro sobre secciones oscuras, blanco sobre claras */
+  background: linear-gradient(to bottom, var(--bg) 72%, transparent);
   transition: color .35s var(--ease-smooth);
   /* Contenido claro por defecto (sobre fondo oscuro); el scroll-spy alterna .is-light */
   --bg: #0a0a0a;
@@ -290,6 +291,17 @@ strong{ color: var(--fg); font-weight: 700; }
 /* El logo es blanco-sobre-transparente: oscuro NO se invierte; claro SÍ (a negro) */
 [data-theme="light"] .site-header .logo img{ filter: none; }
 [data-theme="light"] .site-header.is-light .logo img{ filter: invert(1); }
+
+/* Halo blanco sutil para que el menú y el círculo de Instagram destaquen (apenas se nota) */
+.site-header .pill-nav,
+.site-header .header-actions .social-circle{
+  box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 6px 26px -8px rgba(255,255,255,.20);
+}
+/* Sobre header claro, el halo blanco no aplica (se vería borroso); borde suave gris */
+.site-header.is-light .pill-nav,
+.site-header.is-light .header-actions .social-circle{
+  box-shadow: var(--shadow-card);
+}
 
 /* Botón para invertir los colores del header */
 .header-theme-toggle{
@@ -834,6 +846,21 @@ strong{ color: var(--fg); font-weight: 700; }
 }
 .field-line input::placeholder, .field-line textarea::placeholder{ color: rgba(255,255,255,.5); }
 .field-line input:focus, .field-line textarea:focus{ border-color: #fff; }
+
+/* Formulario blanco (inicio) */
+.contact-form--light{
+  background: #ffffff;
+  border-color: var(--border);
+  box-shadow: 0 34px 80px -34px rgba(0,0,0,.3);
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+.contact-form--light .field-line label{ color: var(--fg-muted); }
+.contact-form--light .field-line input,
+.contact-form--light .field-line textarea{ color: var(--fg); border-bottom-color: var(--border-strong); }
+.contact-form--light .field-line input::placeholder,
+.contact-form--light .field-line textarea::placeholder{ color: var(--fg-dim); }
+.contact-form--light .field-line input:focus,
+.contact-form--light .field-line textarea:focus{ border-color: var(--fg); }
 .tag-chips{ position: absolute; left: var(--space-7); bottom: var(--space-7); display:flex; gap: var(--space-2); z-index: 2; }
 .tag-chips .chip{
   padding: 8px 16px; font-size: 13px;
@@ -1255,7 +1282,7 @@ strong{ color: var(--fg); font-weight: 700; }
 /* background-image media (process slides) */
 .media-cover{
   background-size: cover !important;
-  background-position: center 72% !important;
+  background-position: center 62% !important;
   background-repeat: no-repeat !important;
 }
 
