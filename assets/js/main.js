@@ -9,18 +9,85 @@ document.documentElement.setAttribute('data-theme', 'light');
 document.addEventListener('DOMContentLoaded', () => {
 
   // -------------------------------------------------------
-  //  Header color toggle (invierte SOLO los colores del header)
+  //  Header transparente con scroll-spy:
+  //  sobre secciones oscuras -> contenido blanco (sin .is-light)
+  //  sobre secciones claras  -> contenido negro  (.is-light)
   // -------------------------------------------------------
   const header = document.querySelector('.site-header');
   if (header){
-    try{
-      if (localStorage.getItem('arga-header') === 'light') header.classList.add('is-light');
-    }catch(e){}
-    document.querySelectorAll('.header-theme-toggle').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const isLight = header.classList.toggle('is-light');
-        try{ localStorage.setItem('arga-header', isLight ? 'light' : 'dark'); }catch(e){}
+    const setHeaderH = () => document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+    setHeaderH();
+    window.addEventListener('resize', setHeaderH);
+    const zones = [...document.querySelectorAll('section, footer, .article')];
+    const isDarkZone = (el) => el.matches('.section-dark, .hero, [data-header-dark]');
+    let raf = null;
+    function syncHeader(){
+      raf = null;
+      const line = header.offsetHeight * 0.5;
+      let dark = false;
+      for (const el of zones){
+        const r = el.getBoundingClientRect();
+        if (r.top <= line && r.bottom > line){ dark = isDarkZone(el); break; }
+      }
+      header.classList.toggle('is-light', !dark);
+    }
+    const onScroll = () => { if (raf === null) raf = requestAnimationFrame(syncHeader); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    syncHeader();
+  }
+
+  // -------------------------------------------------------
+  //  FAQ acordeón: al abrir una, se cierran las demás del grupo
+  // -------------------------------------------------------
+  document.querySelectorAll('.faq').forEach((group) => {
+    const items = group.querySelectorAll('.faq-item');
+    items.forEach((d) => {
+      d.addEventListener('toggle', () => {
+        if (d.open) items.forEach((o) => { if (o !== d) o.open = false; });
       });
+    });
+  });
+
+  // -------------------------------------------------------
+  //  Lightbox de la galería de coches (ampliar + navegar)
+  // -------------------------------------------------------
+  const lb = document.getElementById('lightbox');
+  if (lb){
+    const lbImg = lb.querySelector('img');
+    const lbCounter = lb.querySelector('.lb-counter');
+    let imgs = [], cur = 0;
+    const show = (i) => {
+      cur = (i + imgs.length) % imgs.length;
+      lbImg.src = imgs[cur];
+      lbCounter.textContent = (cur + 1) + ' / ' + imgs.length;
+    };
+    const openLb = (slug, n) => {
+      imgs = [];
+      for (let k = 1; k <= n; k++) imgs.push('assets/img/catalog/' + slug + '/' + String(k).padStart(2,'0') + '.jpg');
+      if (!imgs.length) return;
+      show(0);
+      lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    };
+    const closeLb = () => {
+      lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
+      document.body.style.overflow = ''; lbImg.src = '';
+    };
+    document.querySelectorAll('.proj-card[data-slug]').forEach((c) => {
+      const go = () => openLb(c.dataset.slug, parseInt(c.dataset.n, 10) || 1);
+      c.addEventListener('click', go);
+      c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    lb.querySelector('.lb-next').addEventListener('click', (e) => { e.stopPropagation(); show(cur + 1); });
+    lb.querySelector('.lb-prev').addEventListener('click', (e) => { e.stopPropagation(); show(cur - 1); });
+    lb.querySelector('.lb-close').addEventListener('click', closeLb);
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      else if (e.key === 'ArrowRight') show(cur + 1);
+      else if (e.key === 'ArrowLeft') show(cur - 1);
     });
   }
 
@@ -237,6 +304,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
+    // aplicar el filtro activo al cargar
+    const active = bar.querySelector('.filter-pill.is-active');
+    if (active){
+      const f = active.dataset.filter;
+      cards.forEach((c) => { c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none'; });
+    }
   });
 
   // -------------------------------------------------------
