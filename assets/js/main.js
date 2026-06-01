@@ -56,16 +56,22 @@ document.addEventListener('DOMContentLoaded', () => {
   if (lb){
     const lbImg = lb.querySelector('img');
     const lbCounter = lb.querySelector('.lb-counter');
+    const lbTitle = lb.querySelector('.lb-title');
+    const lbSub = lb.querySelector('.lb-sub');
     let imgs = [], cur = 0;
     const show = (i) => {
       cur = (i + imgs.length) % imgs.length;
       lbImg.src = imgs[cur];
       lbCounter.textContent = (cur + 1) + ' / ' + imgs.length;
     };
-    const openLb = (slug, n) => {
+    const openLb = (card) => {
+      const slug = card.dataset.slug;
+      const n = parseInt(card.dataset.n, 10) || 1;
       imgs = [];
       for (let k = 1; k <= n; k++) imgs.push('assets/img/catalog/' + slug + '/' + String(k).padStart(2,'0') + '.jpg');
       if (!imgs.length) return;
+      if (lbTitle) lbTitle.textContent = card.querySelector('.proj-body h3')?.textContent || '';
+      if (lbSub) lbSub.textContent = card.querySelector('.proj-body p')?.textContent || '';
       show(0);
       lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
       document.body.style.overflow = 'hidden';
@@ -75,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.style.overflow = ''; lbImg.src = '';
     };
     document.querySelectorAll('.proj-card[data-slug]').forEach((c) => {
-      const go = () => openLb(c.dataset.slug, parseInt(c.dataset.n, 10) || 1);
+      const go = () => openLb(c);
       c.addEventListener('click', go);
       c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
     });
