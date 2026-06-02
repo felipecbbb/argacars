@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setHeaderH();
     window.addEventListener('resize', setHeaderH);
     const zones = [...document.querySelectorAll('section, footer, .article')];
-    const isDarkZone = (el) => el.matches('.section-dark, .hero, [data-header-dark]');
+    const isDarkZone = (el) => el.matches('.section-dark, [data-header-dark]');
     let raf = null;
     function syncHeader(){
       raf = null;
