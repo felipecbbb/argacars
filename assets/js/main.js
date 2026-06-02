@@ -95,6 +95,30 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (e.key === 'ArrowRight') show(cur + 1);
       else if (e.key === 'ArrowLeft') show(cur - 1);
     });
+
+    // Deslizar fotos arrastrando (táctil + ratón)
+    let dragX = 0, dragging = false;
+    lbImg.addEventListener('dragstart', (e) => e.preventDefault());
+    lbImg.addEventListener('pointerdown', (e) => {
+      if (imgs.length < 2) return;
+      dragging = true; dragX = e.clientX;
+      lbImg.style.transition = 'none';
+      lbImg.setPointerCapture?.(e.pointerId);
+    });
+    lbImg.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      lbImg.style.transform = 'translateX(' + (e.clientX - dragX) + 'px)';
+    });
+    const endDrag = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      const dx = e.clientX - dragX;
+      lbImg.style.transition = 'transform .25s var(--ease-smooth)';
+      lbImg.style.transform = '';
+      if (Math.abs(dx) > 45) show(cur + (dx < 0 ? 1 : -1));
+    };
+    lbImg.addEventListener('pointerup', endDrag);
+    lbImg.addEventListener('pointercancel', endDrag);
   }
 
   // -------------------------------------------------------
