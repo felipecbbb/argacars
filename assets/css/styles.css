@@ -1028,7 +1028,7 @@ strong{ color: var(--fg); font-weight: 700; }
   .hero-top{ flex-direction: column; gap: var(--space-3); }
   .hero-top .hero-quote.right{ display:none; }
   .hero-quote{ font-size: 13px; max-width: 32ch; }
-  .hero-big-word{ top: 14%; }
+  .hero-big-word{ top: 36%; }
   .hero-big-word img{ width: clamp(240px, 82vw, 460px); opacity: .5; }
   /* Reorder bottom so stats sit on top of tagline + button */
   .hero-bottom{
@@ -1036,9 +1036,9 @@ strong{ color: var(--fg); font-weight: 700; }
     gap: var(--space-4);
     align-items: stretch;
   }
-  .hero-bottom .hero-stats{ order: 1; flex-direction: row; gap: var(--space-2); width: 100%; }
-  .hero-bottom .hero-tagline{ order: 2; text-align: center; font-size: 15px; line-height: 1.35; }
-  .hero-bottom .pill-cta.is-lg{ order: 3; align-self: center; }
+  .hero-bottom .hero-stats{ order: 1; flex-direction: row; gap: var(--space-2); width: 100%; align-items: stretch; }
+  .hero-bottom .hero-tagline{ order: 2; text-align: center; font-size: 15px; line-height: 1.35; max-width: none; margin-inline: auto; }
+  .hero-bottom .pill-cta.is-lg{ order: 3; justify-self: center; }
   .stat-card{
     flex: 1; width: auto;
     padding: var(--space-4) var(--space-3);
@@ -1126,18 +1126,18 @@ strong{ color: var(--fg); font-weight: 700; }
   :root{ --gutter: 16px; }
   .logo .logo-arga{ font-size: 26px; }
   .logo .logo-premium{ font-size: 10px; padding-bottom: 2px; }
-  .hero-big-word{ top: 10%; }
+  .hero-big-word{ top: 34%; }
   .hero-big-word img{ width: clamp(200px, 80vw, 360px); }
   .hero-frame{ min-height: 600px; }
 
-  /* Stack stats vertically in very small screens */
-  .hero-bottom .hero-stats{ flex-direction: column; }
-  .stat-card{ padding: var(--space-3); }
+  /* Stack stats vertically and keep both cards the same width */
+  .hero-bottom .hero-stats{ flex-direction: column; align-items: stretch; }
+  .stat-card{ width: 100%; padding: var(--space-3); }
   .stat-card .num{ font-size: 30px; }
   .stat-card .label{ font-size: 12px; }
 
-  /* Hero CTA full width */
-  .hero-bottom .pill-cta.is-lg{ align-self: stretch; justify-content: space-between; }
+  /* Hero CTA compact (no full width) */
+  .hero-bottom .pill-cta.is-lg{ justify-self: center; }
 
   .h1{ font-size: clamp(36px, 11vw, 56px); }
   .h2{ font-size: clamp(30px, 9vw, 48px); }
