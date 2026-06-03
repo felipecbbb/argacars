@@ -1,5 +1,3 @@
-const { Resend } = require('resend');
-
 // === Configuración ===
 const TO_EMAIL = 'info@argapremiumcars.es';
 // Remitente: debe ser de un dominio verificado en Resend.
@@ -97,7 +95,8 @@ function buildHtml({ name, email, phone, message }) {
 </html>`;
 }
 
-module.exports = async (req, res) => {
+async function handler(req, res) {
+  const { Resend } = require('resend');
   if (req.method !== 'POST') {
     res.status(405).json({ ok: false, error: 'Method not allowed' });
     return;
@@ -147,4 +146,8 @@ module.exports = async (req, res) => {
   } catch (err) {
     res.status(500).json({ ok: false, error: err.message || 'Error inesperado' });
   }
-};
+}
+
+module.exports = handler;
+module.exports.buildHtml = buildHtml;
+module.exports.toWhatsApp = toWhatsApp;
