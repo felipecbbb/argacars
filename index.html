@@ -578,22 +578,23 @@
           <strong style="color:#fff;">Importante:</strong> Solo para personas decididas a adquirir un vehículo a corto plazo.
         </p>
       </div>
-      <form class="contact-form contact-form--light reveal" data-i="3" onsubmit="event.preventDefault(); alert('Formulario en pruebas. Pronto integraremos calendario real.');">
+      <form class="contact-form contact-form--light reveal" data-i="3">
+        <input type="text" name="company" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
         <div class="field-line">
           <label>Nombre</label>
-          <input type="text" required placeholder="Tu nombre y apellidos">
+          <input type="text" name="name" required placeholder="Tu nombre y apellidos">
         </div>
         <div class="field-line">
           <label>Email</label>
-          <input type="email" required placeholder="tu@email.com">
+          <input type="email" name="email" required placeholder="tu@email.com">
         </div>
         <div class="field-line">
           <label>Teléfono</label>
-          <input type="tel" required placeholder="+34 600 000 000">
+          <input type="tel" name="phone" required placeholder="+34 600 000 000">
         </div>
         <div class="field-line">
           <label>¿Qué coche buscas?</label>
-          <textarea required rows="2" placeholder="Marca, modelo, equipamiento, anuncio que te interesa…"></textarea>
+          <textarea name="message" required rows="2" placeholder="Marca, modelo, equipamiento, anuncio que te interesa…"></textarea>
         </div>
         <button type="submit" class="pill-cta is-dark" style="align-self:flex-start; background:#0a0a0a; color:#fff; border-color: transparent;">
           Enviar mensaje
@@ -673,5 +674,6 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/js/contact-form.js"></script>
 </body>
 </html>

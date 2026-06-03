@@ -1,0 +1,9 @@
+{
+  "name": "argacars",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web ARGA Premium Cars + función de contacto",
+  "dependencies": {
+    "resend": "^4.0.0"
+  }
+}
