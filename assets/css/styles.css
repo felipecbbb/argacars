@@ -1028,8 +1028,8 @@ strong{ color: var(--fg); font-weight: 700; }
   .hero-top{ flex-direction: column; gap: var(--space-3); }
   .hero-top .hero-quote.right{ display:none; }
   .hero-quote{ font-size: 13px; max-width: 32ch; }
-  .hero-big-word{ top: 36%; }
-  .hero-big-word img{ width: clamp(240px, 82vw, 460px); opacity: .5; }
+  .hero-big-word{ top: 22%; }
+  .hero-big-word img{ width: clamp(240px, 72vw, 460px); opacity: .55; }
   /* Reorder bottom so stats sit on top of tagline + button */
   .hero-bottom{
     grid-template-columns: 1fr;
@@ -1126,14 +1126,15 @@ strong{ color: var(--fg); font-weight: 700; }
   :root{ --gutter: 16px; }
   .logo .logo-arga{ font-size: 26px; }
   .logo .logo-premium{ font-size: 10px; padding-bottom: 2px; }
-  .hero-big-word{ top: 34%; }
-  .hero-big-word img{ width: clamp(200px, 80vw, 360px); }
-  .hero-frame{ min-height: 600px; }
+  /* Watermark "arga" en la franja del cielo, despejado y bien visible */
+  .hero-big-word{ top: 21%; }
+  .hero-big-word img{ width: clamp(200px, 66vw, 340px); opacity: .62; }
+  .hero-frame{ min-height: clamp(680px, 94vh, 820px); }
 
-  /* Stats: cajas estrechas, apiladas y alineadas a la derecha (no tapan el watermark) */
-  .hero-bottom .hero-stats{ flex-direction: column; align-items: stretch; width: 64%; margin-left: auto; }
-  .stat-card{ width: 100%; padding: var(--space-3); }
-  .stat-card .num{ font-size: 28px; }
+  /* Stats apiladas a ancho completo, en la zona baja (debajo del watermark) */
+  .hero-bottom .hero-stats{ flex-direction: column; align-items: stretch; width: 100%; margin-left: 0; }
+  .stat-card{ width: 100%; padding: var(--space-4) var(--space-3); }
+  .stat-card .num{ font-size: 30px; }
   .stat-card .label{ font-size: 11px; }
 
   /* Hero CTA compact (no full width) */
