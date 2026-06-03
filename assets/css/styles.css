@@ -656,7 +656,7 @@ strong{ color: var(--fg); font-weight: 700; }
 
 /* Texto de historia a dos columnas (aprovecha el ancho, alineado arriba) */
 .historia-text{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-5) var(--space-10); align-items: start; }
-.historia-text .col{ display:flex; flex-direction:column; gap: var(--space-5); }
+.historia-text .col{ display:flex; flex-direction:column; gap: var(--space-3); }
 @media (max-width: 760px){ .historia-text{ grid-template-columns: 1fr; } }
 
 /* Subtítulo tipo título secundario (más pequeño que .h2) */
