@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // -------------------------------------------------------
   const heroFrame = document.querySelector('.hero-frame');
   const bigWord = document.querySelector('.hero-big-word');
-  if (heroFrame && bigWord){
+  if (heroFrame && bigWord && window.matchMedia('(min-width: 768px)').matches){
     let mx = 0, my = 0, cx = 0, cy = 0;
     heroFrame.addEventListener('mousemove', (e) => {
       const rect = heroFrame.getBoundingClientRect();
