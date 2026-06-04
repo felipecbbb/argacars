@@ -1131,11 +1131,11 @@ strong{ color: var(--fg); font-weight: 700; }
   .hero-big-word img{ width: clamp(200px, 66vw, 340px); opacity: .62; }
   .hero-frame{ min-height: clamp(680px, 94vh, 820px); }
 
-  /* Stats apiladas a ancho completo, en la zona baja (debajo del watermark) */
-  .hero-bottom .hero-stats{ flex-direction: column; align-items: stretch; width: 100%; margin-left: 0; }
-  .stat-card{ width: 100%; padding: var(--space-4) var(--space-3); }
-  .stat-card .num{ font-size: 30px; }
-  .stat-card .label{ font-size: 11px; }
+  /* Stats en una sola fila, cada card a la mitad del espacio */
+  .hero-bottom .hero-stats{ flex-direction: row; align-items: stretch; width: 100%; margin-left: 0; gap: var(--space-2); }
+  .stat-card{ flex: 1 1 0; width: auto; min-width: 0; padding: var(--space-3); }
+  .stat-card .num{ font-size: clamp(22px, 6.4vw, 28px); }
+  .stat-card .label{ font-size: 10px; }
 
   /* Hero CTA compact (no full width) */
   .hero-bottom .pill-cta.is-lg{ justify-self: center; }
