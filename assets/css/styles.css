@@ -1126,10 +1126,13 @@ strong{ color: var(--fg); font-weight: 700; }
   :root{ --gutter: 16px; }
   .logo .logo-arga{ font-size: 26px; }
   .logo .logo-premium{ font-size: 10px; padding-bottom: 2px; }
+  /* Hero más compacto en vertical */
+  .hero-frame{ min-height: clamp(520px, 76vh, 600px); }
+  .hero-content{ padding: var(--space-4); }
+  .hero-bottom{ gap: var(--space-3); }
   /* Watermark "arga" centrado verticalmente y grande */
-  .hero-big-word{ top: 50%; transform: translate(-50%, -50%); }
-  .hero-big-word img{ width: clamp(330px, 94vw, 520px); opacity: .62; }
-  .hero-frame{ min-height: clamp(680px, 94vh, 820px); }
+  .hero-big-word{ top: 48%; transform: translate(-50%, -50%); }
+  .hero-big-word img{ width: clamp(300px, 88vw, 480px); opacity: .62; }
 
   /* Stats en una sola fila, cada card a la mitad del espacio */
   .hero-bottom .hero-stats{ flex-direction: row; align-items: stretch; width: 100%; margin-left: 0; gap: var(--space-2); }
