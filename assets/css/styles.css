@@ -1127,8 +1127,8 @@ strong{ color: var(--fg); font-weight: 700; }
   .logo .logo-arga{ font-size: 26px; }
   .logo .logo-premium{ font-size: 10px; padding-bottom: 2px; }
   /* Watermark "arga" en la franja del cielo, despejado y bien visible */
-  .hero-big-word{ top: 21%; }
-  .hero-big-word img{ width: clamp(200px, 66vw, 340px); opacity: .62; }
+  .hero-big-word{ top: 19%; }
+  .hero-big-word img{ width: clamp(300px, 90vw, 480px); opacity: .62; }
   .hero-frame{ min-height: clamp(680px, 94vh, 820px); }
 
   /* Stats en una sola fila, cada card a la mitad del espacio */
