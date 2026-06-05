@@ -1131,14 +1131,14 @@ strong{ color: var(--fg); font-weight: 700; }
   .hero-frame{ min-height: 70svh; }
   .hero-content{ padding: var(--space-4); }
   .hero-bottom{ gap: var(--space-3); }
-  /* Encuadre de la foto (sin zoom): mostrar los coches de la izquierda */
-  #hero-top .hero-bg.photo{ background-position: 22% center; }
+  /* Encuadre de la foto (sin zoom): mostrar los coches */
+  #hero-top .hero-bg.photo{ background-position: 38% center; }
   /* Watermark "arga" más arriba y más grande */
-  .hero-big-word{ top: 34%; transform: translate(-50%, -50%); }
+  .hero-big-word{ top: 27%; transform: translate(-50%, -50%); }
   .hero-big-word img{ width: clamp(360px, 108vw, 600px); opacity: .62; }
 
-  /* Stats en una sola fila, cada card a la mitad del espacio */
-  .hero-bottom .hero-stats{ flex-direction: row; align-items: stretch; width: 100%; margin-left: 0; gap: var(--space-2); }
+  /* Stats en una sola fila, subidas para dejar ver los coches debajo */
+  .hero-bottom .hero-stats{ flex-direction: row; align-items: stretch; width: 100%; margin-left: 0; gap: var(--space-2); margin-bottom: var(--space-12); }
   .stat-card{ flex: 1 1 0; width: auto; min-width: 0; padding: var(--space-3); }
   .stat-card .num{ font-size: clamp(22px, 6.4vw, 28px); }
   .stat-card .label{ font-size: 10px; }
