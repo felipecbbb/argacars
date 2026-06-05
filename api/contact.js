@@ -26,7 +26,9 @@ function esc(s) {
 
 function buildHtml({ name, email, phone, message }) {
   const wa = toWhatsApp(phone);
-  const waLink = wa ? `https://wa.me/${wa}?text=${encodeURIComponent('Hola ' + (name || '') + ', te escribo desde ARGA Premium Cars 👋')}` : null;
+  const firstName = (name || '').trim().split(/\s+/)[0] || '';
+  const waMessage = `Hola ${firstName}, soy Alejandro de ARGA Premium Cars 👋\n\nHemos recibido tu solicitud de asesoramiento para nuestro servicio de importación de vehículo.`;
+  const waLink = wa ? `https://wa.me/${wa}?text=${encodeURIComponent(waMessage)}` : null;
 
   const row = (label, value) => `
     <tr>
