@@ -1126,13 +1126,15 @@ strong{ color: var(--fg); font-weight: 700; }
   :root{ --gutter: 16px; }
   .logo .logo-arga{ font-size: 26px; }
   .logo .logo-premium{ font-size: 10px; padding-bottom: 2px; }
-  /* Hero más bajo (no cubre toda la pantalla) */
+  /* Hero un poco más alto */
   .hero{ padding: var(--space-2) 0 var(--space-4); }
-  .hero-frame{ min-height: 60svh; }
+  .hero-frame{ min-height: 70svh; }
   .hero-content{ padding: var(--space-4); }
   .hero-bottom{ gap: var(--space-3); }
+  /* Encuadre de la foto: que se vean los coches de la izquierda en la zona baja */
+  #hero-top .hero-bg.photo{ background-size: auto 145%; background-position: 22% 58%; }
   /* Watermark "arga" más arriba y más grande */
-  .hero-big-word{ top: 37%; transform: translate(-50%, -50%); }
+  .hero-big-word{ top: 34%; transform: translate(-50%, -50%); }
   .hero-big-word img{ width: clamp(360px, 108vw, 600px); opacity: .62; }
 
   /* Stats en una sola fila, cada card a la mitad del espacio */
