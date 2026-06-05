@@ -1131,8 +1131,8 @@ strong{ color: var(--fg); font-weight: 700; }
   .hero-frame{ min-height: 70svh; }
   .hero-content{ padding: var(--space-4); }
   .hero-bottom{ gap: var(--space-3); }
-  /* Encuadre de la foto: que se vean los coches de la izquierda en la zona baja */
-  #hero-top .hero-bg.photo{ background-size: auto 145%; background-position: 22% 58%; }
+  /* Encuadre de la foto (sin zoom): mostrar los coches de la izquierda */
+  #hero-top .hero-bg.photo{ background-position: 22% center; }
   /* Watermark "arga" más arriba y más grande */
   .hero-big-word{ top: 34%; transform: translate(-50%, -50%); }
   .hero-big-word img{ width: clamp(360px, 108vw, 600px); opacity: .62; }
