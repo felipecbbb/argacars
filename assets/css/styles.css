@@ -1093,7 +1093,7 @@ strong{ color: var(--fg); font-weight: 700; }
     justify-content: flex-start !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    margin: 0 calc(var(--space-4) * -1);
+    margin: 0 calc(var(--space-4) * -1) var(--space-6);
     padding-left: var(--space-4);
     padding-right: var(--space-4);
   }
