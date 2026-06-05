@@ -1,5 +1,5 @@
 // === Configuración ===
-const TO_EMAIL = 'info@argapremiumcars.es';
+const TO_EMAIL = 'info@argapremiumcars.com';
 // Remitente: debe ser de un dominio verificado en Resend.
 // Hasta verificar argapremiumcars.es puedes usar 'onboarding@resend.dev'.
 const FROM_EMAIL = process.env.FROM_EMAIL || 'ARGA Premium Cars <web@argapremiumcars.es>';

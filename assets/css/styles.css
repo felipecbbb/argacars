@@ -1126,9 +1126,9 @@ strong{ color: var(--fg); font-weight: 700; }
   :root{ --gutter: 16px; }
   .logo .logo-arga{ font-size: 26px; }
   .logo .logo-premium{ font-size: 10px; padding-bottom: 2px; }
-  /* Hero a altura de pantalla (ni más ni menos) */
-  .hero{ padding: var(--space-3) 0 var(--space-4); }
-  .hero-frame{ min-height: 86svh; }
+  /* Hero más bajo (no cubre toda la pantalla) */
+  .hero{ padding: var(--space-2) 0 var(--space-4); }
+  .hero-frame{ min-height: 68svh; }
   .hero-content{ padding: var(--space-4); }
   .hero-bottom{ gap: var(--space-3); }
   /* Watermark "arga" centrado verticalmente y grande */

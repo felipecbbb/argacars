@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
           throw new Error(json.error || 'Error al enviar');
         }
       } catch (err) {
-        alert('No se pudo enviar el formulario. Escríbenos a info@argapremiumcars.es o inténtalo de nuevo.');
+        alert('No se pudo enviar el formulario. Escríbenos a info@argapremiumcars.com o inténtalo de nuevo.');
       } finally {
         if (btn) { btn.disabled = false; btn.innerHTML = btnHtml; }
       }
