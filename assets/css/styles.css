@@ -1219,6 +1219,7 @@ strong{ color: var(--fg); font-weight: 700; }
 .article .meta{ display:flex; gap: var(--space-3); color: var(--fg-muted); font-size: 14px; margin-bottom: var(--space-8); }
 .article p{ font-size: 17px; line-height: 1.7; color: var(--fg); opacity: .85; margin: 0 0 var(--space-5); }
 .article a{ color: var(--fg); text-decoration: underline; text-underline-offset: 4px; }
+.article h2{ margin-bottom: var(--space-4); }
 
 /* === MOTION === */
 .reveal{ opacity:0; transform: translateY(28px); transition: opacity .8s var(--ease-smooth), transform .9s var(--ease-spring); }
