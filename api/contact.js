@@ -27,7 +27,15 @@ function esc(s) {
 function buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupuesto, enlaces }) {
   const wa = toWhatsApp(phone);
   const firstName = (name || '').trim().split(/\s+/)[0] || '';
-  const waMessage = `Hola ${firstName}, soy Alejandro de ARGA Premium Cars 👋\n\nHemos recibido tu solicitud de asesoramiento para nuestro servicio de importación de vehículo.`;
+  // Resumen de la solicitud del cliente a partir de los campos rellenados
+  const parts = [];
+  if ((modelo || '').trim()) parts.push(modelo.trim());
+  if ((anio || '').trim()) parts.push(`año ${anio.trim()}`);
+  if ((km || '').trim()) parts.push(`máx. ${km.trim()}`);
+  if ((equipamiento || '').trim()) parts.push(equipamiento.trim());
+  if ((presupuesto || '').trim()) parts.push(`presupuesto ${presupuesto.trim()}`);
+  const clientRequest = parts.join(', ');
+  const waMessage = `Hola ${firstName}, soy Alejandro de ARGA Premium Cars 👋\n\nHemos recibido tu solicitud de asesoramiento para nuestro servicio de importación de vehículo:` + (clientRequest ? `\n\n“${clientRequest}”` : '');
   const waLink = wa ? `https://wa.me/${wa}?text=${encodeURIComponent(waMessage)}` : null;
 
   const row = (label, value) => `
