@@ -655,8 +655,28 @@
           <input type="tel" name="phone" required placeholder="+34 600 000 000">
         </div>
         <div class="field-line">
-          <label>¿Qué coche buscas?</label>
-          <textarea name="message" required rows="2" placeholder="Marca, modelo, equipamiento, anuncio que te interesa…"></textarea>
+          <label>Marca/s, modelo/s y motorización/es</label>
+          <input type="text" name="modelo" required placeholder="Ej. BMW M340i, Audi RS6 Avant…">
+        </div>
+        <div class="field-line">
+          <label>Año</label>
+          <input type="text" name="anio" placeholder="Ej. 2021 o más nuevo">
+        </div>
+        <div class="field-line">
+          <label>Kilometraje máximo</label>
+          <input type="text" name="km" placeholder="Ej. 80.000 km">
+        </div>
+        <div class="field-line">
+          <label>Equipamiento</label>
+          <input type="text" name="equipamiento" placeholder="Extras imprescindibles para ti">
+        </div>
+        <div class="field-line">
+          <label>Presupuesto aproximado</label>
+          <input type="text" name="presupuesto" placeholder="Ej. 60.000 €">
+        </div>
+        <div class="field-line">
+          <label>Enlace/s <span style="color:var(--fg-muted);font-weight:400;">(opcional)</span></label>
+          <textarea name="enlaces" rows="2" placeholder="Pega aquí anuncios que te interesen"></textarea>
         </div>
         <button type="submit" class="pill-cta is-dark" style="align-self:flex-start; background:#0a0a0a; color:#fff; border-color: transparent;">
           Enviar mensaje

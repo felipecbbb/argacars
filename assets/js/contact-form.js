@@ -7,12 +7,18 @@ document.addEventListener('DOMContentLoaded', function () {
       const btn = form.querySelector('button[type="submit"]');
       const btnHtml = btn ? btn.innerHTML : '';
 
+      const val = function (n) { return ((form.querySelector('[name="' + n + '"]') || {}).value || '').trim(); };
       const data = {
-        name: (form.querySelector('[name="name"]') || {}).value || '',
-        email: (form.querySelector('[name="email"]') || {}).value || '',
-        phone: (form.querySelector('[name="phone"]') || {}).value || '',
-        message: (form.querySelector('[name="message"]') || {}).value || '',
-        company: (form.querySelector('[name="company"]') || {}).value || '', // honeypot
+        name: val('name'),
+        email: val('email'),
+        phone: val('phone'),
+        modelo: val('modelo'),
+        anio: val('anio'),
+        km: val('km'),
+        equipamiento: val('equipamiento'),
+        presupuesto: val('presupuesto'),
+        enlaces: val('enlaces'),
+        company: val('company'), // honeypot
       };
 
       if (btn) { btn.disabled = true; btn.innerHTML = 'Enviando…'; }

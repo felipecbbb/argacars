@@ -24,7 +24,7 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
-function buildHtml({ name, email, phone, message }) {
+function buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupuesto, enlaces }) {
   const wa = toWhatsApp(phone);
   const firstName = (name || '').trim().split(/\s+/)[0] || '';
   const waMessage = `Hola ${firstName}, soy Alejandro de ARGA Premium Cars 👋\n\nHemos recibido tu solicitud de asesoramiento para nuestro servicio de importación de vehículo.`;
@@ -35,6 +35,11 @@ function buildHtml({ name, email, phone, message }) {
       <td style="padding:14px 0;border-bottom:1px solid #eee;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#9b9b9b;font-weight:600;width:120px;vertical-align:top;">${label}</td>
       <td style="padding:14px 0;border-bottom:1px solid #eee;font-size:16px;color:${BLACK};font-weight:600;">${value}</td>
     </tr>`;
+  // Fila opcional: solo se muestra si hay valor
+  const optRow = (label, value) => {
+    const v = (value || '').toString().trim();
+    return v ? row(label, esc(v).replace(/\n/g, '<br>')) : '';
+  };
 
   return `<!doctype html>
 <html lang="es">
@@ -59,7 +64,12 @@ function buildHtml({ name, email, phone, message }) {
               ${row('Nombre', esc(name) || '—')}
               ${row('Email', `<a href="mailto:${esc(email)}" style="color:${BLACK};text-decoration:none;">${esc(email) || '—'}</a>`)}
               ${row('Teléfono', esc(phone) || '—')}
-              ${row('Qué busca', (esc(message) || '—').replace(/\n/g, '<br>'))}
+              ${row('Marca / modelo / motor', (esc(modelo) || '—').replace(/\n/g, '<br>'))}
+              ${optRow('Año', anio)}
+              ${optRow('Km máximo', km)}
+              ${optRow('Equipamiento', equipamiento)}
+              ${optRow('Presupuesto', presupuesto)}
+              ${optRow('Enlaces', enlaces)}
             </table>
           </td>
         </tr>
@@ -117,7 +127,12 @@ async function handler(req, res) {
     const name = (body.name || '').toString().trim();
     const email = (body.email || '').toString().trim();
     const phone = (body.phone || '').toString().trim();
-    const message = (body.message || '').toString().trim();
+    const modelo = (body.modelo || '').toString().trim();
+    const anio = (body.anio || '').toString().trim();
+    const km = (body.km || '').toString().trim();
+    const equipamiento = (body.equipamiento || '').toString().trim();
+    const presupuesto = (body.presupuesto || '').toString().trim();
+    const enlaces = (body.enlaces || '').toString().trim();
 
     // Honeypot anti-spam (campo oculto que un bot rellenaría)
     if (body.company) {
@@ -135,8 +150,8 @@ async function handler(req, res) {
       from: FROM_EMAIL,
       to: TO_EMAIL,
       replyTo: email,
-      subject: `Nueva solicitud — ${name} (${phone})`,
-      html: buildHtml({ name, email, phone, message }),
+      subject: `Nueva solicitud — ${name}${modelo ? ' · ' + modelo : ''} (${phone})`,
+      html: buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupuesto, enlaces }),
     });
 
     if (error) {
