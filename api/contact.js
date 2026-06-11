@@ -77,7 +77,7 @@ function buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupu
               ${optRow('Km máximo', km)}
               ${optRow('Equipamiento', equipamiento)}
               ${optRow('Presupuesto', presupuesto)}
-              ${optRow('Enlaces', enlaces)}
+              ${optRow('Enlaces u observaciones', enlaces)}
             </table>
           </td>
         </tr>
