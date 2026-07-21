@@ -32,6 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const json = await res.json().catch(function () { return {}; });
 
         if (res.ok && json.ok) {
+          // Meta Pixel: conversión de lead (solo en envío correcto)
+          if (typeof fbq === 'function') {
+            fbq('track', 'Lead', { content_name: 'Solicitud de presupuesto' });
+          }
           form.reset();
           if (btn) { btn.innerHTML = '✓ Enviado'; }
           alert('¡Gracias! Hemos recibido tu solicitud. Te contactaremos muy pronto.');
