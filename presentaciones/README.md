@@ -17,6 +17,30 @@ píldoras del sitio).
 | `6-documentos-necesarios.html` | 6 · Documentos necesarios en el proceso | 7 |
 | `9-15-consejos-clave.html` | 9 · 15 consejos clave para la importación | 6 |
 
+### Guía 5, desglosada en cuatro guías gratuitas
+
+La guía 5 (`4-1-operaciones-regimenes-compra`) cubre las cuatro casuísticas en un solo deck.
+Estas cuatro la parten en una guía por casuística, pensadas para repartir sueltas como lead
+magnet. Todas comparten **la misma página 1** (los dos supuestos: nuevo vs. usado y tipo de
+vendedor/régimen) y **la misma página 6** (las cuatro casuísticas + próximas guías); cambian
+la tabla y los tres ejemplos con números.
+
+| Archivo | Casuística | Páginas |
+|---|---|---|
+| `guia-5-1-particular-usado.html` | Comprador particular · vehículo usado | 6 |
+| `guia-5-2-particular-nuevo.html` | Comprador particular · vehículo nuevo | 6 |
+| `guia-5-3-profesional-usado.html` | Comprador profesional · vehículo usado | 6 |
+| `guia-5-4-profesional-nuevo.html` | Comprador profesional · vehículo nuevo | 6 |
+
+Estructura fija de cada una: **1)** los dos supuestos · **2)** la tabla de la casuística ·
+**3)** ejemplo con números — vendedor particular · **4)** ejemplo con números — REBU ·
+**5)** ejemplo con números — régimen general · **6)** cierre.
+
+Los ejemplos usan siempre el mismo coche dentro de cada categoría (BMW 320d Touring de 25.000 €
+para usado, Audi A4 km 0 de 40.000 € para nuevo), así los tres regímenes se comparan cifra a
+cifra. Los estilos propios de estas guías (`.calc`, `.total`, `.ad`) van en un `<style>` dentro
+de cada archivo; el resto es `assets/deck.css`.
+
 `index.html` es el índice con acceso a todas. En `pdf/` está cada presentación ya exportada.
 
 ## Uso
