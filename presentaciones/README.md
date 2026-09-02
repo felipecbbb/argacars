@@ -17,6 +17,16 @@ píldoras del sitio).
 | `6-documentos-necesarios.html` | 6 · Documentos necesarios en el proceso | 7 |
 | `9-15-consejos-clave.html` | 9 · 15 consejos clave para la importación | 6 |
 
+### Guía 2, versión suelta para repartir
+
+`guia-2-documentacion-alemana.html` (7 páginas) es la guía 2 recortada como lead magnet.
+Respecto al deck original de 9 slides se han quitado: el detalle casilla a casilla del Teil 1,
+la comprobación 3 de la pegatina (contraseña que empieza por «E»), la comprobación 3 del COC
+(extras y equipamiento), la tabla de orígenes por contraseña de homologación y el cierre de
+recapitulación. Se añade una última página anunciando la segunda mitad del papeleo —los
+documentos de matriculación en España—. El deck completo de 9 slides sigue intacto en
+`3-2-documentacion-alemana.html`.
+
 ### Guía 5, desglosada en cuatro guías gratuitas
 
 La guía 5 (`4-1-operaciones-regimenes-compra`) cubre las cuatro casuísticas en un solo deck.
