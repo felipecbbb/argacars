@@ -84,6 +84,24 @@ parte de lo que debes conocer». **Nada de eso está en las presentaciones**: el
 cada deck es una recapitulación de las tres ideas clave del módulo, sin llamadas a la acción ni
 referencias externas.
 
+### Guía 8, desglosada en tres guías gratuitas
+
+Los 15 consejos repartidos en tres bloques temáticos de cinco, **una página por consejo**,
+para poder repartirlos sueltos por el grupo. Todas comparten la página 1 (introducción y
+contexto, con el índice de sus cinco consejos) y la página 7 (cierre + aviso de que llegarán
+más consejos por el grupo).
+
+| Archivo | Bloque | Consejos del original | Páginas |
+|---|---|---|---|
+| `guia-8-1-antes-de-comprar.html` | Búsqueda, análisis y criterio | 1, 2, 3, 8, 7 | 7 |
+| `guia-8-2-revisar-y-cerrar.html` | Revisión, comunicaciones y pago | 5, 6, 4, 13, 11 | 7 |
+| `guia-8-3-traer-y-legalizar.html` | Transporte, trámites y fiscalidad | 12, 10, 9, 15, 14 | 7 |
+
+Cada página de consejo tiene el mismo esqueleto: número grande, texto del consejo original
+desarrollado, una frase-resumen destacada, un bloque «Cómo se aplica» con tres puntos
+accionables y una tarjeta de aviso (dorada si es una ventaja, roja si es un error caro).
+Estilos propios (`.bignum`, `.tip-body`, `.quote`, `.idx`) en el `<style>` de cada archivo.
+
 ---
 
 # Mapas mentales
