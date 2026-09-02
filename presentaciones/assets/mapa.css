@@ -1,0 +1,142 @@
+/* =========================================================
+   ARGA — Sistema de mapas mentales (1600×900, fondo blanco)
+   Compartido por todos los mapas. Las posiciones de los nodos
+   se definen en el <style> de cada mapa.
+   ========================================================= */
+
+:root{
+  --ink:#0a0a0a; --gold:#c5a572; --gold-deep:#9a7c46;
+  --paper:#ffffff; --soft:#f7f7f5;
+  --line:#e6e6e2; --line-strong:#d4d4cf;
+  --body:#55555a;
+  --red:#b23b3b; --red-soft:#fbf1f1; --red-line:#eccfcf;
+  --green:#3f7a52;
+  --f:'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:#e9e9e6; font-family:var(--f); color:var(--ink);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  overflow:hidden;
+}
+#stage{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; }
+#map{
+  width:1600px; height:900px; flex:none; position:relative; overflow:hidden;
+  background:var(--paper); transform-origin:center center;
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.35);
+}
+
+/* ---------- CONECTORES ---------- */
+svg.wires{ position:absolute; inset:0; width:1600px; height:900px; pointer-events:none; }
+svg.wires path{ fill:none; stroke:var(--gold); stroke-opacity:.75; stroke-width:2; }
+svg.wires path.soft{ stroke-opacity:.4; stroke-dasharray:5 6; }
+
+/* ---------- HEADER ---------- */
+.head{ position:absolute; left:60px; top:44px; right:60px; }
+.head .eyebrow{ font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-deep); }
+.head h1{ margin:10px 0 0; font-size:34px; font-weight:900; letter-spacing:-.035em; line-height:1; text-transform:uppercase; }
+
+/* ---------- NODO ---------- */
+.node{ position:absolute; border-radius:20px; padding:20px 24px; display:flex; flex-direction:column; gap:8px;
+  background:var(--paper); border:1px solid var(--line); }
+.node .kick{ display:flex; align-items:center; gap:10px; }
+.node .n{ width:26px; height:26px; border-radius:999px; flex:none; display:grid; place-items:center;
+  background:var(--ink); color:#fff; font-size:12px; font-weight:800; }
+.node h2{ margin:0; font-size:24px; font-weight:800; letter-spacing:-.025em; line-height:1.05; }
+.node h2.sm{ font-size:21px; }
+.node .tag{ font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-deep); }
+.node ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px; }
+.node li{ position:relative; padding-left:16px; font-size:14px; line-height:1.35; color:var(--body); }
+.node li::before{ content:""; position:absolute; left:0; top:7px; width:5px; height:5px; border-radius:999px; background:var(--gold); }
+.node li b{ color:var(--ink); font-weight:700; }
+.node ul.tight li{ font-size:13.5px; }
+.node ul.tight{ gap:6px; }
+.node .warn{ margin-top:auto; font-size:12.5px; line-height:1.35; color:var(--gold-deep);
+  border-top:1px solid var(--line); padding-top:9px; }
+.node .warn b{ color:var(--gold-deep); font-weight:700; }
+
+/* Variantes de nodo */
+.node.soft{ background:var(--soft); border-color:var(--line-strong); }
+.node.ink{ background:var(--ink); border-color:var(--ink); color:#fff; }
+.node.ink li{ color:rgba(255,255,255,.76); }
+.node.ink li b{ color:#fff; }
+.node.ink .tag{ color:var(--gold); }
+.node.ink .n{ background:var(--gold); color:var(--ink); }
+.node.ink .warn{ color:var(--gold); border-top-color:rgba(255,255,255,.14); }
+.node.alert{ background:var(--red-soft); border-color:var(--red-line); }
+.node.alert .tag{ color:var(--red); }
+.node.alert li::before{ background:var(--red); }
+.node.alert .warn{ color:var(--red); border-top-color:var(--red-line); }
+
+/* Filas etiqueta + texto (criterios, reglas) */
+.rows{ display:flex; flex-direction:column; gap:10px; }
+.rows .row{ display:flex; align-items:flex-start; gap:12px; }
+.rows .row + .row{ border-top:1px solid var(--line); padding-top:10px; }
+.node.soft .rows .row + .row{ border-top-color:var(--line-strong); }
+.rows .tier{ font-size:11px; font-weight:800; color:var(--ink);
+  background:var(--paper); border:1px solid var(--line-strong); border-radius:999px;
+  padding:4px 11px; flex:none; white-space:nowrap; }
+.rows .txt{ font-size:13.5px; line-height:1.35; color:var(--body); }
+.rows .txt b{ color:var(--ink); font-weight:700; }
+
+/* ---------- NODO CENTRAL ---------- */
+.core{ position:absolute; border-radius:24px; background:var(--ink); color:#fff;
+  display:flex; flex-direction:column; justify-content:center; gap:7px; padding:0 34px; }
+.core .m{ font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+.core h2{ margin:0; font-size:36px; font-weight:900; letter-spacing:-.04em; line-height:.98; text-transform:uppercase; }
+.core h2.sm{ font-size:30px; }
+.core p{ margin:4px 0 0; font-size:13.5px; line-height:1.4; color:rgba(255,255,255,.7); }
+
+/* ---------- BANDA INFERIOR ---------- */
+.flow{ position:absolute; border-radius:999px; border:1px solid var(--line); background:var(--soft);
+  display:flex; align-items:center; gap:22px; padding:0 30px; }
+.flow .lbl{ font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--gold-deep); flex:none; }
+.flow .steps{ display:flex; align-items:center; gap:26px; flex:1; }
+.flow .step{ display:flex; align-items:center; gap:10px; font-size:14.5px; white-space:nowrap; }
+.flow .step .d{ width:22px; height:22px; border-radius:999px; display:grid; place-items:center;
+  background:var(--ink); color:#fff; font-size:11px; font-weight:800; flex:none; }
+.flow .step b{ font-weight:700; }
+.flow .step span.s{ color:var(--body); }
+.flow .arrow{ color:var(--gold); font-size:16px; }
+
+/* ---------- IMPRESIÓN ---------- */
+@page{ size:1600px 900px; margin:0; }
+@media print{
+  body{ background:#fff; overflow:visible; }
+  #stage{ position:static; display:block; }
+  #map{ transform:none !important; box-shadow:none; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+}
+
+/* =========================================================
+   LAYOUT AUTOMÁTICO (columnas + conectores calculados por JS)
+   Convive con los mapas antiguos de posiciones absolutas.
+   ========================================================= */
+.auto{
+  position:absolute; left:60px; right:60px; top:132px; bottom:56px;
+  display:grid; grid-template-columns:466px 1fr 466px; gap:0 72px;
+}
+.auto.has-flow{ bottom:150px; }
+.auto .col{ display:flex; flex-direction:column; gap:18px; justify-content:center; min-height:0; }
+.auto .col.mid{ justify-content:center; align-items:center; }
+.auto .node{ position:static; }
+.auto .core{ position:static; width:100%; }
+
+/* Columna de 3 nodos: menos aire */
+.auto .col.dense{ gap:12px; }
+
+/* Ancho completo (un solo bloque bajo el centro) */
+.auto.wide{ grid-template-columns:1fr; }
+.auto .core{ min-height:158px; padding:26px 32px; }
+
+/* Columnas de 3+ nodos: tipografía y espaciado compactos */
+.auto .col.dense .node{ padding:16px 20px; gap:6px; }
+.auto .col.dense .node h2{ font-size:21px; }
+.auto .col.dense .node h2.sm{ font-size:19px; }
+.auto .col.dense .node .tag{ font-size:9.5px; }
+.auto .col.dense .node li{ font-size:13px; line-height:1.3; }
+.auto .col.dense .node ul{ gap:5px; }
+.auto .col.dense .node .warn{ font-size:11.5px; padding-top:7px; line-height:1.3; }
+.auto .col.dense .rows{ gap:8px; }
+.auto .col.dense .rows .txt{ font-size:12.5px; }
+.auto .col.dense .rows .tier{ font-size:10px; padding:3px 9px; }

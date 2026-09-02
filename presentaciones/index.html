@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Presentaciones · Formación de importación | ARGA Premium Cars</title>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/deck.css">
+<style>
+  body{ background: var(--bg-soft); overflow: auto; }
+  .wrap{ max-width: 1240px; margin: 0 auto; padding: 72px 40px 96px; }
+  .top{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; margin-bottom: 48px; }
+  .top img{ height: 30px; filter: invert(1); }
+  .deck-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 1000px){ .deck-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 660px){ .deck-grid{ grid-template-columns: 1fr; } .wrap{ padding: 48px 22px 64px; } }
+  .deck{
+    position:relative; display:flex; flex-direction:column; gap:10px; color:inherit;
+    background:#fff; border:1px solid var(--border); border-radius:20px; padding:26px 28px;
+    transition: transform .35s cubic-bezier(.34,1.36,.64,1), border-color .25s ease, box-shadow .35s ease;
+  }
+  .deck:hover{ transform: translateY(-4px); border-color: var(--border-strong); box-shadow: 0 18px 40px -18px rgba(0,0,0,.22); }
+  .deck .mod{ font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color: var(--gold); }
+  .deck h3{ font-size:23px; font-weight:800; letter-spacing:-.025em; line-height:1.1; }
+  .deck p{ font-size:14px; line-height:1.45; color:#55555a; }
+  .deck .foot{ margin-top:auto; padding-top:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color: var(--dim); border-top:1px solid var(--border); }
+  .deck a.cover{ position:absolute; inset:0; border-radius:20px; z-index:1; }
+  .deck .foot .links{ position:relative; z-index:2; display:flex; gap:8px; }
+  .deck .foot a{ text-decoration:none; color:var(--ink); border:1px solid var(--border-strong); border-radius:999px; padding:5px 12px; font-weight:600; transition:background .2s ease,color .2s ease,border-color .2s ease; }
+  .deck .foot a:hover{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .help{ margin-top:44px; background:var(--ink); color:#fff; border-radius:20px; padding:30px 34px; display:flex; flex-direction:column; gap:12px; }
+  .help .k{ font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color: var(--gold); }
+  .help ul{ display:grid; grid-template-columns: repeat(2,1fr); gap:10px 30px; }
+  @media (max-width: 660px){ .help ul{ grid-template-columns:1fr; } }
+  .help li{ font-size:14px; color:rgba(255,255,255,.72); display:flex; gap:10px; }
+  .help li b{ color:#fff; font-weight:700; }
+  kbd{ background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); border-radius:6px; padding:1px 7px; font-size:12px; font-family:var(--f); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <span class="eyebrow">Formación · Importación de vehículos</span>
+      <h1 class="h-lg" style="margin-top:14px; font-size:64px">Presentaciones</h1>
+      <p class="lede" style="margin-top:16px; max-width:62ch">Ocho presentaciones en formato 16:9 con el sistema de diseño de ARGA Premium Cars. Ábrelas en pantalla completa o expórtalas a PDF.</p>
+    </div>
+    <img src="assets/logo.png" alt="ARGA Premium Cars">
+  </div>
+
+  <div class="deck-grid">
+    <div class="deck">
+      <a class="cover" href="3-1-preguntas-pre-compra.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 3.1</span>
+      <h3>Listado de preguntas pre-compra</h3>
+      <p>El guion en inglés y español para el primer contacto con el vendedor, y cómo adaptarlo según quién compra y quién vende.</p>
+      <span class="foot"><span>8 slides</span><span class="links"><a href="3-1-preguntas-pre-compra.html">Abrir</a><a href="pdf/3-1-preguntas-pre-compra.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+    <div class="deck">
+      <a class="cover" href="3-2-documentacion-alemana.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 3.2</span>
+      <h3>Documentación alemana y comprobaciones</h3>
+      <p>Teil 1, pegatina de homologación, Teil 2 y COC: qué es cada documento, qué casillas revisar y cómo saber el origen del vehículo.</p>
+      <span class="foot"><span>9 slides</span><span class="links"><a href="3-2-documentacion-alemana.html">Abrir</a><a href="pdf/3-2-documentacion-alemana.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+    <div class="deck">
+      <a class="cover" href="3-3-guia-revision-vehiculo.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 3.3</span>
+      <h3>Guía de revisión de un vehículo</h3>
+      <p>Los 12 pasos de una inspección pre-compra, del espesímetro y la escala de micras a la diagnosis final.</p>
+      <span class="foot"><span>9 slides</span><span class="links"><a href="3-3-guia-revision-vehiculo.html">Abrir</a><a href="pdf/3-3-guia-revision-vehiculo.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+    <div class="deck">
+      <a class="cover" href="4-1-guia-negociacion.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 4.1</span>
+      <h3>Guía de negociación y paso a paso en la compra</h3>
+      <p>Los cuatro pasos desde el primer contacto hasta la firma, con las bazas a usar cuando el precio no es negociable.</p>
+      <span class="foot"><span>6 slides</span><span class="links"><a href="4-1-guia-negociacion.html">Abrir</a><a href="pdf/4-1-guia-negociacion.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+    <div class="deck">
+      <a class="cover" href="4-1-operaciones-regimenes-compra.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 4.1</span>
+      <h3>Operaciones y regímenes de compra</h3>
+      <p>IVA e ITP en los cuatro escenarios: comprador particular o profesional, vehículo nuevo o usado, y régimen del vendedor.</p>
+      <span class="foot"><span>8 slides</span><span class="links"><a href="4-1-operaciones-regimenes-compra.html">Abrir</a><a href="pdf/4-1-operaciones-regimenes-compra.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+    <div class="deck">
+      <a class="cover" href="6-impuesto-matriculacion.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 6</span>
+      <h3>Cálculo del impuesto de matriculación</h3>
+      <p>Bases de cálculo, tramos de CO2, excepciones por comunidad, fórmulas, depreciación, minoración y cuatro ejemplos reales.</p>
+      <span class="foot"><span>11 slides</span><span class="links"><a href="6-impuesto-matriculacion.html">Abrir</a><a href="pdf/6-impuesto-matriculacion.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+    <div class="deck">
+      <a class="cover" href="6-documentos-necesarios.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 6</span>
+      <h3>Documentos necesarios en el proceso</h3>
+      <p>Todo el expediente de matriculación en orden cronológico, más los documentos extra que pide Hacienda si para el trámite.</p>
+      <span class="foot"><span>7 slides</span><span class="links"><a href="6-documentos-necesarios.html">Abrir</a><a href="pdf/6-documentos-necesarios.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+    <div class="deck">
+      <a class="cover" href="9-15-consejos-clave.html" aria-label="Abrir presentación"></a>
+      <span class="mod">Módulo 9</span>
+      <h3>15 consejos clave para la importación</h3>
+      <p>Los quince consejos tras años de experiencia y cientos de importaciones, agrupados por fase del proceso.</p>
+      <span class="foot"><span>6 slides</span><span class="links"><a href="9-15-consejos-clave.html">Abrir</a><a href="pdf/9-15-consejos-clave.pdf" target="_blank" rel="noopener">PDF</a></span></span>
+    </div>
+  </div>
+
+  <div class="help">
+    <span class="k">Cómo se usan</span>
+    <ul>
+      <li><span>→</span><span><b>Avanzar:</b> <kbd>→</kbd> <kbd>espacio</kbd> o clic en la parte derecha del slide</span></li>
+      <li><span>→</span><span><b>Retroceder:</b> <kbd>←</kbd> o clic en el margen izquierdo</span></li>
+      <li><span>→</span><span><b>Pantalla completa:</b> <kbd>F</kbd></span></li>
+      <li><span>→</span><span><b>Exportar a PDF:</b> <kbd>P</kbd> — en el diálogo de impresión, elige «Guardar como PDF», orientación horizontal y activa «Gráficos de fondo»</span></li>
+      <li><span>→</span><span><b>Ir al principio o al final:</b> <kbd>Inicio</kbd> / <kbd>Fin</kbd></span></li>
+      <li><span>→</span><span><b>Móvil:</b> desliza a izquierda o derecha</span></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

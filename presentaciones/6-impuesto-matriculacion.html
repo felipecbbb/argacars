@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>6 · Cálculo del impuesto de matriculación | ARGA Premium Cars</title>
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/deck.css">
+</head>
+<body>
+<div id="stage"><div id="deck" data-deck="6 · Impuesto de matriculación">
+
+<!-- 01 — PORTADA -->
+<section class="slide dark cover" data-nofoot>
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="top">
+    <img class="logo" src="assets/logo.png" alt="ARGA Premium Cars">
+    <span class="eyebrow">Módulo 6</span>
+  </div>
+  <div class="mid">
+    <span class="kicker">El gasto que decide la operación</span>
+    <h1 class="h-xl">Impuesto de<br><span class="gold-t">matriculación</span></h1>
+    <div class="rule"></div>
+    <p class="lede">Generalmente es el gasto más grande de la importación después del vehículo en sí. Aquí aprendes a calcularlo a mano y todos los supuestos que existen.</p>
+  </div>
+  <div class="meta">
+    <span class="pill ghost-light">Tablas BOE y BON</span>
+    <span class="pill ghost-light">Tramos de CO2</span>
+    <span class="pill gold">4 ejemplos reales</span>
+  </div>
+</section>
+
+<!-- 02 — LAS DOS BASES -->
+<section class="slide">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Lo primero que debes saber</span>
+      <h2 class="s-title" style="margin-top:10px">Existen dos bases<br>posibles de cálculo</h2>
+    </div>
+    <span class="pill">01</span>
+  </div>
+  <div class="s-body">
+    <p class="lede">Recomendamos usar una calculadora online —como la de Car Revol— para agilizar el cálculo del día a día. Pero el saber no ocupa lugar: esto es lo que hay detrás.</p>
+    <div class="grid g-1-1" style="flex:1">
+      <div class="card">
+        <div class="row-head"><span class="num-badge">A</span><span class="t lg">Valor neto de factura</span></div>
+        <span class="d">Se usa cuando el vehículo es <strong>nuevo</strong> (menos de 6 meses desde la primera matriculación o menos de 6.000 km) o cuando es usado <strong>pero no aparece en las tablas del BOE</strong>.</span>
+        <div class="card danger mt-a"><span class="k">Cuidado con el REBU</span><span class="d">Si la factura fuese en REBU, cogerías <strong>ese valor único</strong> como base, lo que incrementa aún más el impuesto. <strong>Recomendamos descartar el vehículo en ese caso.</strong></span></div>
+      </div>
+      <div class="card">
+        <div class="row-head"><span class="num-badge">B</span><span class="t lg">Valor oficial de las tablas del BOE</span></div>
+        <span class="d">Se usa cuando el vehículo es <strong>usado</strong> (más de 6 meses o más de 6.000 km) <strong>y el modelo concreto aparece en las tablas oficiales</strong>.</span>
+        <div class="card soft mt-a"><span class="k">Sobre las tablas</span><span class="d">Se actualizan cada año y contienen prácticamente todos los modelos hasta la fecha, <strong>pero no todos</strong>. Revisa bien marca, modelo, rango de fechas de fabricación, potencia en CV y kW y toda la información del boletín.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — ESQUEMA -->
+<section class="slide dark">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Resumen</span>
+      <h2 class="s-title" style="margin-top:10px; color:#fff">El esquema en<br><span class="gold">una imagen</span></h2>
+    </div>
+    <span class="pill ghost-light">02</span>
+  </div>
+  <div class="s-body center">
+    <div class="grid g-1-1" style="gap:20px">
+      <div class="card" style="padding:28px 30px">
+        <span class="k">Vehículo nuevo</span>
+        <span class="h-sm" style="color:#fff">− 6 meses <span class="muted">o</span> − 6.000 km</span>
+        <div class="sep-line" style="margin:12px 0"></div>
+        <span class="k">Base de cálculo</span>
+        <span class="t lg" style="color:#fff">Valor neto de la factura</span>
+      </div>
+      <div class="card" style="padding:28px 30px">
+        <span class="k">Vehículo usado</span>
+        <span class="h-sm" style="color:#fff">+ 6 meses <span class="muted">y</span> + 6.000 km</span>
+        <div class="sep-line" style="margin:12px 0"></div>
+        <div style="display:flex; flex-direction:column; gap:10px">
+          <div>
+            <span class="k">Si sale en tablas BOE</span>
+            <span class="t" style="color:#fff; display:block; margin-top:3px">Valor BOE − depreciación − minoración</span>
+          </div>
+          <div>
+            <span class="k">Si NO sale en tablas BOE</span>
+            <span class="t" style="color:#fff; display:block; margin-top:3px">Valor neto de la factura</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="background:rgba(197,165,114,.14); border-color:rgba(197,165,114,.4); margin-top:20px">
+      <span class="k">Excepciones y fallos de las tablas</span>
+      <span class="d" style="font-size:14.5px">Generalmente en el apartado de fechas. Ejemplo: un vehículo matriculado en 11/2021 cuyo modelo, según tablas, comienza en 2022, y tú sabes que es ese modelo y no otro. <strong style="color:#fff">En estos casos no hay problema en usar ese modelo</strong> y su valor de tablas. Ahora bien: si difiere cualquier otro dato que no sea la fecha (potencia, versión…), <strong style="color:#fff">deberás usar sí o sí el valor de factura</strong>. Y si hay más de una opción perfectamente compatible, puedes coger la de menor valor.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — TRAMOS CO2 -->
+<section class="slide">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">El porcentaje</span>
+      <h2 class="s-title" style="margin-top:10px">Tramos de emisiones<br>de CO2</h2>
+    </div>
+    <span class="pill">03</span>
+  </div>
+  <div class="s-body">
+    <p class="lede">El impuesto se calcula multiplicando la base imponible por el porcentaje correspondiente a las emisiones de CO2 del vehículo, <strong>estipuladas en la casilla V7 de la ficha técnica o Teil 1</strong>. Estos son los tramos generales para todas las comunidades autónomas.</p>
+    <div class="grid g4" style="flex:1; align-items:stretch">
+      <div class="card ok" style="background:#eef4f0; border-color:#cfe0d5; justify-content:center">
+        <span class="k" style="color:#3f7a52">0 — 120 g de CO2</span>
+        <div class="stat"><span class="v" style="color:#3f7a52">0%</span><span class="l">Exento, no paga impuesto. Híbridos enchufables, eléctricos…</span></div>
+      </div>
+      <div class="card" style="justify-content:center">
+        <span class="k">120 — 160 g de CO2</span>
+        <div class="stat"><span class="v">4,75%</span><span class="l">Tramo bajo.</span></div>
+      </div>
+      <div class="card" style="justify-content:center">
+        <span class="k">160 — 200 g de CO2</span>
+        <div class="stat"><span class="v">9,75%</span><span class="l">Tramo medio.</span></div>
+      </div>
+      <div class="card ink" style="justify-content:center">
+        <span class="k">+ 200 g de CO2</span>
+        <div class="stat"><span class="v">14,75%</span><span class="l" style="color:rgba(255,255,255,.65)">Tramo alto. Donde se juega la rentabilidad de los coches potentes.</span></div>
+      </div>
+    </div>
+    <div class="card soft">
+      <span class="k">Nota</span>
+      <span class="d">Estos son los 4 tramos que utilizarás para <strong>turismos</strong>. Existen algunos más, pero aplican a vehículos pesados, maquinaria agrícola, embarcaciones…</span>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — EXCEPCIONES CCAA -->
+<section class="slide white">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Sin embargo, existen excepciones</span>
+      <h2 class="s-title" style="margin-top:10px">Porcentajes por<br>comunidad autónoma</h2>
+    </div>
+    <span class="pill solid">04</span>
+  </div>
+  <div class="s-body">
+    <div class="grid g3" style="flex:1; gap:16px">
+      <div class="card">
+        <span class="k">Asturias · Cataluña · Islas Baleares</span>
+        <div class="stat"><span class="v">16%</span><span class="l">Para el tramo de <strong>+ 200 g de CO2</strong>.</span></div>
+      </div>
+      <div class="card">
+        <span class="k">Cantabria</span>
+        <div class="stat"><span class="v">15%</span><span class="l">Para el tramo de <strong>+ 200 g de CO2</strong>.</span></div>
+      </div>
+      <div class="card">
+        <span class="k">Murcia</span>
+        <div class="stat"><span class="v">15,9%</span><span class="l">Para el tramo de <strong>+ 200 g de CO2</strong>.</span></div>
+      </div>
+      <div class="card gold" style="grid-column: span 2">
+        <span class="k">Canarias</span>
+        <div class="grid g3" style="margin-top:4px">
+          <div class="stat"><span class="v" style="font-size:34px">3,75%</span><span class="l">120 — 160 g</span></div>
+          <div class="stat"><span class="v" style="font-size:34px">8,75%</span><span class="l">160 — 200 g</span></div>
+          <div class="stat"><span class="v" style="font-size:34px">13,75%</span><span class="l">+ 200 g</span></div>
+        </div>
+      </div>
+      <div class="card ink">
+        <span class="k">Ceuta y Melilla</span>
+        <div class="stat"><span class="v" style="color:var(--gold)">0%</span><span class="l" style="color:rgba(255,255,255,.65)">En todos los tramos. <strong style="color:#fff">Exención total</strong> del impuesto de matriculación.</span></div>
+      </div>
+    </div>
+    <div class="card danger">
+      <span class="k">Y dos casos aparte</span>
+      <span class="d"><strong>Navarra</strong> usa las tablas del BON en lugar del BOE. <strong>País Vasco</strong> usa las tablas del BOE pero <strong>sin minoración</strong>. Los ves en las fórmulas.</span>
+    </div>
+  </div>
+</section>
+
+<!-- 06 — FÓRMULAS -->
+<section class="slide dark">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Las fórmulas</span>
+      <h2 class="s-title" style="margin-top:10px; color:#fff">Cómo se calcula,<br><span class="gold">caso por caso</span></h2>
+    </div>
+    <span class="pill ghost-light">05</span>
+  </div>
+  <div class="s-body">
+    <div class="grid g-1-1" style="flex:1; gap:16px">
+      <div style="display:flex; flex-direction:column; gap:14px; justify-content:center">
+        <div class="card" style="gap:12px">
+          <span class="k">Vehículo nuevo · o usado que no sale en tablas</span>
+          <span class="eq" style="font-size:16px; font-weight:800; color:#fff; line-height:1.4">Valor neto en factura (€) <span class="gold-t">×</span> % del tramo de CO2</span>
+        </div>
+        <div class="card" style="gap:12px">
+          <span class="k">País Vasco · tablas BOE, sin minoración</span>
+          <span class="eq" style="font-size:16px; font-weight:800; color:#fff; line-height:1.4">Valor tablas BOE (€) <span class="gold-t">×</span> % depreciación por años <span class="gold-t">×</span> % del tramo de CO2</span>
+        </div>
+        <div class="card" style="gap:12px">
+          <span class="k">Navarra</span>
+          <span class="d">Exactamente igual que el resto de comunidades, pero usando las <strong style="color:#fff">tablas del BON</strong> (Boletín Oficial de Navarra) en lugar de las del BOE.</span>
+        </div>
+      </div>
+      <div class="formula" style="justify-content:center">
+        <span class="k">Fórmula general · vehículos usados que sí salen en tablas</span>
+        <span class="k" style="color:rgba(255,255,255,.5); letter-spacing:.1em">Base imponible</span>
+        <div class="frac">
+          <span class="top">Valor tablas BOE (€) × % depreciación de Hacienda (valor residual)</span>
+          <span class="bar"></span>
+          <span class="bot">1 + % IVA del año de 1ª matriculación + % del tramo de CO2<br><em style="color:var(--gold)">(a esto se le conoce como la minoración)</em></span>
+        </div>
+        <div style="height:1px; background:rgba(255,255,255,.16); width:100%; margin:6px 0"></div>
+        <span class="k" style="color:rgba(255,255,255,.5); letter-spacing:.1em">Total a pagar</span>
+        <span class="eq">Base imponible (€) <span class="gold-t">×</span> % del tramo de CO2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 — DEPRECIACIÓN -->
+<section class="slide white">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Concepto 1</span>
+      <h2 class="s-title" style="margin-top:10px">Depreciación<br><span class="gold">(valor residual)</span></h2>
+    </div>
+    <span class="pill solid">06</span>
+  </div>
+  <div class="s-body">
+    <p class="lede">Es el valor teórico que pierde cada vehículo con cada año que pasa. Se toma la <strong>fecha exacta de primera matriculación</strong> y se resta a la fecha de matriculación en España —hoy—. Cada año cumplido baja de tramo. <strong>Multiplica el valor del BOE por el porcentaje que corresponda</strong> para obtener el valor teórico actual.</p>
+    <div class="grid g5" style="flex:1; gap:11px; align-content:center">
+      <div class="card tight"><span class="k">6 meses a 1 año</span><span class="t">100%</span></div>
+      <div class="card tight"><span class="k">+ 1 año, hasta 2</span><span class="t">84%</span></div>
+      <div class="card tight"><span class="k">+ 2 años, hasta 3</span><span class="t">67%</span></div>
+      <div class="card tight"><span class="k">+ 3 años, hasta 4</span><span class="t">56%</span></div>
+      <div class="card tight"><span class="k">+ 4 años, hasta 5</span><span class="t">47%</span></div>
+      <div class="card tight"><span class="k">+ 5 años, hasta 6</span><span class="t">39%</span></div>
+      <div class="card tight"><span class="k">+ 6 años, hasta 7</span><span class="t">34%</span></div>
+      <div class="card tight"><span class="k">+ 7 años, hasta 8</span><span class="t">28%</span></div>
+      <div class="card tight"><span class="k">+ 8 años, hasta 9</span><span class="t">24%</span></div>
+      <div class="card tight"><span class="k">+ 9 años, hasta 10</span><span class="t">19%</span></div>
+      <div class="card tight"><span class="k">+ 10 años, hasta 11</span><span class="t">17%</span></div>
+      <div class="card tight"><span class="k">+ 11 años, hasta 12</span><span class="t">13%</span></div>
+      <div class="card tight ink"><span class="k">+ 12 años</span><span class="t">10%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 — MINORACIÓN -->
+<section class="slide">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Concepto 2</span>
+      <h2 class="s-title" style="margin-top:10px">La minoración</h2>
+    </div>
+    <span class="pill">07</span>
+  </div>
+  <div class="s-body">
+    <div class="grid g-6-4" style="flex:1; gap:20px">
+      <div style="display:flex; flex-direction:column; gap:14px">
+        <div class="card">
+          <span class="k">Qué es</span>
+          <span class="d" style="font-size:15px">Restar del valor de mercado la parte que corresponde a <strong>impuestos indirectos ya implícitos</strong> en ese valor, para evitar una sobreimposición sobre un vehículo usado procedente de otro país.</span>
+        </div>
+        <div class="card ink">
+          <span class="k">Dicho de otra manera</span>
+          <span class="d" style="font-size:15px">Hacienda no debería calcular el nuevo impuesto de matriculación sobre una cantidad que <strong style="color:#fff">ya contiene conceptualmente una parte residual de impuestos</strong>. Por eso se le restan.</span>
+        </div>
+        <div class="formula light" style="padding:20px 24px">
+          <span class="k">La fórmula de la minoración</span>
+          <span class="eq" style="font-size:17px">1 + % IVA del año de 1ª matriculación + % del tramo de CO2</span>
+        </div>
+        <div class="card soft">
+          <span class="k">El IVA que se aplica</span>
+          <span class="d">Se coge el porcentaje <strong>vigente en la fecha de primera matriculación</strong> del vehículo y se multiplica por el valor del BOE con la depreciación por años ya aplicada.</span>
+        </div>
+      </div>
+      <div class="card" style="min-height:0; overflow:hidden">
+        <span class="k">IVA vigente por año</span>
+        <div style="display:flex; flex-direction:column; gap:5px; font-size:13px; margin-top:4px" class="tnum">
+          <div style="display:flex; justify-content:space-between"><span class="muted">2013 — 2026</span><strong>21%</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between; gap:10px"><span class="muted">2012</span><strong style="text-align:right">18% hasta 31 ago.<br>21% desde 1 sep.</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between"><span class="muted">2011</span><strong>18%</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between; gap:10px"><span class="muted">2010</span><strong style="text-align:right">16% hasta 30 jun.<br>18% desde 1 jul.</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between"><span class="muted">1996 — 2009</span><strong>16%</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between; gap:10px"><span class="muted">1995</span><strong style="text-align:right">15% hasta 31 jul.<br>16% desde 1 ago.</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between"><span class="muted">1993 — 1994</span><strong>15%</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between; gap:10px"><span class="muted">1992</span><strong style="text-align:right">13% hasta 31 dic.<br>15% desde 1993</strong></div>
+          <div class="sep-line"></div>
+          <div style="display:flex; justify-content:space-between"><span class="muted">1986 — 1991</span><strong>12%</strong></div>
+        </div>
+        <span class="d" style="font-size:11.5px; margin-top:6px">Entrada del IVA: 1 de enero de 1986.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 — EJEMPLO 1 -->
+<section class="slide white">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Ejemplo 1 <span class="sep">/</span> Usado en tablas · Madrid</span>
+      <h2 class="s-title" style="margin-top:10px">BMW M2 Competition F87</h2>
+    </div>
+    <span class="pill solid">1ª matriculación 04/2021</span>
+  </div>
+  <div class="s-body">
+    <div class="grid g4" style="gap:14px">
+      <div class="card tight"><span class="k">Valor tablas BOE</span><span class="t">49.100 €</span><span class="d">Opción más barata de 3 factibles.</span></div>
+      <div class="card tight"><span class="k">Valor residual</span><span class="t">39% <span class="muted" style="font-size:13px">(0,39)</span></span><span class="d">5 años y 4 meses de antigüedad.</span></div>
+      <div class="card tight"><span class="k">IVA en 2021</span><span class="t">21% <span class="muted" style="font-size:13px">(0,21)</span></span><span class="d">Año de primera matriculación.</span></div>
+      <div class="card tight"><span class="k">Emisiones CO2 · casilla V7</span><span class="t">223 g → 14,75%</span><span class="d">Tramo de + 200 g.</span></div>
+    </div>
+    <div class="grid g-1-1" style="flex:1; gap:18px; align-items:stretch">
+      <div class="formula light" style="justify-content:center">
+        <span class="k">Base imponible</span>
+        <div class="frac">
+          <span class="top">49.100 € × 0,39</span>
+          <span class="bar"></span>
+          <span class="bot">1 + 0,21 + 0,1475</span>
+        </div>
+        <span class="eq">= 14.106,08 €</span>
+      </div>
+      <div class="card ink" style="justify-content:center; align-items:center; text-align:center; gap:12px">
+        <span class="k">Total a pagar</span>
+        <span class="d" style="font-size:15px">14.106,08 € × 0,1475</span>
+        <span class="h-md" style="color:var(--gold)">2.080,65 €</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 — EJEMPLOS 2, 3 Y 4 -->
+<section class="slide">
+  <div class="s-head">
+    <div>
+      <span class="eyebrow">Ejemplos 2, 3 y 4</span>
+      <h2 class="s-title" style="margin-top:10px">Los otros tres supuestos</h2>
+    </div>
+    <span class="pill">Agosto de 2026</span>
+  </div>
+  <div class="s-body">
+    <div class="grid g3" style="flex:1; gap:16px">
+      <div class="card">
+        <span class="k">Ejemplo 2 · Vehículo nuevo · Asturias</span>
+        <span class="t lg">Porsche GT3 RS</span>
+        <ul class="list tight" style="margin-top:2px">
+          <li><strong>2.700 km</strong> — vehículo nuevo (− 6.000 km)</li>
+          <li>Valor <strong>NETO de factura</strong>: 230.000 €</li>
+          <li><strong>Sin</strong> depreciación ni minoración</li>
+          <li>CO2: 305 g → <strong>16%</strong> (Asturias, + 200 g)</li>
+        </ul>
+        <div class="card ink mt-a" style="align-items:center; text-align:center; gap:6px">
+          <span class="d" style="font-size:13px">230.000 € × 0,16</span>
+          <span class="h-sm" style="color:var(--gold)">36.800 €</span>
+        </div>
+      </div>
+      <div class="card">
+        <span class="k">Ejemplo 3 · País Vasco · Bilbao</span>
+        <span class="t lg">Mercedes A 200d</span>
+        <ul class="list tight" style="margin-top:2px">
+          <li>1ª matriculación <strong>10/2018</strong></li>
+          <li>Valor tablas BOE: <strong>30.900 €</strong></li>
+          <li>Valor residual 7 años y 10 meses: <strong>28%</strong></li>
+          <li><strong>Sin minoración</strong> (País Vasco)</li>
+          <li>CO2: 128 g → <strong>4,75%</strong></li>
+        </ul>
+        <div class="card ink mt-a" style="align-items:center; text-align:center; gap:6px">
+          <span class="d" style="font-size:13px">30.900 € × 0,28 × 0,0475</span>
+          <span class="h-sm" style="color:var(--gold)">410,97 €</span>
+        </div>
+      </div>
+      <div class="card gold">
+        <span class="k">Ejemplo 4 · Híbrido enchufable · Barcelona</span>
+        <span class="t lg">BMW 330e xDrive</span>
+        <ul class="list tight" style="margin-top:2px">
+          <li>1ª matriculación <strong>12/2024</strong></li>
+          <li>Valor tablas BOE: <strong>55.000 €</strong></li>
+          <li>Híbrido enchufable, <strong>− 120 g de CO2</strong> → 0%</li>
+        </ul>
+        <div class="card ink mt-a" style="align-items:center; text-align:center; gap:6px">
+          <span class="d" style="font-size:13px">Exento por emisiones</span>
+          <span class="h-sm" style="color:var(--gold)">0 €</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 — CIERRE -->
+<section class="slide dark cover" data-nofoot>
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="top">
+    <img class="logo" src="assets/logo.png" alt="ARGA Premium Cars">
+    <span class="eyebrow">Módulo 6 <span class="sep">/</span> En resumen</span>
+  </div>
+  <div class="mid">
+    <span class="kicker">Lo que te llevas</span>
+    <h2 class="h-lg">El CO2 decide si<br>la operación es<br><span class="gold-t">rentable.</span></h2>
+  </div>
+  <div class="grid g3" style="gap:16px">
+      <div class="card">
+        <span class="k">01</span>
+        <span class="t" style="color:#fff">Dos bases posibles</span>
+        <span class="d">Valor de tablas BOE si el vehículo es usado y aparece en ellas. Valor neto de factura en todos los demás casos.</span>
+      </div>
+      <div class="card">
+        <span class="k">02</span>
+        <span class="t" style="color:#fff">La casilla V7 manda</span>
+        <span class="d">Marca el tramo: del 0% hasta 120 g al 14,75% por encima de 200 g, con excepciones en varias comunidades.</span>
+      </div>
+      <div class="card">
+        <span class="k">03</span>
+        <span class="t" style="color:#fff">Depreciación y minoración</span>
+        <span class="d">Reducen la base del usado que sale en tablas. País Vasco no minora y Navarra usa las tablas del BON.</span>
+      </div>
+  </div>
+</section>
+
+</div></div>
+<script src="assets/deck.js"></script>
+</body>
+</html>
