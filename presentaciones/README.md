@@ -27,6 +27,16 @@ recapitulación. Se añade una última página anunciando la segunda mitad del p
 documentos de matriculación en España—. El deck completo de 9 slides sigue intacto en
 `3-2-documentacion-alemana.html`.
 
+### Guía 7, versión suelta para repartir
+
+`guia-7-documentos-necesarios.html` (6 páginas). Respecto al deck original de 7 slides se han
+quitado: la columna «Fase 3 · Te lo da Tráfico» del mapa, la página de permisos de circulación
+y la de documentos adicionales si Hacienda para la matriculación. El cierre se mantiene, pero
+su tercer punto —que hablaba de los justificantes que pide Hacienda— se ha reescrito sobre las
+fichas técnicas de la ITV, porque esa página ya no existe en esta versión. Se añade una última
+página anunciando que lo siguiente es aprender a interpretar la documentación. El deck completo
+sigue en `6-documentos-necesarios.html`.
+
 ### Guía 5, desglosada en cuatro guías gratuitas
 
 La guía 5 (`4-1-operaciones-regimenes-compra`) cubre las cuatro casuísticas en un solo deck.
