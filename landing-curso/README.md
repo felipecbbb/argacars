@@ -6,12 +6,26 @@ La landing "tocha" con todo el copy vendrá después.
 
 **En línea:** https://landing-curso-smoky.vercel.app
 
-## Faltan dos cosas (las envía Alex)
+## Falta una cosa (la envía Alex)
 
-1. **El vídeo** (~2 min). Déjalo en `assets/video.mp4`, borra el bloque `<div class="ph">…</div>`
-   y descomenta la línea `<video>` que hay justo encima. Está señalado con un comentario.
-2. **El enlace de la comunidad de WhatsApp.** Sustituye el `href="#"` del `<a class="cta">`.
-   También señalado con un comentario.
+- **El enlace de la comunidad de WhatsApp.** Sustituye el `href="#"` del `<a class="cta">`.
+  Está señalado con un comentario en el HTML.
+
+## El vídeo (VSL)
+
+El original venía en 4K vertical (2160x3840), HEVC, 259 MB y **con la imagen girada 90°
+dentro del lienzo** (sin metadato de rotación, así que ningún reproductor lo corregía solo).
+Se ha enderezado y transcodificado:
+
+```bash
+ffmpeg -i original.mp4 -vf "transpose=2,scale=1280:720:flags=lanczos" \
+  -c:v libx264 -profile:v high -preset slow -crf 23 -maxrate 2200k -bufsize 4400k \
+  -pix_fmt yuv420p -g 60 -c:a aac -b:a 128k -ac 2 -movflags +faststart assets/vsl.mp4
+```
+
+Resultado: `assets/vsl.mp4`, H.264 1280x720 horizontal, 55 s, 16 MB. El `+faststart` permite
+que empiece a reproducirse mientras se descarga, y `preload="metadata"` evita bajarlo entero
+al abrir la página. `assets/vsl-poster.jpg` es el frame del segundo 0,5.
 
 Tras cualquier cambio: `vercel deploy --yes` desde esta carpeta.
 
