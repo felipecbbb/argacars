@@ -86,6 +86,41 @@ img{ display:block; max-width:100%; }
 .player video, .player iframe{
   position:absolute; inset:0; width:100%; height:100%; border:0; display:block; object-fit:contain; background:#000;
 }
+
+/* ===== CAPA "ACTIVAR SONIDO" ===== */
+.soundgate{
+  position:absolute; inset:0; z-index:3;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+  background:linear-gradient(180deg, rgba(10,10,10,.30) 0%, rgba(10,10,10,.62) 100%);
+  cursor:pointer; border:0; width:100%; padding:20px;
+  font-family:inherit; color:#fff; text-align:center;
+  -webkit-backdrop-filter:blur(1.5px); backdrop-filter:blur(1.5px);
+  transition:opacity .3s ease, visibility .3s ease;
+}
+.soundgate[hidden]{ display:none; }
+.soundgate .ring{
+  width:clamp(64px,13vw,84px); aspect-ratio:1; border-radius:999px; flex:none;
+  display:grid; place-items:center;
+  background:linear-gradient(180deg, var(--gold-soft) 0%, var(--gold) 100%);
+  box-shadow:0 14px 40px -10px rgba(0,0,0,.75), 0 0 0 0 rgba(197,165,114,.55);
+  animation:pulse 2.4s ease-out infinite;
+}
+.soundgate .ring svg{ width:44%; height:auto; fill:#0a0a0a; }
+.soundgate .txt{
+  font-size:clamp(13px,3.3vw,15px); font-weight:700; letter-spacing:-.01em;
+  text-shadow:0 2px 12px rgba(0,0,0,.6);
+}
+.soundgate .sub{
+  font-size:clamp(11px,2.7vw,12.5px); font-weight:500; color:rgba(255,255,255,.66);
+  text-shadow:0 2px 10px rgba(0,0,0,.6); margin-top:-6px;
+}
+@keyframes pulse{
+  0%   { box-shadow:0 14px 40px -10px rgba(0,0,0,.75), 0 0 0 0 rgba(197,165,114,.5); }
+  70%  { box-shadow:0 14px 40px -10px rgba(0,0,0,.75), 0 0 0 22px rgba(197,165,114,0); }
+  100% { box-shadow:0 14px 40px -10px rgba(0,0,0,.75), 0 0 0 0 rgba(197,165,114,0); }
+}
+@media (prefers-reduced-motion:reduce){ .soundgate .ring{ animation:none; } }
+
 /* ===== CTA ===== */
 .cta{
   display:inline-flex; align-items:center; justify-content:center; gap:12px;
@@ -139,19 +174,29 @@ img{ display:block; max-width:100%; }
 
   <img class="logo" src="assets/logo-arga-blanco.png" alt="ARGA Premium Cars">
 
-  <!-- VÍDEO · VSL -->
+  <!-- VÍDEO · VSL
+       Arranca solo. Los navegadores prohíben el autoplay CON sonido, así que
+       empieza silenciado y la capa de abajo lo activa al primer toque,
+       rebobinando al inicio para que no se pierda nada. -->
   <div class="player">
     <div class="frame">
-      <video
+      <video id="vsl"
         src="assets/vsl.mp4"
         poster="assets/vsl-poster.jpg"
-        controls
-        playsinline
-        preload="metadata"
+        autoplay muted loop playsinline
+        preload="auto"
         controlsList="nodownload"
         disablepictureinpicture>
         Tu navegador no puede reproducir el vídeo.
       </video>
+
+      <button class="soundgate" id="soundgate" type="button" aria-label="Activar el sonido del vídeo">
+        <span class="ring">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3Zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12ZM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77Z"/></svg>
+        </span>
+        <span class="txt">Toca para activar el sonido</span>
+        <span class="sub">El vídeo ya está en marcha</span>
+      </button>
     </div>
   </div>
 
@@ -170,5 +215,59 @@ img{ display:block; max-width:100%; }
 
 </main>
 
+
+<script>
+(function(){
+  var v = document.getElementById('vsl');
+  var gate = document.getElementById('soundgate');
+  if(!v || !gate) return;
+
+  // 1) Se intenta arrancar CON sonido. Solo funciona si el navegador ya
+  //    considera que el visitante interactuó antes con el dominio.
+  function tryLoud(){
+    v.muted = false;
+    var p = v.play();
+    if(p && p.catch){
+      p.then(function(){ gate.hidden = true; })
+       .catch(function(){ fallbackMuted(); });
+    }
+  }
+
+  // 2) Plan B universal: silenciado (esto SIEMPRE está permitido) + capa
+  //    para que el visitante active el sonido con un solo toque.
+  function fallbackMuted(){
+    v.muted = true;
+    v.play().catch(function(){});
+    gate.hidden = false;
+  }
+
+  function unmute(){
+    gate.hidden = true;
+    v.muted = false;
+    v.loop = false;          // con sonido ya no se repite en bucle
+    v.controls = true;
+    v.currentTime = 0;       // se rebobina para no perder el arranque
+    v.play().catch(function(){});
+    document.removeEventListener('click', onFirstTouch, true);
+    document.removeEventListener('touchstart', onFirstTouch, true);
+    document.removeEventListener('keydown', onFirstTouch, true);
+  }
+
+  function onFirstTouch(){ if(!gate.hidden) unmute(); }
+
+  gate.addEventListener('click', function(e){ e.stopPropagation(); unmute(); });
+
+  // Cualquier interacción con la página vale para activar el sonido
+  document.addEventListener('click', onFirstTouch, true);
+  document.addEventListener('touchstart', onFirstTouch, true);
+  document.addEventListener('keydown', onFirstTouch, true);
+
+  // Si el vídeo termina en modo silenciado, se deja el póster y los controles
+  v.addEventListener('ended', function(){ v.controls = true; gate.hidden = true; });
+
+  if(v.readyState >= 2) tryLoud();
+  else v.addEventListener('loadeddata', tryLoud, { once:true });
+})();
+</script>
 </body>
 </html>

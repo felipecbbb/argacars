@@ -27,6 +27,25 @@ Resultado: `assets/vsl.mp4`, H.264 1280x720 horizontal, 55 s, 16 MB. El `+fastst
 que empiece a reproducirse mientras se descarga, y `preload="metadata"` evita bajarlo entero
 al abrir la página. `assets/vsl-poster.jpg` es el frame del segundo 0,5.
 
+## Autoplay con sonido
+
+Alex lo pidió: que suene solo al entrar. **Ningún navegador lo permite** — Chrome, Safari y
+Firefox bloquean el autoplay con audio salvo que el visitante ya tenga historial de
+interacción con el dominio (Media Engagement Index). No hay forma de saltárselo desde el
+código, le pasa igual a YouTube.
+
+Lo que hace la landing, que es el patrón que usan las VSL que funcionan:
+
+1. Intenta arrancar **con sonido**. Si el navegador lo permite (visitante recurrente), suena
+   directamente y no aparece ninguna capa.
+2. Si lo bloquea, arranca **silenciado** —eso sí está siempre permitido— en bucle, y muestra
+   una capa dorada «Toca para activar el sonido».
+3. Al primer toque en **cualquier** parte de la página, quita el mute, desactiva el bucle,
+   **rebobina al segundo 0** para que no se pierda el arranque del discurso y muestra los
+   controles.
+
+Verificado en los dos escenarios con `--autoplay-policy` de Chrome.
+
 Tras cualquier cambio: `vercel deploy --yes` desde esta carpeta.
 
 ## Assets
