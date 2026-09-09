@@ -30,6 +30,21 @@
   .calc .r.zero .vl{ color:var(--green); }
   .calc .r.pay .vl{ color:#9a6d2c; }
   .calc .r.bad .vl{ color:var(--red); }
+
+  /* Aviso fijo al pie de cada ejemplo con números */
+  .disc{
+    margin:0; flex:none;
+    font-size:11.5px; line-height:1.45; color:var(--muted);
+    border-top:1px solid var(--border); padding-top:11px;
+  }
+
+  /* La píldora del encabezado nunca parte en dos líneas */
+  .s-head .pill{ white-space:nowrap; }
+  /* Desgloses de 5 filas: se compactan para no invadir el aviso de abajo */
+  .card:has(.calc .r:nth-child(5)){ padding:14px 18px; }
+  .calc:has(.r:nth-child(5)) .r{ padding:4px 0; font-size:12.5px; line-height:1.25; }
+  .calc:has(.r:nth-child(5)) .r .lb small{ font-size:10.5px; line-height:1.3; }
+  .calc:has(.r:nth-child(5)) .r .vl{ font-size:13.5px; }
   .total{
     background:var(--ink); color:#fff; border-radius:16px; padding:16px 22px;
     display:flex; align-items:center; justify-content:space-between; gap:18px; flex:none;
@@ -167,7 +182,8 @@
           <span class="k" style="margin-bottom:6px">Qué pagas y dónde</span>
           <div class="calc"><div class="r "><span class="lb">Precio pagado en Alemania<small>El importe TOTAL, con el 19% alemán dentro</small></span><span class="vl">40.000,00 €</span></div><div class="r zero"><span class="lb">IVA alemán deducible<small>Sin factura con IVA desglosado: coste puro</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">IVA español devengado (21% · modelo 303)<small>Vehículo NUEVO: adquisición intracomunitaria. Hay que adelantarlo</small></span><span class="vl">8.400,00 €</span></div><div class="r zero"><span class="lb">IVA español deducible<small>Se compensa en la misma declaración: efecto de caja cero</small></span><span class="vl">− 8.400,00 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Operación intracomunitaria de vehículo nuevo: exenta</small></span><span class="vl">0,00 €</span></div></div>
         </div>
-        <div class="card danger" style="flex:none; padding:15px 18px; gap:5px"><span class="k">Evitar a toda costa</span><span class="d" style="font-size:13px">Como profesional el golpe duele menos que a un particular (el 21% español lo deduces), pero sigues pagando 6.386,55 € de IVA alemán que se comen tu margen entero. En vehículo nuevo, nunca compres a un particular.</span></div>
+        <div class="card danger" style="flex:none; padding:15px 18px; gap:5px"><span class="k">Evitar a toda costa</span><span class="d" style="font-size:13px">Como profesional el golpe duele menos que a un particular (el 21% español lo deduces), pero sigues pagando 6.386,55 € de IVA alemán que se comen tu margen entero. <strong>En vehículo nuevo, si puedes evitarlo, no compres a un particular.</strong></span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total bad">
           <span class="lb">Coste real de la compra<small>El IVA español se neutraliza, pero los 6.386,55 € de IVA alemán que van dentro del precio no los recuperas nunca.</small></span>
           <span class="vl">40.000,00 €</span>
@@ -197,7 +213,7 @@
           <span class="k" style="margin-bottom:6px">Qué pagas y dónde</span>
           <div class="calc"><div class="r "><span class="lb">Precio pagado en Alemania<small>El importe TOTAL, sin IVA desglosado</small></span><span class="vl">40.000,00 €</span></div><div class="r zero"><span class="lb">IVA alemán deducible<small>En REBU no se desglosa: no se deduce</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">IVA español devengado (21% · modelo 303)<small>Vehículo NUEVO: tributa en el país de matriculación</small></span><span class="vl">8.400,00 €</span></div><div class="r zero"><span class="lb">IVA español deducible<small>Se compensa en la misma declaración</small></span><span class="vl">− 8.400,00 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Operación intracomunitaria de vehículo nuevo: exenta</small></span><span class="vl">0,00 €</span></div></div>
         </div>
-        <div class="card danger" style="flex:none; padding:15px 18px; gap:5px"><span class="k">Exige el régimen general</span><span class="d" style="font-size:13px">Si el coche cumple la definición fiscal de nuevo (− 6.000 km o − 6 meses), el REBU solo te perjudica. Antes de cerrar, confirma por escrito que la factura irá con IVA desglosado y entrega intracomunitaria exenta.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total bad">
           <span class="lb">Coste real de la compra<small>Mismo resultado que con un particular: el IVA alemán se queda dentro del precio.</small></span>
           <span class="vl">40.000,00 €</span>
@@ -227,7 +243,8 @@
           <span class="k" style="margin-bottom:6px">Qué pagas y dónde</span>
           <div class="calc"><div class="r "><span class="lb">Precio neto pagado en Alemania<small>Entrega intracomunitaria exenta: sin el 19% alemán</small></span><span class="vl">33.613,45 €</span></div><div class="r zero"><span class="lb">IVA alemán soportado<small>No se repercute: 6.386,55 € menos de desembolso</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">IVA español devengado (21% · modelo 303)<small>Sobre los 33.613,45 €</small></span><span class="vl">7.058,82 €</span></div><div class="r zero"><span class="lb">IVA español deducible<small>Se compensa en la misma declaración: efecto de caja cero</small></span><span class="vl">− 7.058,82 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Operación intracomunitaria de vehículo nuevo: exenta</small></span><span class="vl">0,00 €</span></div></div>
         </div>
-        <div class="card gold" style="flex:none; padding:15px 18px; gap:5px"><span class="k">6.386,55 € de diferencia</span><span class="d" style="font-size:13px">Mismo anuncio de 40.000 €. En régimen general el coche te entra a 33.613,45 € y en cualquier otro régimen, a 40.000 €. Ese es todo tu margen. Para vehículo nuevo, régimen general o nada.</span></div>
+        <div class="card gold" style="flex:none; padding:15px 18px; gap:5px"><span class="k">6.386,55 € de diferencia</span><span class="d" style="font-size:13px">Mismo anuncio de 40.000 €. En régimen general el coche te entra a 33.613,45 € y en cualquier otro régimen, a 40.000 €. Para vehículo nuevo, régimen general o nada.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total ok">
           <span class="lb">Coste real de la compra<small>Sin IVA alemán y con el español neutralizado. El coche entra en tu stock por el neto.</small></span>
           <span class="vl">33.613,45 €</span>
@@ -249,26 +266,26 @@
 
   <div class="s-body" style="gap:22px; justify-content:center">
     <div>
-      <span class="cover kicker" style="font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)">Lo que viene después</span>
-      <h2 class="h-lg" style="margin-top:14px">Esto es solo una<br>de las <span class="gold-t">cuatro casuísticas.</span></h2>
-      <p class="lede" style="margin-top:14px">Comprar como particular o como profesional, y comprar nuevo o usado, dan cuatro escenarios fiscales distintos. Este es uno. Los otros tres tienen sus propias reglas — y sus propias trampas.</p>
+      <span class="cover kicker" style="font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)">Lo que ya tienes</span>
+      <h2 class="h-lg" style="margin-top:14px">Ya tienes las<br><span class="gold-t">cuatro casuísticas.</span></h2>
+      <p class="lede" style="margin-top:14px">Comprar como particular o como profesional, y comprar nuevo o usado, dan cuatro escenarios fiscales distintos. Con esta guía ya los tienes los cuatro, cada uno con sus reglas y sus trampas.</p>
     </div>
 
     <div class="grid g4" style="gap:14px">
         <div class="card">
           <span class="k">Casuística 01</span>
           <span class="t" style="color:#fff">Comprador particular<br>Vehículo usado</span>
-          <span class="d" style="margin-top:auto">Próximamente, en su propia guía gratuita.</span>
+          <span class="d" style="margin-top:auto">Ya la tienes disponible en el grupo.</span>
         </div>
         <div class="card">
           <span class="k">Casuística 02</span>
           <span class="t" style="color:#fff">Comprador particular<br>Vehículo nuevo</span>
-          <span class="d" style="margin-top:auto">Próximamente, en su propia guía gratuita.</span>
+          <span class="d" style="margin-top:auto">Ya la tienes disponible en el grupo.</span>
         </div>
         <div class="card">
           <span class="k">Casuística 03</span>
           <span class="t" style="color:#fff">Comprador profesional<br>Vehículo usado</span>
-          <span class="d" style="margin-top:auto">Próximamente, en su propia guía gratuita.</span>
+          <span class="d" style="margin-top:auto">Ya la tienes disponible en el grupo.</span>
         </div>
         <div class="card" style="background:var(--gold); border-color:var(--gold)">
           <span class="k" style="color:rgba(10,10,10,.6)">Casuística 04</span>
@@ -278,8 +295,8 @@
     </div>
 
     <div class="cta-box gold">
-      <span class="k" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,10,10,.6)">Próximamente</span>
-      <span class="t" style="font-size:21px;font-weight:800;letter-spacing:-.02em">Te iremos dando el resto de guías gratuitas con las demás casuísticas.</span>
+      <span class="k" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,10,10,.6)">Sigue en el grupo</span>
+      <span class="t" style="font-size:19px;font-weight:800;letter-spacing:-.02em;line-height:1.35">Ya conoces todas las casuísticas de operaciones de compra. No obstante, esto es solo una pequeña pieza de todos los recursos y el valor que seguiremos compartiendo estos días por este grupo de WhatsApp. <strong>¡No te lo pierdas!</strong></span>
     </div>
   </div>
 </section>

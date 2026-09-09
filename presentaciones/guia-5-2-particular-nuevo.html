@@ -30,6 +30,21 @@
   .calc .r.zero .vl{ color:var(--green); }
   .calc .r.pay .vl{ color:#9a6d2c; }
   .calc .r.bad .vl{ color:var(--red); }
+
+  /* Aviso fijo al pie de cada ejemplo con números */
+  .disc{
+    margin:0; flex:none;
+    font-size:11.5px; line-height:1.45; color:var(--muted);
+    border-top:1px solid var(--border); padding-top:11px;
+  }
+
+  /* La píldora del encabezado nunca parte en dos líneas */
+  .s-head .pill{ white-space:nowrap; }
+  /* Desgloses de 5 filas: se compactan para no invadir el aviso de abajo */
+  .card:has(.calc .r:nth-child(5)){ padding:14px 18px; }
+  .calc:has(.r:nth-child(5)) .r{ padding:4px 0; font-size:12.5px; line-height:1.25; }
+  .calc:has(.r:nth-child(5)) .r .lb small{ font-size:10.5px; line-height:1.3; }
+  .calc:has(.r:nth-child(5)) .r .vl{ font-size:13.5px; }
   .total{
     background:var(--ink); color:#fff; border-radius:16px; padding:16px 22px;
     display:flex; align-items:center; justify-content:space-between; gap:18px; flex:none;
@@ -168,8 +183,9 @@
           <div class="calc"><div class="r "><span class="lb">Precio pagado en Alemania<small>El importe TOTAL, con el IVA alemán dentro</small></span><span class="vl">40.000,00 €</span></div><div class="r zero"><span class="lb">IVA alemán recuperable<small>No hay factura con IVA desglosado: nada que recuperar</small></span><span class="vl">0,00 €</span></div><div class="r bad"><span class="lb">IVA español (21% · modelo 309)<small>Vehículo NUEVO: la adquisición intracomunitaria tributa en España. Sin él no matriculas</small></span><span class="vl">8.400,00 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Operación intracomunitaria de vehículo nuevo: exenta</small></span><span class="vl">0,00 €</span></div></div>
         </div>
         <div class="card danger" style="flex:none; padding:15px 18px; gap:5px"><span class="k">Evitar a toda costa</span><span class="d" style="font-size:13px">8.400 € tirados. Un coche nuevo comprado a un particular en Alemania te sale un 21% más caro que el mismo coche comprado en régimen general. No hay forma de arreglarlo después.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total bad">
-          <span class="lb">Coste total de la compra<small>Pagas el IVA dos veces: el alemán va dentro del precio y el español encima.</small></span>
+          <span class="lb">Coste total de la compra<small>Pagas el IVA «dos veces»: el alemán va dentro del precio y el español encima.</small></span>
           <span class="vl">48.400,00 €</span>
         </div>
       </div>
@@ -198,6 +214,7 @@
           <div class="calc"><div class="r "><span class="lb">Precio pagado en Alemania<small>El importe TOTAL, sin IVA desglosado</small></span><span class="vl">40.000,00 €</span></div><div class="r zero"><span class="lb">IVA alemán recuperable<small>En REBU el IVA no se desglosa: no se deduce</small></span><span class="vl">0,00 €</span></div><div class="r bad"><span class="lb">IVA español (21% · modelo 309)<small>Vehículo NUEVO: tributa en el país de matriculación</small></span><span class="vl">8.400,00 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Operación intracomunitaria de vehículo nuevo: exenta</small></span><span class="vl">0,00 €</span></div></div>
         </div>
         <div class="card danger" style="flex:none; padding:15px 18px; gap:5px"><span class="k">El REBU solo sirve para usados</span><span class="d" style="font-size:13px">Es un régimen pensado para bienes usados. Aplicado a un coche que fiscalmente es nuevo, pierdes toda su ventaja y pagas el 21% español encima. Si el coche es nuevo, exige régimen general.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total bad">
           <span class="lb">Coste total de la compra<small>La misma trampa que con un particular: 8.400 € de sobrecoste.</small></span>
           <span class="vl">48.400,00 €</span>
@@ -228,6 +245,7 @@
           <div class="calc"><div class="r "><span class="lb">Precio neto pagado en Alemania<small>Entrega intracomunitaria exenta: sin el 19% alemán</small></span><span class="vl">33.613,45 €</span></div><div class="r zero"><span class="lb">IVA alemán soportado<small>El vendedor no lo repercute: te ahorras 6.386,55 €</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">IVA español (21% · modelo 309)<small>Sobre los 33.613,45 €. Se paga antes de matricular</small></span><span class="vl">7.058,82 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Operación intracomunitaria de vehículo nuevo: exenta</small></span><span class="vl">0,00 €</span></div></div>
         </div>
         <div class="card gold" style="flex:none; padding:15px 18px; gap:5px"><span class="k">7.727,73 € de diferencia</span><span class="d" style="font-size:13px">Mismo coche, mismo anuncio de 40.000 €. En régimen general te cuesta 40.672,27 € y con un particular o en REBU, 48.400 €. Para un vehículo nuevo, el régimen general no es una opción mejor: es <strong>la única</strong>.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total ok">
           <span class="lb">Coste total de la compra<small>Pagas el IVA una sola vez, y en España.</small></span>
           <span class="vl">40.672,27 €</span>
@@ -258,7 +276,7 @@
         <div class="card">
           <span class="k">Casuística 01</span>
           <span class="t" style="color:#fff">Comprador particular<br>Vehículo usado</span>
-          <span class="d" style="margin-top:auto">Próximamente, en su propia guía gratuita.</span>
+          <span class="d" style="margin-top:auto">Ya la tienes disponible en el grupo.</span>
         </div>
         <div class="card" style="background:var(--gold); border-color:var(--gold)">
           <span class="k" style="color:rgba(10,10,10,.6)">Casuística 02</span>
@@ -279,7 +297,7 @@
 
     <div class="cta-box gold">
       <span class="k" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,10,10,.6)">Próximamente</span>
-      <span class="t" style="font-size:21px;font-weight:800;letter-spacing:-.02em">Te iremos dando el resto de guías gratuitas con las demás casuísticas.</span>
+      <span class="t" style="font-size:21px;font-weight:800;letter-spacing:-.02em">Te iremos dando el resto de guías gratuitas con las demás casuísticas. Estos días, a través de este grupo de WhatsApp. ¡No te lo pierdas!</span>
     </div>
   </div>
 </section>

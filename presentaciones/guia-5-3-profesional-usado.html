@@ -30,6 +30,21 @@
   .calc .r.zero .vl{ color:var(--green); }
   .calc .r.pay .vl{ color:#9a6d2c; }
   .calc .r.bad .vl{ color:var(--red); }
+
+  /* Aviso fijo al pie de cada ejemplo con números */
+  .disc{
+    margin:0; flex:none;
+    font-size:11.5px; line-height:1.45; color:var(--muted);
+    border-top:1px solid var(--border); padding-top:11px;
+  }
+
+  /* La píldora del encabezado nunca parte en dos líneas */
+  .s-head .pill{ white-space:nowrap; }
+  /* Desgloses de 5 filas: se compactan para no invadir el aviso de abajo */
+  .card:has(.calc .r:nth-child(5)){ padding:14px 18px; }
+  .calc:has(.r:nth-child(5)) .r{ padding:4px 0; font-size:12.5px; line-height:1.25; }
+  .calc:has(.r:nth-child(5)) .r .lb small{ font-size:10.5px; line-height:1.3; }
+  .calc:has(.r:nth-child(5)) .r .vl{ font-size:13.5px; }
   .total{
     background:var(--ink); color:#fff; border-radius:16px; padding:16px 22px;
     display:flex; align-items:center; justify-content:space-between; gap:18px; flex:none;
@@ -161,13 +176,14 @@
   <div class="kbox"><span class="car">BMW 320d Touring<br>Sport Line</span>
     <span class="specs">Primera matriculación 03/2021 · 78.400 km · 190 CV · Diésel · Automático</span></div>
   <div class="kbox"><span class="kt">Precio del anuncio</span><span class="price">25.000 €</span></div>
-<div class="note">Contrato privado de compraventa. Compras como empresa o autónomo, con el coche destinado a la reventa: entra en tu <strong>existencias</strong>, no en tu inmovilizado.</div></div>
+</div>
       <div style="display:flex; flex-direction:column; gap:14px; min-height:0">
         <div class="card" style="flex:1; min-height:0; justify-content:center; gap:0">
           <span class="k" style="margin-bottom:6px">Qué pagas y dónde</span>
           <div class="calc"><div class="r "><span class="lb">Precio pagado en Alemania</span><span class="vl">25.000,00 €</span></div><div class="r zero"><span class="lb">IVA alemán (19%)<small>Un particular no repercute IVA</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">IVA español (21%)<small>Vehículo usado comprado a particular: no hay adquisición intracomunitaria gravada</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">ITP si revendes en <strong>menos de 12 meses</strong><small>Exención del art. 45.I.B.17 LITP para revendedores</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">ITP si <strong>superas</strong> los 12 meses<small>6% sobre valor fiscal. Se pierde la exención y hay que liquidarlo</small></span><span class="vl">1.500,00 €</span></div></div>
         </div>
         <div class="card danger" style="flex:none; padding:15px 18px; gap:5px"><span class="k">El reloj de los 12 meses</span><span class="d" style="font-size:13px">La exención de ITP es condicional: cuenta desde la adquisición. Si el coche se te queda parado y pasas de los 12 meses, tienes que autoliquidar el ITP. Contrólalo en tu inventario, no de memoria.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total ">
           <span class="lb">Coste de la compra si revendes a tiempo<small>Sin impuestos si el coche sale de tu stock en menos de un año.</small></span>
           <span class="vl">25.000,00 €</span>
@@ -195,11 +211,12 @@
       <div style="display:flex; flex-direction:column; gap:14px; min-height:0">
         <div class="card" style="flex:1; min-height:0; justify-content:center; gap:0">
           <span class="k" style="margin-bottom:6px">Qué pagas y dónde</span>
-          <div class="calc"><div class="r "><span class="lb">Precio pagado en Alemania</span><span class="vl">25.000,00 €</span></div><div class="r zero"><span class="lb">IVA alemán deducible<small>En REBU no se desglosa: no hay nada que deducir</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">IVA español en la compra<small>Adquisición en REBU: no genera IVA en España</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Compra a profesional: exenta</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">IVA al revenderlo en REBU por 29.000 €<small>Solo sobre el margen: 4.000 € − (4.000 / 1,21) = 694,21 €</small></span><span class="vl">694,21 €</span></div></div>
+          <div class="calc"><div class="r "><span class="lb">Precio pagado en Alemania</span><span class="vl">25.000,00 €</span></div><div class="r zero"><span class="lb">IVA alemán deducible<small>En REBU no se desglosa: no hay nada que deducir</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">IVA español en la compra<small>Adquisición en REBU: no genera IVA en España</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Compra a profesional: exenta</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">IVA al revenderlo en REBU<small>Vendes por 32.000 € y pones unos 3.000 € de gastos de importación. Margen = 32.000 − (25.000 + 3.000) = 4.000 €. IVA a pagar = 4.000 × 0,21</small></span><span class="vl">840,00 €</span></div></div>
         </div>
-        <div class="card gold" style="flex:none; padding:15px 18px; gap:5px"><span class="k">La cadena REBU no se rompe</span><span class="d" style="font-size:13px">Comprado en REBU, puedes revenderlo en REBU. En vez de repercutir el 21% sobre los 29.000 € (5.033 €), pagas 694,21 € por el margen. Es el régimen natural del compraventa de vehículos usados.</span></div>
+        <div class="card gold" style="flex:none; padding:15px 18px; gap:5px"><span class="k">La cadena REBU no se rompe</span><span class="d" style="font-size:13px">Comprado en REBU, puedes revenderlo en REBU. En vez de repercutir el 21% sobre el total de la venta, pagas <strong>840 €</strong> por tus 4.000 € de margen. Es el régimen natural del compraventa de vehículos usados.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total ok">
-          <span class="lb">Coste de la compra<small>Sin impuestos en la compra. Al vender tributas solo por los 4.000 € de margen.</small></span>
+          <span class="lb">Coste de la compra<small>Sin impuestos en la compra. Al vender tributas solo por tu margen.</small></span>
           <span class="vl">25.000,00 €</span>
         </div>
       </div>
@@ -210,7 +227,7 @@
   <div class="s-head">
     <div>
       <span class="eyebrow">Ejemplo real con números <span class="sep">/</span> Fila 3 <span class='sep'>/</span> Régimen general</span>
-      <h2 class="s-title sm" style="margin-top:10px">Compras en <span class='gold'>régimen general</span> con tu VIES</h2>
+      <h2 class="s-title sm" style="margin-top:10px">Compras en <span class='gold'>régimen general</span> como operador intracomunitario</h2>
     </div>
     <span class="pill solid">Régimen general</span>
   </div>
@@ -227,9 +244,10 @@
           <span class="k" style="margin-bottom:6px">Qué pagas y dónde</span>
           <div class="calc"><div class="r "><span class="lb">Precio neto pagado en Alemania<small>Sin el 19% alemán, gracias al VIES</small></span><span class="vl">21.008,40 €</span></div><div class="r zero"><span class="lb">IVA alemán soportado<small>El vendedor no lo repercute: 3.991,60 € menos de desembolso</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">IVA español autoliquidado (21% · modelo 303)<small>Se declara devengado y deducido a la vez: efecto de caja cero</small></span><span class="vl">0,00 €</span></div><div class="r zero"><span class="lb">ITP en España<small>Compra a profesional: exenta</small></span><span class="vl">0,00 €</span></div><div class="r pay"><span class="lb">IVA que repercutes al vender por 27.000 € (IVA incl.)<small>Base 22.314,05 € + 21%. Lo ingresas tú, lo paga tu cliente</small></span><span class="vl">4.685,95 €</span></div></div>
         </div>
-        <div class="card gold" style="flex:none; padding:15px 18px; gap:5px"><span class="k">La ventaja de comprar como profesional</span><span class="d" style="font-size:13px">Un particular pagaría 25.000 € por este coche. Tú pagas 21.008,40 €. Esa diferencia de 3.991,60 € es tu margen antes de empezar a negociar. Requisito: estar en el ROI y que el vendedor valide tu VIES.</span></div>
+        <div class="card gold" style="flex:none; padding:15px 18px; gap:5px"><span class="k">La ventaja de comprar como profesional</span><span class="d" style="font-size:13px">Un particular pagaría 25.000 € por este coche. Tú pagas 21.008,40 €. No aplicas el IVA hasta que vendes el vehículo. Y recuerda, <strong>ese IVA no es tu margen</strong>. Requisito: estar en el ROI y que el vendedor valide tu VIES.</span></div>
+        <p class="disc">Este desglose incluye únicamente el precio de compra, IVA e ITP (si corresponde). No se tienen en cuenta el resto de gastos de importación y matriculación en estos ejemplos.</p>
         <div class="total ok">
-          <span class="lb">Coste real de la compra<small>Casi 4.000 € menos de desembolso que un particular por el mismo coche.</small></span>
+          <span class="lb">Coste real de la compra<small>Casi 4.000 € menos de desembolso inicial que un particular por el mismo coche.</small></span>
           <span class="vl">21.008,40 €</span>
         </div>
       </div>
@@ -258,12 +276,12 @@
         <div class="card">
           <span class="k">Casuística 01</span>
           <span class="t" style="color:#fff">Comprador particular<br>Vehículo usado</span>
-          <span class="d" style="margin-top:auto">Próximamente, en su propia guía gratuita.</span>
+          <span class="d" style="margin-top:auto">Ya la tienes disponible en el grupo.</span>
         </div>
         <div class="card">
           <span class="k">Casuística 02</span>
           <span class="t" style="color:#fff">Comprador particular<br>Vehículo nuevo</span>
-          <span class="d" style="margin-top:auto">Próximamente, en su propia guía gratuita.</span>
+          <span class="d" style="margin-top:auto">Ya la tienes disponible en el grupo.</span>
         </div>
         <div class="card" style="background:var(--gold); border-color:var(--gold)">
           <span class="k" style="color:rgba(10,10,10,.6)">Casuística 03</span>
@@ -279,7 +297,7 @@
 
     <div class="cta-box gold">
       <span class="k" style="font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(10,10,10,.6)">Próximamente</span>
-      <span class="t" style="font-size:21px;font-weight:800;letter-spacing:-.02em">Te iremos dando el resto de guías gratuitas con las demás casuísticas.</span>
+      <span class="t" style="font-size:21px;font-weight:800;letter-spacing:-.02em">Te iremos dando el resto de guías gratuitas con las demás casuísticas. Estos días, a través de este grupo de WhatsApp. ¡No te lo pierdas!</span>
     </div>
   </div>
 </section>
