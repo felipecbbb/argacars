@@ -15,16 +15,39 @@ MAPA={
  '07 · Legal, fiscalidad y estafas':[('mapa-7-1-garantias','7.1 · Garantías en España y Alemania'),('mapa-7-2-seguros','7.2 · Seguros'),('mapa-7-3-fiscalidad','7.3 · Fiscalidad'),('mapa-7-4-estafas-comunes','7.4 · Estafas comunes y cómo evitarlas')],
  '08 · Monetización y ventas':[('mapa-8-1-opciones-de-monetizacion','8.1 · Opciones de monetización'),('mapa-8-2-venta-y-marketing','8.2 · Venta y marketing'),('mapa-8-3-relaciones-clave','8.3 · Relaciones clave del proceso')],
 }
-GUIAS=[('3-1-preguntas-pre-compra','Guía 1 · Listado de preguntas pre-compra'),('3-2-documentacion-alemana','Guía 2 · Documentación alemana y comprobaciones'),('3-3-guia-revision-vehiculo','Guía 3 · Revisión de un vehículo'),('4-1-guia-negociacion','Guía 4 · Negociación y paso a paso en la compra'),('4-1-operaciones-regimenes-compra','Guía 5 · Operaciones y regímenes de compra'),('6-impuesto-matriculacion','Guía 6 · Cálculo del impuesto de matriculación'),('6-documentos-necesarios','Guía 7 · Documentos necesarios en el proceso'),('9-15-consejos-clave','Guía 8 · 15 consejos clave para la importación'),('guia-5-1-particular-usado','Guía 5.1 · Compra como particular de un vehículo usado'),('guia-5-2-particular-nuevo','Guía 5.2 · Compra como particular de un vehículo nuevo'),('guia-5-3-profesional-usado','Guía 5.3 · Compra como profesional de un vehículo usado'),('guia-5-4-profesional-nuevo','Guía 5.4 · Compra como profesional de un vehículo nuevo'),('guia-8-1-antes-de-comprar','Guía 8.1 · 5 consejos · Antes de comprar'),('guia-8-2-revisar-y-cerrar','Guía 8.2 · 5 consejos · Verificar y cerrar la compra'),('guia-8-3-traer-y-legalizar','Guía 8.3 · 5 consejos · Traer el coche y legalizarlo'),('guia-2-documentacion-alemana','Guía 2b · Documentación alemana (documentos para importar)'),('guia-7-documentos-necesarios','Guía 7b · Documentos necesarios en el proceso')]
+# Lo que SE REPARTE por el grupo: revisado y aprobado por el cliente
+REPARTIR=[('guia-2-documentacion-alemana','Guía 2b · Documentación alemana (documentos para importar)'),
+ ('guia-5-1-particular-usado','Guía 5.1 · Compra como particular de un vehículo usado'),
+ ('guia-5-2-particular-nuevo','Guía 5.2 · Compra como particular de un vehículo nuevo'),
+ ('guia-5-3-profesional-usado','Guía 5.3 · Compra como profesional de un vehículo usado'),
+ ('guia-5-4-profesional-nuevo','Guía 5.4 · Compra como profesional de un vehículo nuevo'),
+ ('guia-7-documentos-necesarios','Guía 7b · Documentos necesarios en el proceso'),
+ ('guia-8-1-antes-de-comprar','Guía 8.1 · 5 consejos · Antes de comprar'),
+ ('guia-8-2-revisar-y-cerrar','Guía 8.2 · 5 consejos · Verificar y cerrar la compra'),
+ ('guia-8-3-traer-y-legalizar','Guía 8.3 · 5 consejos · Traer el coche y legalizarlo')]
+
+# Material del CURSO: decks completos, NO revisados y NO aptos para repartir.
+# Las guías 5 y 8 son las "madre" de las sueltas y conservan texto que el
+# cliente mandó cambiar (p. ej. Car Revol), así que no deben mezclarse.
+CURSO=[('3-1-preguntas-pre-compra','Guía 1 · Listado de preguntas pre-compra'),
+ ('3-2-documentacion-alemana','Guía 2 · Documentación alemana y comprobaciones'),
+ ('3-3-guia-revision-vehiculo','Guía 3 · Revisión de un vehículo'),
+ ('4-1-guia-negociacion','Guía 4 · Negociación y paso a paso en la compra'),
+ ('4-1-operaciones-regimenes-compra','Guía 5 · Operaciones y regímenes de compra'),
+ ('6-impuesto-matriculacion','Guía 6 · Cálculo del impuesto de matriculación'),
+ ('6-documentos-necesarios','Guía 7 · Documentos necesarios en el proceso'),
+ ('9-15-consejos-clave','Guía 8 · 15 consejos clave para la importación')]
+
 n=0
 for carpeta,items in MAPA.items():
     d=os.path.join(DST,'Mapas mentales',carpeta); os.makedirs(d,exist_ok=True)
     for src,name in items:
         s=os.path.join(SRC,src+'.pdf')
         if os.path.exists(s): shutil.copy2(s,os.path.join(d,name+'.pdf')); n+=1
-d=os.path.join(DST,'Guías descargables'); os.makedirs(d,exist_ok=True)
-for src,name in GUIAS:
-    s=os.path.join(SRC,src+'.pdf')
-    if os.path.exists(s): shutil.copy2(s,os.path.join(d,name+'.pdf')); n+=1
+for carpeta,lista in [('Guías descargables',REPARTIR),('_Curso completo · NO repartir',CURSO)]:
+    d=os.path.join(DST,carpeta); os.makedirs(d,exist_ok=True)
+    for src,name in lista:
+        s=os.path.join(SRC,src+'.pdf')
+        if os.path.exists(s): shutil.copy2(s,os.path.join(d,name+'.pdf')); n+=1
 print('FORMACION actualizada:',n,'PDF')
 PY
