@@ -4,7 +4,20 @@ Landing temporal para captar gente al grupo de WhatsApp. Es la versión mínima 
 Alex por audio (02/09/2026): logo, foto de fondo oscurecida, vídeo, botón y una línea.
 La landing "tocha" con todo el copy vendrá después.
 
-**En línea:** https://landing-curso-smoky.vercel.app
+**En línea:** https://comunidad.argapremiumcars.es
+(la URL de Vercel, https://landing-curso-smoky.vercel.app, sigue funcionando)
+
+## Dominio
+
+`argapremiumcars.es` usa los nameservers de Vercel (`ns1/ns2.vercel-dns.com`), así que el
+subdominio se crea desde Vercel y **no hay que tocar Hostinger**: el registro DNS y el
+certificado se generan solos.
+
+```bash
+cd landing-curso && vercel domains add comunidad.argapremiumcars.es
+```
+
+El `.com` está aparcado en Hostinger (nameservers `dns-parking.com`) y no pasa por Vercel.
 
 ## Falta una cosa (la envía Alex)
 
