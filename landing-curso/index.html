@@ -200,10 +200,10 @@ img{ display:block; max-width:100%; }
     </div>
   </div>
 
-  <!-- ================================================================
-       BOTÓN · sustituye el href por el enlace real de la comunidad
-       ================================================================ -->
-  <a class="cta" href="#" id="cta">
+  <!-- BOTÓN · comunidad de WhatsApp -->
+  <a class="cta" id="cta"
+     href="https://chat.whatsapp.com/LjdNjRDenmoLtEz1I8I3NC"
+     target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.8 14.16c-.25.69-1.44 1.32-1.99 1.37-.53.05-1.02.24-3.43-.72-2.9-1.14-4.74-4.1-4.88-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.57.81 1.97.88 2.11.07.14.12.31.02.5-.09.19-.14.31-.28.47-.14.16-.3.36-.42.48-.14.14-.29.29-.12.57.16.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.45.12.61-.07.17-.19.71-.83.9-1.11.19-.29.38-.24.64-.14.26.09 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.69-.18 1.38Z"/></svg>
     Obtén tu recurso gratis
   </a>
@@ -253,7 +253,11 @@ img{ display:block; max-width:100%; }
     document.removeEventListener('keydown', onFirstTouch, true);
   }
 
-  function onFirstTouch(){ if(!gate.hidden) unmute(); }
+  function onFirstTouch(e){
+    // Pulsar el botón lleva a WhatsApp: no tiene sentido arrancar el sonido ahí
+    if(e && e.target && e.target.closest && e.target.closest('#cta')) return;
+    if(!gate.hidden) unmute();
+  }
 
   gate.addEventListener('click', function(e){ e.stopPropagation(); unmute(); });
 

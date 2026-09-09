@@ -19,10 +19,12 @@ cd landing-curso && vercel domains add comunidad.argapremiumcars.es
 
 El `.com` está aparcado en Hostinger (nameservers `dns-parking.com`) y no pasa por Vercel.
 
-## Falta una cosa (la envía Alex)
+## Estado
 
-- **El enlace de la comunidad de WhatsApp.** Sustituye el `href="#"` del `<a class="cta">`.
-  Está señalado con un comentario en el HTML.
+Completa y operativa. El botón apunta al grupo de WhatsApp
+`https://chat.whatsapp.com/LjdNjRDenmoLtEz1I8I3NC` («4 OCTUBRE · 19:00 | ARGA Premium Cars»).
+Si el grupo cambia o se regenera el enlace de invitación, hay que actualizar el `href` del
+`<a class="cta">` y volver a desplegar.
 
 ## El vídeo (VSL)
 
