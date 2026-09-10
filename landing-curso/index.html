@@ -64,17 +64,31 @@ img{ display:block; max-width:100%; }
   position:relative; z-index:2;
   min-height:100svh;
   display:flex; flex-direction:column; align-items:center;
-  gap:clamp(26px,4.2vh,44px);
-  padding:clamp(30px,6vh,60px) clamp(20px,5vw,28px) clamp(38px,7vh,64px);
-  justify-content:center;
+  padding:clamp(26px,5vh,52px) clamp(20px,5vw,28px) clamp(34px,6vh,56px);
+  justify-content:flex-start;
+}
+/* El logo se queda arriba; todo lo demás se centra en el espacio restante */
+.stack{
+  flex:1; min-height:0; width:100%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:clamp(20px,3.4vh,34px);
 }
 
 /* ===== LOGO ===== */
-.logo{ width:clamp(132px,26vw,188px); height:auto; flex:none; }
+.logo{ width:clamp(132px,26vw,188px); height:auto; flex:none; margin-bottom:clamp(12px,2.6vh,30px); }
+
+/* ===== TITULAR ===== */
+.headline{
+  margin:0; max-width:640px; text-align:center;
+  font-size:clamp(15.5px,3.7vw,21px); font-weight:600; line-height:1.45;
+  letter-spacing:-.01em; color:#fff;
+  text-shadow:0 2px 16px rgba(0,0,0,.7);
+}
+.headline b{ font-weight:800; color:var(--gold-soft); }
 
 /* ===== VÍDEO ===== */
 .player{
-  width:100%; max-width:760px;
+  width:100%; max-width:700px;
   border-radius:clamp(16px,3vw,22px);
   border:1px solid rgba(255,255,255,.16);
   background:rgba(255,255,255,.04);
@@ -174,6 +188,10 @@ img{ display:block; max-width:100%; }
 
   <img class="logo" src="assets/logo-arga-blanco.png" alt="ARGA Premium Cars">
 
+  <div class="stack">
+
+  <p class="headline">Obtén tu regalo <b>GRATUITO</b> en el botón de abajo, pero primero ve el vídeo de 60 segundos que te hemos preparado.</p>
+
   <!-- VÍDEO · VSL
        Arranca solo. Los navegadores prohíben el autoplay CON sonido, así que
        empieza silenciado y la capa de abajo lo activa al primer toque,
@@ -211,6 +229,8 @@ img{ display:block; max-width:100%; }
   <div class="note">
     <div class="rule"></div>
     <p>Te llevará a nuestra <strong>comunidad de WhatsApp</strong>, donde encontrarás el recurso que te prometimos, junto a más guías y recursos útiles, y mucho más valor que iremos aportando estas semanas de forma gratuita.</p>
+  </div>
+
   </div>
 
 </main>
