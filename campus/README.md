@@ -5,6 +5,31 @@ Presupuesto **FC-2026-019**.
 
 **En producción:** https://campus-arga.vercel.app (pendiente de subdominio propio)
 
+## Rutas
+
+| Ruta | Quién la ve |
+|---|---|
+| `/` | Portada pública de la plataforma. **Estática**, sale del CDN. Si ya has entrado, te lleva a `/campus` |
+| `/campus` | El campus: continuación, avance y temario |
+| `/entrar`, `/recuperar`, `/nueva-clave` | Acceso y contraseña |
+| `/clase/[código]`, `/recursos`, `/mentorias`, `/dudas` | Contenido, solo con matrícula activa |
+| `/admin/*` | Panel, solo administradores |
+
+## Rendimiento
+
+Dos cosas lo lastraban y están corregidas:
+
+1. **Las funciones corrían en Washington y la base de datos está en Frankfurt**: cada consulta
+   cruzaba el Atlántico, y una página encadena varias. `vercel.json` fija ahora `regions: ["fra1"]`.
+2. **Se comprobaba la sesión de más**: el proxy llamaba a Supabase en cada navegación y luego la
+   página repetía la consulta. Ahora el proxy solo lee la cookie (sin red), `obtenerSesion()` va
+   envuelta en `cache()` de React y perfil y matrícula vienen en una sola consulta.
+
+Además la portada es estática, así que la primera impresión no depende de la base de datos.
+
+Al tocar esto, ojo: **el proxy no autoriza, solo enruta**. Quien protege de verdad son las
+páginas (`getUser()`) y las reglas RLS de la base.
+
 ## Stack
 
 | Pieza | Elección | Por qué |

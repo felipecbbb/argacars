@@ -37,7 +37,7 @@ export default async function Clase({ params }: { params: Promise<{ code: string
       <Cabecera esAdmin={esAdmin} />
 
       <main className="mx-auto max-w-4xl px-5 py-8 sm:py-11">
-        <Link href="/" className="text-[13px] text-white/45 hover:text-white">← Todos los módulos</Link>
+        <Link href="/campus" className="text-[13px] text-white/45 hover:text-white">← Todos los módulos</Link>
 
         <p className="mt-5 text-[11px] font-bold uppercase tracking-[.18em] text-gold">
           Módulo {modulo?.code} · {modulo?.title}

@@ -35,7 +35,7 @@ export default function FormularioNuevaClave() {
     setEnviando(false)
 
     if (error) return setError('No se ha podido guardar. Prueba con otra contraseña.')
-    router.push('/')
+    router.push('/campus')
     router.refresh()
   }
 

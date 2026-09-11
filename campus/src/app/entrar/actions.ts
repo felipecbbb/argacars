@@ -9,7 +9,7 @@ export type EstadoAcceso = { error?: string }
 export async function entrar(_prev: EstadoAcceso, formData: FormData): Promise<EstadoAcceso> {
   const email = String(formData.get('email') ?? '').trim()
   const password = String(formData.get('password') ?? '')
-  const destino = String(formData.get('destino') ?? '/')
+  const destino = String(formData.get('destino') ?? '/campus')
 
   if (!email || !password) return { error: 'Escribe tu correo y tu contraseña.' }
 
@@ -22,5 +22,5 @@ export async function entrar(_prev: EstadoAcceso, formData: FormData): Promise<E
   }
 
   revalidatePath('/', 'layout')
-  redirect(destino.startsWith('/') ? destino : '/')
+  redirect(destino.startsWith('/') ? destino : '/campus')
 }

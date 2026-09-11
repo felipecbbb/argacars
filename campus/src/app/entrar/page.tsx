@@ -31,7 +31,7 @@ export default async function Entrar({
             Usa el correo con el que compraste el curso.
           </p>
 
-          <FormularioAcceso destino={destino ?? '/'} />
+          <FormularioAcceso destino={destino ?? '/campus'} />
         </div>
 
         <p className="mt-6 text-center text-xs text-white/40">
