@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Campus ARGA · identidad del sitio
+   Inter · negro #0a0a0a · dorado #c5a572
+   ============================================================ */
+@theme {
+  --color-ink: #0a0a0a;
+  --color-ink-2: #111111;
+  --color-ink-3: #171717;
+  --color-gold: #c5a572;
+  --color-gold-soft: #d4b988;
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html, body { background: var(--color-ink); color: #fff; }
+body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+::selection { background: var(--color-gold); color: #0a0a0a; }
+
+/* Anillo de foco visible, para poder recorrer el campus con el teclado */
+:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; border-radius: 6px; }
