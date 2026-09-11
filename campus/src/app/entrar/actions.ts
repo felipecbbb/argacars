@@ -24,15 +24,3 @@ export async function entrar(_prev: EstadoAcceso, formData: FormData): Promise<E
   revalidatePath('/', 'layout')
   redirect(destino.startsWith('/') ? destino : '/')
 }
-
-export async function recuperar(_prev: EstadoAcceso, formData: FormData): Promise<EstadoAcceso> {
-  const email = String(formData.get('email') ?? '').trim()
-  if (!email) return { error: 'Escribe tu correo.' }
-
-  const supabase = await createClient()
-  await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/nueva-clave`,
-  })
-  // Se responde igual exista o no la cuenta.
-  return {}
-}

@@ -14,7 +14,7 @@ export async function altaAlumno(formData: FormData): Promise<{ ok: boolean; men
   const admin = createAdminClient()
   const { data, error } = await admin.auth.admin.inviteUserByEmail(email, {
     data: { full_name: nombre },
-    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/nueva-clave`,
+    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? ''}/auth/callback?next=/nueva-clave`,
   })
 
   if (error || !data?.user) {

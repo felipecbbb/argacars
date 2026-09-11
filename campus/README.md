@@ -50,6 +50,16 @@ psql "$POSTGRES_URL_NON_POOLING" -v ON_ERROR_STOP=1 -f supabase/migrations/0001_
 Los PDF viven en un bucket privado: la descarga comprueba el acceso y firma una URL que
 caduca en 60 segundos, así un enlace copiado no sirve fuera del campus.
 
+## Antes de abrirlo a alumnos reales
+
+En el panel de Supabase (`vercel integration open supabase`), pestaña **Authentication**:
+
+1. **URL Configuration** → *Site URL*: `https://campus-arga.vercel.app` (o el subdominio final)
+   y añadir `https://campus-arga.vercel.app/auth/callback` a *Redirect URLs*. Sin esto, los
+   enlaces de invitación y de recuperación que salen por correo apuntan a `localhost`.
+2. **SMTP Settings** → conectar Resend (ya se usa en la web). El correo por defecto de Supabase
+   está limitado a unos pocos envíos por hora: sirve para probar, no para dar de alta alumnos.
+
 ## Qué falta
 
 1. **Bunny Stream**: crear la cuenta a nombre de ARGA, subir los vídeos y poner
