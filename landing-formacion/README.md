@@ -1,3 +1,8 @@
+> **Reemplazada (11 sep 2026).** Esta landing vive ahora dentro del campus, como su página
+> principal: `campus/src/app/page.tsx`, con cabecera, pie y aviso de cookies propios.
+> Se ve en https://campus-arga.vercel.app. Esta carpeta queda como referencia del boceto
+> original; el contenido editable está en `campus/src/lib/contenido-landing.ts`.
+
 # Landing de venta · Formación de importación
 
 Montada sobre el boceto `landing definitiva boceto (1).pdf` que pasó Alex el 11 sep 2026.

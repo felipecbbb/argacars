@@ -9,11 +9,28 @@ Presupuesto **FC-2026-019**.
 
 | Ruta | Quién la ve |
 |---|---|
-| `/` | Portada pública de la plataforma. **Estática**, sale del CDN. Si ya has entrado, te lleva a `/campus` |
+| `/` | **La página de venta**: hero, el problema, la formación, quiénes somos, temario y bonus. Es estática y sale del CDN. Si ya has entrado, te lleva a `/campus` |
 | `/campus` | El campus: continuación, avance y temario |
 | `/entrar`, `/recuperar`, `/nueva-clave` | Acceso y contraseña |
 | `/clase/[código]`, `/recursos`, `/mentorias`, `/dudas` | Contenido, solo con matrícula activa |
 | `/admin/*` | Panel, solo administradores |
+
+## Página principal, cabecera, pie y cookies
+
+La raíz es la landing de venta montada desde el boceto del cliente. El copy editable está
+separado del diseño en `src/lib/contenido-landing.ts`: se cambian módulos, bonus y textos sin
+tocar el maquetado.
+
+- **Cabecera** (`components/header.tsx`): fija, se vuelve opaca al bajar, con navegación por
+  secciones, «Acceso alumnos» y el botón de venta. En móvil, menú a pantalla completa.
+- **Pie** (`components/footer.tsx`): descripción, enlaces a las secciones y a la web principal,
+  datos fiscales del titular y los tres enlaces legales.
+- **Cookies** (`components/cookies.tsx`): mismo criterio que la web —el Meta Pixel no se carga
+  hasta aceptar— y **la misma clave de almacenamiento** (`arga_cookies_consent`), así que quien
+  ya decidió en argapremiumcars.es no vuelve a ver el aviso.
+
+Los textos legales no se duplican: se enlazan a los de `argapremiumcars.es`, que son los
+oficiales y ya están redactados.
 
 ## Rendimiento
 
