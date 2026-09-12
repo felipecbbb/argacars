@@ -14,13 +14,21 @@ export async function entrar(_prev: EstadoAcceso, formData: FormData): Promise<E
   if (!email || !password) return { error: 'Escribe tu correo y tu contraseña.' }
 
   const supabase = await createClient()
-  const { error } = await supabase.auth.signInWithPassword({ email, password })
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
     // No se distingue «no existe» de «contraseña mal»: daría pistas a quien pruebe correos.
     return { error: 'Correo o contraseña incorrectos.' }
   }
 
+  // Quien administra entra a gestionar, no a hacer el curso.
+  let inicio = destino.startsWith('/') ? destino : '/campus'
+  if (inicio === '/campus' && data.user) {
+    const { data: perfil } = await supabase
+      .from('profiles').select('role').eq('id', data.user.id).maybeSingle()
+    if (perfil?.role === 'admin') inicio = '/admin'
+  }
+
   revalidatePath('/', 'layout')
-  redirect(destino.startsWith('/') ? destino : '/campus')
+  redirect(inicio)
 }

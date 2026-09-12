@@ -13,7 +13,11 @@ Presupuesto **FC-2026-019**.
 | `/campus` | El campus: continuación, avance y temario |
 | `/entrar`, `/recuperar`, `/nueva-clave` | Acceso y contraseña |
 | `/clase/[código]`, `/recursos`, `/mentorias`, `/dudas` | Contenido, solo con matrícula activa |
-| `/admin/*` | Panel, solo administradores |
+| `/admin/*` | Panel de administración, con su propia cabecera. Solo administradores |
+
+**El administrador no cursa: gestiona.** Al entrar va directo a `/admin`, no al campus. Si quiere
+comprobar cómo lo ve un alumno, usa «Ver como alumno» (`/campus?vista=alumno`), que muestra un
+aviso y un enlace para volver al panel.
 
 ## Página principal, cabecera, pie y cookies
 
@@ -86,8 +90,13 @@ psql "$POSTGRES_URL_NON_POOLING" -v ON_ERROR_STOP=1 -f supabase/migrations/0001_
 - **Mentorías**: calendario propio. ARGA abre tramos de 30 min desde el panel y el alumno
   reserva. Las tres del bonus se controlan solas: a la cuarta, la base de datos lo impide.
 - **Dudas**: enlace al canal de la comunidad.
-- **Panel**: resumen, alta manual de alumnos por invitación, dar y retirar acceso, cargar
-  vídeos y PDF por clase, y gestión de huecos y reservas.
+- **Panel de administración**, con cabecera y navegación propias:
+  - *Resumen*: cifras, un bloque de «qué falta» (clases sin vídeo, sin publicar, mentorías sin
+    atender) y las últimas cuentas creadas.
+  - *Alumnos*: listado con estado, alta manual por invitación, dar y retirar acceso.
+  - *Clases y vídeos*: identificador de Bunny, descripción, publicar y adjuntar PDF por clase.
+  - *Recursos*: subir, renombrar y borrar los descargables de la zona de recursos.
+  - *Mentorías*: abrir huecos, ver reservas y marcarlas como hechas.
 
 Los PDF viven en un bucket privado: la descarga comprueba el acceso y firma una URL que
 caduca en 60 segundos, así un enlace copiado no sirve fuera del campus.

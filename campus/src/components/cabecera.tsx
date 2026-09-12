@@ -27,7 +27,7 @@ export default function Cabecera({ esAdmin = false }: { esAdmin?: boolean }) {
           </Link>
           {esAdmin && (
             <Link href="/admin" className="rounded-full border border-gold/40 px-3 py-2 text-gold hover:bg-gold/10">
-              Panel
+              Volver al panel
             </Link>
           )}
           <form action="/auth/salir" method="post">

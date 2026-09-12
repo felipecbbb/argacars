@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Cabecera from '@/components/cabecera'
+import { redirect } from 'next/navigation'
 import { exigirAcceso } from '@/lib/sesion'
 
 export const dynamic = 'force-dynamic'
@@ -7,8 +8,16 @@ export const dynamic = 'force-dynamic'
 type Leccion = { id: string; code: string; title: string; position: number; video_id: string | null }
 type Modulo = { id: string; code: string; title: string; description: string | null; position: number; lessons: Leccion[] }
 
-export default async function Campus() {
+export default async function Campus({
+  searchParams,
+}: {
+  searchParams: Promise<{ vista?: string }>
+}) {
+  const { vista } = await searchParams
   const { supabase, perfil, esAdmin, user } = await exigirAcceso()
+
+  // El administrador gestiona; solo ve el campus si pide expresamente la vista de alumno.
+  if (esAdmin && vista !== 'alumno') redirect('/admin')
 
   const [{ data: modulos }, { data: vistas }, { data: reservas }, { data: recursos }] = await Promise.all([
     supabase.from('modules')
@@ -37,6 +46,16 @@ export default async function Campus() {
       <Cabecera esAdmin={esAdmin} />
 
       <main className="mx-auto max-w-6xl px-5 py-9 sm:py-12">
+        {esAdmin && (
+          <p className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2 rounded-xl border border-gold/35 bg-gold/8 px-5 py-3.5 text-[13.5px]">
+            <span className="font-bold text-gold">Vista de alumno</span>
+            <span className="text-white/60">Estás viendo el campus como lo ve quien compra el curso.</span>
+            <Link href="/admin" className="font-semibold text-gold underline underline-offset-4">
+              Volver al panel
+            </Link>
+          </p>
+        )}
+
         {/* ── Bienvenida y continuación ── */}
         <section className="overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-br from-gold/12 via-ink-3 to-ink-3 p-7 sm:p-9">
           <p className="text-[11px] font-bold uppercase tracking-[.2em] text-gold">
