@@ -130,8 +130,11 @@ por ahí.
 
 ## Cuentas
 
-- Administrador: `felipegestion03@gmail.com`
+- Administrador: `info@argapremiumcars.com` (el correo de ARGA, el mismo del aviso legal)
 - Alumno de prueba: `alumno.prueba@argapremiumcars.es`
+
+El perfil guarda una copia del correo para poder listarlo sin consultar el esquema de
+autenticación; un disparador la mantiene al día si el correo cambia (`0004_sync_email.sql`).
 
 **Las contraseñas no se guardan aquí.** Se generaron al azar y se entregaron por el chat; si se
 pierden, se reponen desde «Recupera tu contraseña» o con «Reenviar acceso» en el panel.
