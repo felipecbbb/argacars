@@ -6,7 +6,7 @@ export default function Cabecera({ esAdmin = false }: { esAdmin?: boolean }) {
     <header className="sticky top-0 z-30 border-b border-white/8 bg-ink/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5">
         <Link href="/campus" className="flex items-center gap-3">
-          <Image src="/marca/logo-arga.png" alt="ARGA Premium Cars" width={112} height={28} />
+          <Image src="/marca/logo-arga.png" alt="ARGA Premium Cars" width={112} height={28} priority />
           <span className="hidden text-[11px] font-bold uppercase tracking-[.18em] text-gold sm:inline">
             Campus
           </span>

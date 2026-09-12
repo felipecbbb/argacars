@@ -19,7 +19,7 @@ export default function CabeceraAdmin() {
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink-2/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <div className="flex items-center gap-3.5">
-          <Image src="/marca/logo-arga.png" alt="ARGA Premium Cars" width={104} height={26} />
+          <Image src="/marca/logo-arga.png" alt="ARGA Premium Cars" width={104} height={26} priority />
           <span className="rounded-full bg-gold px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[.14em] text-ink">
             Administración
           </span>
