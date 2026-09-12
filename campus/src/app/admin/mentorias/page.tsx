@@ -12,7 +12,7 @@ export default async function AdminMentorias() {
   const [{ data: huecos }, { data: reservas }] = await Promise.all([
     admin.from('availability_slots').select('id, starts_at, ends_at, bookings(id, status)')
       .gte('starts_at', ahora).order('starts_at'),
-    admin.from('bookings').select('id, status, topic, created_at, availability_slots(starts_at), profiles!bookings_user_id_fkey(full_name, email)')
+    admin.from('bookings').select('id, status, topic, created_at, availability_slots(starts_at), profiles(full_name, email)')
       .neq('status', 'cancelled').order('created_at', { ascending: false }).limit(40),
   ])
 

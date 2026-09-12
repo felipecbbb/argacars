@@ -1,5 +1,6 @@
 import { createAdminClient } from '@/lib/supabase/server'
 import Acciones from './acciones'
+import { comoLista } from '@/lib/sesion'
 
 const fmt = new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: 'short', year: 'numeric' })
 
@@ -33,7 +34,7 @@ export default async function Alumnos() {
           </thead>
           <tbody className="divide-y divide-white/6">
             {(perfiles ?? []).map((p) => {
-              const m = (p.enrollments as unknown as { status: string; source: string }[] | null)?.[0]
+              const m = comoLista(p.enrollments as never)[0] as { status: string; source: string } | undefined
               const activo = m?.status === 'active'
               return (
                 <tr key={p.id}>

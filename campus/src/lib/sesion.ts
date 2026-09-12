@@ -3,12 +3,20 @@ import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 
+type Matricula = { status: string }
 type Perfil = {
   id: string
   email: string
   full_name: string | null
   role: 'student' | 'admin'
-  enrollments: { status: string }[] | null
+  // Supabase devuelve objeto cuando la relación es uno a uno y lista cuando no.
+  enrollments: Matricula | Matricula[] | null
+}
+
+/** Deja la matrícula siempre como lista, venga como venga. */
+export function comoLista(v: Matricula | Matricula[] | null | undefined): Matricula[] {
+  if (!v) return []
+  return Array.isArray(v) ? v : [v]
 }
 
 /**
@@ -40,7 +48,7 @@ export const obtenerSesion = cache(async () => {
     .maybeSingle<Perfil>()
 
   const esAdmin = data?.role === 'admin'
-  const matriculado = (data?.enrollments ?? []).some((e) => e.status === 'active')
+  const matriculado = comoLista(data?.enrollments).some((e) => e.status === 'active')
 
   return { supabase, user, perfil: data, esAdmin, tieneAcceso: esAdmin || matriculado }
 })
