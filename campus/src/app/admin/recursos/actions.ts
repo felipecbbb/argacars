@@ -63,3 +63,19 @@ export async function borrarRecurso(formData: FormData) {
   revalidatePath('/admin/recursos')
   revalidatePath('/recursos')
 }
+
+/** Guarda el orden en que quedaron los recursos tras arrastrarlos. */
+export async function reordenarRecursos(ids: string[]): Promise<string> {
+  await exigirAdmin()
+  if (ids.length === 0) return 'Nada que ordenar.'
+
+  const admin = createAdminClient()
+  // Una actualización por fila: son pocas y así no hace falta un procedimiento.
+  await Promise.all(
+    ids.map((id, i) => admin.from('lesson_files').update({ position: i + 1 }).eq('id', id))
+  )
+
+  revalidatePath('/admin/recursos')
+  revalidatePath('/recursos')
+  return 'Orden guardado.'
+}

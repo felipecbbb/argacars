@@ -1,24 +1,37 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { altaAlumno, alternarAcceso } from './actions'
+import { altaAlumno, alternarAcceso, reenviarAcceso } from './actions'
 
 export default function Acciones({
-  modo, userId, activo,
-}: { modo: 'alta' | 'alternar'; userId?: string; activo?: boolean }) {
+  modo, userId, activo, email,
+}: { modo: 'alta' | 'alternar'; userId?: string; activo?: boolean; email?: string }) {
   const [abierto, setAbierto] = useState(false)
   const [msg, setMsg] = useState<string | null>(null)
   const [pendiente, start] = useTransition()
 
   if (modo === 'alternar') {
     return (
-      <button
-        onClick={() => start(async () => { await alternarAcceso(userId!, !activo) })}
-        disabled={pendiente}
-        className="rounded-full border border-white/16 px-4 py-2 text-[12.5px] font-semibold text-white/70 hover:border-gold/50 hover:text-white disabled:opacity-50"
-      >
-        {activo ? 'Retirar acceso' : 'Dar acceso'}
-      </button>
+      <div className="flex flex-wrap justify-end gap-2">
+        {email && (
+          <form action={reenviarAcceso}>
+            <input type="hidden" name="email" value={email} />
+            <button
+              title="Le reenvía un enlace para entrar y poner contraseña"
+              className="rounded-full border border-white/16 px-4 py-2 text-[12.5px] font-semibold text-white/60 hover:border-gold/50 hover:text-white"
+            >
+              Reenviar acceso
+            </button>
+          </form>
+        )}
+        <button
+          onClick={() => start(async () => { await alternarAcceso(userId!, !activo) })}
+          disabled={pendiente}
+          className="rounded-full border border-white/16 px-4 py-2 text-[12.5px] font-semibold text-white/70 hover:border-gold/50 hover:text-white disabled:opacity-50"
+        >
+          {activo ? 'Retirar acceso' : 'Dar acceso'}
+        </button>
+      </div>
     )
   }
 

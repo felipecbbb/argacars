@@ -52,7 +52,7 @@ export default async function Alumnos() {
                   </td>
                   <td className="px-5 py-4 text-white/45">{m?.source ?? '—'}</td>
                   <td className="px-5 py-4 text-right">
-                    <Acciones modo="alternar" userId={p.id} activo={activo} />
+                    <Acciones modo="alternar" userId={p.id} activo={activo} email={p.email} />
                   </td>
                 </tr>
               )

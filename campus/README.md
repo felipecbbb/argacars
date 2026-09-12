@@ -3,7 +3,7 @@
 Plataforma de formación propia, sin Hotmart ni comisiones por venta.
 Presupuesto **FC-2026-019**.
 
-**En producción:** https://campus-arga.vercel.app (pendiente de subdominio propio)
+**En producción:** https://campus.argapremiumcars.es (la URL de Vercel sigue funcionando)
 
 ## Rutas
 
@@ -101,15 +101,23 @@ psql "$POSTGRES_URL_NON_POOLING" -v ON_ERROR_STOP=1 -f supabase/migrations/0001_
 Los PDF viven en un bucket privado: la descarga comprueba el acceso y firma una URL que
 caduca en 60 segundos, así un enlace copiado no sirve fuera del campus.
 
-## Antes de abrirlo a alumnos reales
+## Correo
 
-En el panel de Supabase (`vercel integration open supabase`), pestaña **Authentication**:
+Los correos de alta y de recuperación **los envía el campus con Resend**, no Supabase: se pide
+el enlace con `generateLink` (que no manda nada) y se envía con la plantilla de ARGA que está en
+`src/lib/correo.ts`. Así llevan la imagen de marca y no se topan con el límite de envíos del
+plan gratuito. La clave de Resend es la misma que usa el formulario de la web.
 
-1. **URL Configuration** → *Site URL*: `https://campus-arga.vercel.app` (o el subdominio final)
-   y añadir `https://campus-arga.vercel.app/auth/callback` a *Redirect URLs*. Sin esto, los
-   enlaces de invitación y de recuperación que salen por correo apuntan a `localhost`.
-2. **SMTP Settings** → conectar Resend (ya se usa en la web). El correo por defecto de Supabase
-   está limitado a unos pocos envíos por hora: sirve para probar, no para dar de alta alumnos.
+## Lo único que queda por tocar en Supabase
+
+Panel de Supabase (`vercel integration open supabase`) → **Authentication → URL Configuration**:
+
+- *Site URL*: `https://campus.argapremiumcars.es`
+- *Redirect URLs*: añadir `https://campus.argapremiumcars.es/auth/callback`
+
+Sin esto, Supabase ignora el destino que le pedimos y los enlaces de los correos acaban
+apuntando a `localhost`. El **SMTP ya no hace falta** tocarlo, porque los correos no salen
+por ahí.
 
 ## Qué falta
 
@@ -120,9 +128,10 @@ En el panel de Supabase (`vercel integration open supabase`), pestaña **Authent
 4. **Subdominio** definitivo y quitar el `noindex`.
 5. **Contenido**: vídeos, descripciones y los PDF de las guías.
 
-## Cuentas de prueba
+## Cuentas
 
-- Administrador: `felipegestion03@gmail.com` / `CampusArga2026!`
-- Alumno: `alumno.prueba@argapremiumcars.es` / `Alumno2026!`
+- Administrador: `felipegestion03@gmail.com`
+- Alumno de prueba: `alumno.prueba@argapremiumcars.es`
 
-Cambiar ambas antes de abrirlo a alumnos reales.
+**Las contraseñas no se guardan aquí.** Se generaron al azar y se entregaron por el chat; si se
+pierden, se reponen desde «Recupera tu contraseña» o con «Reenviar acceso» en el panel.

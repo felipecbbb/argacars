@@ -30,6 +30,9 @@ export default function Cabecera({ esAdmin = false }: { esAdmin?: boolean }) {
               Volver al panel
             </Link>
           )}
+          <Link href="/perfil" className="rounded-full px-3 py-2 text-white/70 hover:bg-white/6 hover:text-white">
+            Mi cuenta
+          </Link>
           <form action="/auth/salir" method="post">
             <button className="rounded-full px-3 py-2 text-white/45 hover:text-white" type="submit">
               Salir
