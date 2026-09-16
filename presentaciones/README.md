@@ -17,6 +17,26 @@ píldoras del sitio).
 | `6-documentos-necesarios.html` | 6 · Documentos necesarios en el proceso | 7 |
 | `9-15-consejos-clave.html` | 9 · 15 consejos clave para la importación | 6 |
 
+### Guías 9, 10 y 11 · a partir de los documentos del cliente
+
+Tres guías nuevas montadas desde los textos que pasó Alex el 16 sep 2026, con el mismo sistema
+de diseño que el resto:
+
+| Archivo | Contenido | Páginas |
+|---|---|---|
+| `guia-ventajas-importar.html` | Por qué importar desde Alemania · las 5 grandes ventajas | 8 |
+| `guia-tipos-de-vendedor.html` | Particular, campa, compraventa y concesionario oficial | 8 |
+| `guia-bmw-por-necesidad.html` | 5 categorías y 15 recomendaciones de BMW | 7 |
+
+El contenido es el de los documentos originales, reordenado para que cada página sostenga una
+idea: los datos de salarios, los ejemplos con números (70.000 → 64.000 y las dos unidades a
+55.000 €) y las quince recomendaciones están tal cual los escribió el cliente. El cierre de cada
+una usa su propio texto de despedida hacia el grupo de WhatsApp.
+
+Ojo con las páginas oscuras: `deck.css` pinta el texto en blanco dentro de `.dark`, así que una
+tarjeta `.card.gold` (fondo claro) queda ilegible si no se le devuelve el color oscuro. Está
+resuelto en el `<style>` de `guia-bmw-por-necesidad.html`.
+
 ### Guía 2, versión suelta para repartir
 
 `guia-2-documentacion-alemana.html` (7 páginas) es la guía 2 recortada como lead magnet.

@@ -24,7 +24,10 @@ REPARTIR=[('guia-2-documentacion-alemana','Guía 2b · Documentación alemana (d
  ('guia-7-documentos-necesarios','Guía 7b · Documentos necesarios en el proceso'),
  ('guia-8-1-antes-de-comprar','Guía 8.1 · 5 consejos · Antes de comprar'),
  ('guia-8-2-revisar-y-cerrar','Guía 8.2 · 5 consejos · Verificar y cerrar la compra'),
- ('guia-8-3-traer-y-legalizar','Guía 8.3 · 5 consejos · Traer el coche y legalizarlo')]
+ ('guia-8-3-traer-y-legalizar','Guía 8.3 · 5 consejos · Traer el coche y legalizarlo'),
+ ('guia-ventajas-importar','Guía 9 · Por qué importar un coche desde Alemania'),
+ ('guia-tipos-de-vendedor','Guía 10 · Dónde comprar los coches a importar'),
+ ('guia-bmw-por-necesidad','Guía 11 · Qué BMW importar según tu necesidad')]
 
 # Material del CURSO: decks completos, NO revisados y NO aptos para repartir.
 # Las guías 5 y 8 son las "madre" de las sueltas y conservan texto que el
