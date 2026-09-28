@@ -12,6 +12,7 @@ export async function subirRecurso(formData: FormData): Promise<string> {
   const file = formData.get('file') as File | null
   const titulo = String(formData.get('title') ?? '').trim()
   const posicion = Number(formData.get('position') ?? 0)
+  const tipo = formData.get('kind') === 'plantilla' ? 'plantilla' : 'recurso'
   if (!file || file.size === 0) return 'No se ha elegido ningún archivo.'
   if (file.type !== 'application/pdf') return 'Solo se aceptan PDF.'
 
@@ -29,11 +30,25 @@ export async function subirRecurso(formData: FormData): Promise<string> {
     size_bytes: file.size,
     position: posicion,
     is_resource: true,
+    kind: tipo,
   })
 
   revalidatePath('/admin/recursos')
   revalidatePath('/recursos')
-  return error ? `Subido, pero no se registró: ${error.message}` : 'Recurso añadido.'
+  return error ? `Subido, pero no se registró: ${error.message}` : tipo === 'plantilla' ? 'Plantilla añadida.' : 'Recurso añadido.'
+}
+
+/** Pasa un descargable de «recurso» a «plantilla» o al revés. */
+export async function cambiarTipo(formData: FormData) {
+  await exigirAdmin()
+  const id = String(formData.get('id') ?? '')
+  const tipo = formData.get('kind') === 'plantilla' ? 'plantilla' : 'recurso'
+  if (!id) return
+
+  const admin = createAdminClient()
+  await admin.from('lesson_files').update({ kind: tipo }).eq('id', id)
+  revalidatePath('/admin/recursos')
+  revalidatePath('/recursos')
 }
 
 export async function renombrarRecurso(formData: FormData) {

@@ -9,7 +9,7 @@ const PESTANAS = [
   ['/admin/alumnos', 'Alumnos'],
   ['/admin/contenido', 'Clases y vídeos'],
   ['/admin/recursos', 'Recursos'],
-  ['/admin/mentorias', 'Mentorías'],
+  ['/admin/mentorias', 'Agenda'],
 ] as const
 
 export default function CabeceraAdmin() {

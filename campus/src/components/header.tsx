@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 const SECCIONES = [
-  ['#formacion', 'La formación'],
-  ['#temario', 'Temario'],
-  ['#bonus', 'Bonus'],
-  ['#nosotros', 'Quiénes somos'],
+  ['/#formacion', 'La formación'],
+  ['/#temario', 'Temario'],
+  ['/#bonus', 'Bonus'],
+  ['/#nosotros', 'Quiénes somos'],
 ] as const
 
 export default function Header() {
@@ -41,9 +41,9 @@ export default function Header() {
 
         <nav className="hidden items-center gap-1 lg:flex">
           {SECCIONES.map(([href, texto]) => (
-            <a key={href} href={href} className="rounded-full px-3.5 py-2 text-[13.5px] font-semibold text-white/65 transition hover:bg-white/6 hover:text-white">
+            <Link key={href} href={href} className="rounded-full px-3.5 py-2 text-[13.5px] font-semibold text-white/65 transition hover:bg-white/6 hover:text-white">
               {texto}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -54,12 +54,12 @@ export default function Header() {
           >
             Acceso alumnos
           </Link>
-          <a
-            href="#acceso"
+          <Link
+            href="/#acceso"
             className="hidden whitespace-nowrap rounded-full bg-gradient-to-b from-gold-soft to-gold px-5 py-2.5 text-[12px] font-extrabold uppercase tracking-[.05em] text-ink transition hover:-translate-y-0.5 sm:inline-flex"
           >
-            Ver la formación
-          </a>
+            Acceder a la formación
+          </Link>
           <button
             onClick={() => setMenu(true)}
             aria-label="Abrir el menú"
@@ -85,19 +85,19 @@ export default function Header() {
           </div>
           <nav className="flex flex-col gap-1 px-5 pt-6">
             {SECCIONES.map(([href, texto]) => (
-              <a key={href} href={href} onClick={() => setMenu(false)}
+              <Link key={href} href={href} onClick={() => setMenu(false)}
                  className="border-b border-white/8 py-4 text-[19px] font-bold tracking-[-.02em]">
                 {texto}
-              </a>
+              </Link>
             ))}
             <Link href="/entrar" onClick={() => setMenu(false)}
                   className="border-b border-white/8 py-4 text-[19px] font-bold tracking-[-.02em] text-gold">
               Acceso alumnos
             </Link>
-            <a href="#acceso" onClick={() => setMenu(false)}
+            <Link href="/#acceso" onClick={() => setMenu(false)}
                className="mt-7 rounded-full bg-gradient-to-b from-gold-soft to-gold px-6 py-4 text-center text-[14px] font-extrabold uppercase tracking-wide text-ink">
-              Ver la formación
-            </a>
+              Acceder a la formación
+            </Link>
           </nav>
         </div>
       )}

@@ -39,8 +39,12 @@ export default function EditorLeccion({ leccion }: { leccion: Leccion }) {
 
             <label className="block text-[11px] font-bold uppercase tracking-wider text-white/45">
               Descripción de la clase
-              <textarea name="description" rows={4} defaultValue={leccion.description ?? ''}
-                className="mt-1.5 w-full rounded-lg border border-white/12 bg-ink-3 px-3.5 py-2.5 text-[13.5px] font-normal normal-case tracking-normal leading-relaxed text-white" />
+              <textarea name="description" rows={6} defaultValue={leccion.description ?? ''}
+                placeholder="Un resumen corto de la clase. Los enlaces se pegan tal cual o como [texto del enlace](https://…)"
+                className="mt-1.5 w-full rounded-lg border border-white/12 bg-ink-3 px-3.5 py-2.5 text-[13.5px] font-normal normal-case tracking-normal leading-relaxed text-white placeholder:text-white/25" />
+              <span className="mt-1.5 block text-[11.5px] font-normal normal-case tracking-normal text-white/35">
+                El alumno la ve debajo del vídeo. Los PDF que adjuntes aquí abajo salen como «La guía de esta clase».
+              </span>
             </label>
 
             <label className="flex items-center gap-2.5 text-[13px] text-white/70">

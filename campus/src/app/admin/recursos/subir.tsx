@@ -31,6 +31,13 @@ export default function SubirRecurso({ siguiente }: { siguiente: number }) {
             type="file" name="file" accept="application/pdf" required
             className="mt-3.5 w-full text-[13px] text-white/60 file:mr-3 file:rounded-full file:border-0 file:bg-white/10 file:px-4 file:py-2 file:text-[12px] file:font-bold file:text-white"
           />
+          <select
+            name="kind" defaultValue="recurso"
+            className="mt-2.5 w-full rounded-xl border border-white/12 bg-ink px-4 py-3 text-sm"
+          >
+            <option value="recurso">Guía o recurso</option>
+            <option value="plantilla">Plantilla (contrato, autorización…)</option>
+          </select>
           <input
             name="title" placeholder="Nombre visible (opcional)"
             className="mt-2.5 w-full rounded-xl border border-white/12 bg-ink px-4 py-3 text-sm"

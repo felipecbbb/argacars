@@ -1,11 +1,11 @@
 import { Resend } from 'resend'
 
-const REMITENTE = process.env.CORREO_REMITENTE ?? 'ARGA Premium Cars <web@argapremiumcars.es>'
+export const REMITENTE = process.env.CORREO_REMITENTE ?? 'ARGA Premium Cars <web@argapremiumcars.es>'
 const GOLD = '#c5a572'
 const NEGRO = '#0a0a0a'
 
 /** Plantilla de correo con la imagen de ARGA. Sin imágenes externas: solo texto y color. */
-function plantilla({ titulo, cuerpo, boton, enlace, pie }: {
+export function plantilla({ titulo, cuerpo, boton, enlace, pie }: {
   titulo: string
   cuerpo: string
   boton: string
@@ -63,7 +63,7 @@ function plantilla({ titulo, cuerpo, boton, enlace, pie }: {
 </body></html>`
 }
 
-function cliente() {
+export function cliente() {
   const clave = process.env.RESEND_API_KEY
   if (!clave) return null
   return new Resend(clave)
@@ -105,6 +105,59 @@ export async function enviarRecuperacion(email: string, enlace: string) {
       boton: 'Poner contraseña nueva',
       enlace,
       pie: 'Si no has sido tú, puedes ignorar este correo: tu contraseña actual sigue funcionando.',
+    }),
+  })
+  return error ? { error: error.message } : {}
+}
+
+/**
+ * Bienvenida tras pagar: confirma el pago, explica cómo se entra y lleva a
+ * elegir la contraseña. No se manda ninguna contraseña por correo: el alumno
+ * la pone él con el enlace, que es de un solo uso.
+ */
+export async function enviarBienvenida(email: string, enlace: string, nombre?: string | null) {
+  const resend = cliente()
+  if (!resend) return { error: 'Falta configurar el envío de correo.' }
+
+  const saludo = nombre?.trim() ? `Hola ${nombre.trim().split(' ')[0]},` : 'Hola,'
+  const { error } = await resend.emails.send({
+    from: REMITENTE,
+    to: email,
+    subject: 'Bienvenido a la formación de ARGA Premium Cars',
+    html: plantilla({
+      titulo: 'Hemos recibido tu pago. ¡Bienvenido!',
+      cuerpo: `${saludo} ya formas parte de la formación de importación de vehículos de ARGA Premium Cars.<br><br>
+        <strong>Cómo entrar al campus:</strong><br>
+        1. Pulsa el botón de abajo y elige tu contraseña.<br>
+        2. A partir de ahí entras siempre en <strong>campus.argapremiumcars.es</strong> con tu correo
+        (<strong>${email}</strong>) o con tu teléfono, y la contraseña que hayas elegido.<br>
+        3. Si algún día quieres cambiarla, lo haces desde «Mi cuenta» dentro del campus.<br><br>
+        Dentro tienes los 9 módulos, las guías y plantillas descargables y tus 3 mentorías 1 a 1 para reservar cuando quieras.`,
+      boton: 'Elegir mi contraseña y entrar',
+      enlace,
+      pie: 'Este enlace caduca en 24 horas. Si se te pasa, pide uno nuevo desde «¿Has olvidado tu contraseña?» en la pantalla de acceso. La factura te llegará en un correo aparte.',
+    }),
+  })
+  return error ? { error: error.message } : {}
+}
+
+/** Aviso de seguridad cuando se cambia la contraseña desde «Mi cuenta». */
+export async function enviarAvisoClave(email: string, nombre?: string | null) {
+  const resend = cliente()
+  if (!resend) return { error: 'Falta configurar el envío de correo.' }
+
+  const saludo = nombre?.trim() ? `Hola ${nombre.trim().split(' ')[0]},` : 'Hola,'
+  const base = (process.env.NEXT_PUBLIC_SITE_URL ?? '').replace(/\/$/, '')
+  const { error } = await resend.emails.send({
+    from: REMITENTE,
+    to: email,
+    subject: 'Has cambiado tu contraseña del campus',
+    html: plantilla({
+      titulo: 'Tu contraseña se ha cambiado',
+      cuerpo: `${saludo} te confirmamos que la contraseña de tu cuenta del campus se acaba de cambiar.`,
+      boton: 'Entrar al campus',
+      enlace: `${base}/entrar`,
+      pie: 'Si no has sido tú, recupera el acceso cuanto antes desde «¿Has olvidado tu contraseña?» y escríbenos a info@argapremiumcars.com.',
     }),
   })
   return error ? { error: error.message } : {}

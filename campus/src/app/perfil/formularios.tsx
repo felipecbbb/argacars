@@ -28,19 +28,40 @@ function Aviso({ estado }: { estado: EstadoPerfil }) {
   return null
 }
 
-export default function Formularios({ nombre }: { nombre: string }) {
+type Datos = { correo: string; nombre: string; telefono: string; direccion: string }
+
+export default function Formularios({ correo, nombre, telefono, direccion }: Datos) {
   const [estDatos, accDatos] = useActionState<EstadoPerfil, FormData>(guardarDatos, {})
   const [estClave, accClave] = useActionState<EstadoPerfil, FormData>(cambiarClave, {})
 
   return (
     <div className="mt-9 space-y-4">
       <section className="rounded-2xl border border-white/12 bg-ink-3 p-6 sm:p-7">
-        <h2 className="text-[11px] font-bold uppercase tracking-[.16em] text-white/45">Tu nombre</h2>
+        <h2 className="text-[11px] font-bold uppercase tracking-[.16em] text-white/45">Datos personales</h2>
         <form action={accDatos} className="mt-4">
           <label className={ETIQUETA}>
+            Correo electrónico
+            <input value={correo} readOnly aria-describedby="nota-correo"
+                   className={`${CAMPO} cursor-not-allowed text-white/55`} />
+          </label>
+          <p id="nota-correo" className="mt-2 text-xs text-white/40">
+            Es tu usuario de acceso. Si necesitas cambiarlo, escríbenos y lo hacemos nosotros.
+          </p>
+          <label className={`${ETIQUETA} mt-5`}>
             Nombre y apellidos
-            <input name="full_name" defaultValue={nombre} required minLength={2}
+            <input name="full_name" defaultValue={nombre} required minLength={2} autoComplete="name"
                    placeholder="Cómo quieres que te llamemos" className={CAMPO} />
+          </label>
+          <label className={`${ETIQUETA} mt-5`}>
+            Teléfono
+            <input name="phone" type="tel" defaultValue={telefono} autoComplete="tel"
+                   placeholder="+34 600 000 000" className={CAMPO} />
+          </label>
+          <p className="mt-2 text-xs text-white/40">También puedes entrar al campus con tu teléfono en vez del correo.</p>
+          <label className={`${ETIQUETA} mt-5`}>
+            Dirección
+            <input name="address" defaultValue={direccion} autoComplete="street-address"
+                   placeholder="Calle, número, código postal y ciudad" className={CAMPO} />
           </label>
           <Aviso estado={estDatos} />
           <Boton texto="Guardar" />

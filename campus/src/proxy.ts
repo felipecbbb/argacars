@@ -2,7 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 /** Rutas que se pueden ver sin haber entrado. */
-const PUBLICAS = ['/entrar', '/recuperar', '/nueva-clave', '/auth']
+const PUBLICAS = ['/entrar', '/recuperar', '/nueva-clave', '/auth', '/pagar', '/api/stripe', '/api/cron', '/llamada', '/cita']
 
 /** La portada es pública: enseña la plataforma y desde ahí se entra. */
 const PORTADA = '/'

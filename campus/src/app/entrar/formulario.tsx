@@ -25,14 +25,15 @@ export default function FormularioAcceso({ destino }: { destino: string }) {
       <input type="hidden" name="destino" value={destino} />
 
       <label className="block text-xs font-semibold uppercase tracking-wider text-white/50">
-        Correo
+        Correo o teléfono
         <input
           name="email"
-          type="email"
-          autoComplete="email"
+          type="text"
+          inputMode="email"
+          autoComplete="username"
           required
           className="mt-2 w-full rounded-xl border border-white/12 bg-ink px-4 py-3.5 text-[15px] font-normal normal-case tracking-normal text-white placeholder:text-white/25 focus:border-gold/60"
-          placeholder="tucorreo@ejemplo.com"
+          placeholder="tucorreo@ejemplo.com o 600 000 000"
         />
       </label>
 

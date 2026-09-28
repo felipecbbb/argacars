@@ -17,13 +17,13 @@ export default function Cabecera({ esAdmin = false }: { esAdmin?: boolean }) {
             Módulos
           </Link>
           <Link href="/recursos" className="rounded-full px-3 py-2 text-white/70 hover:bg-white/6 hover:text-white">
-            Recursos
+            Recursos<span className="hidden lg:inline"> y plantillas</span>
           </Link>
           <Link href="/mentorias" className="rounded-full px-3 py-2 text-white/70 hover:bg-white/6 hover:text-white">
             Mentorías
           </Link>
           <Link href="/dudas" className="hidden rounded-full px-3 py-2 text-white/70 hover:bg-white/6 hover:text-white sm:block">
-            Dudas
+            Resuelve tus dudas
           </Link>
           {esAdmin && (
             <Link href="/admin" className="rounded-full border border-gold/40 px-3 py-2 text-gold hover:bg-gold/10">

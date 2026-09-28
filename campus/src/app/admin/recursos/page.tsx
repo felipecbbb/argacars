@@ -8,7 +8,7 @@ export default async function AdminRecursos() {
   const admin = createAdminClient()
   const { data } = await admin
     .from('lesson_files')
-    .select('id, title, size_bytes, position, lessons(code)')
+    .select('*, lessons(code)')
     .eq('is_resource', true)
     .order('position')
 
@@ -17,6 +17,7 @@ export default async function AdminRecursos() {
     title: r.title as string,
     size_bytes: r.size_bytes as number | null,
     clase: (r.lessons as unknown as { code: string } | null)?.code ?? null,
+    kind: (r.kind as string | undefined) === 'plantilla' ? 'plantilla' as const : 'recurso' as const,
   }))
 
   return (
@@ -25,8 +26,8 @@ export default async function AdminRecursos() {
         <div>
           <h1 className="text-2xl font-black tracking-[-.03em]">Recursos descargables</h1>
           <p className="mt-1.5 text-sm text-white/50">
-            Las guías y plantillas que el alumno ve en su zona de recursos. Arrástralos para
-            cambiar el orden en que los verá.
+            Las guías y plantillas que el alumno ve en su zona de descargables: primero las guías y
+            debajo las plantillas. Arrástralos para cambiar el orden en que los verá.
           </p>
         </div>
         <SubirRecurso siguiente={recursos.length + 1} />

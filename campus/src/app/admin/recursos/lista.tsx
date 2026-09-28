@@ -1,13 +1,14 @@
 'use client'
 
 import { useState, useTransition } from 'react'
-import { borrarRecurso, renombrarRecurso, reordenarRecursos } from './actions'
+import { borrarRecurso, cambiarTipo, renombrarRecurso, reordenarRecursos } from './actions'
 
 type Recurso = {
   id: string
   title: string
   size_bytes: number | null
   clase: string | null
+  kind: 'recurso' | 'plantilla'
 }
 
 const peso = (b: number | null) => (b ? `${(b / 1024 / 1024).toFixed(1)} MB` : '—')
@@ -17,7 +18,12 @@ export default function Lista({ inicial }: { inicial: Recurso[] }) {
   const [arrastrado, setArrastrado] = useState<string | null>(null)
   const [sucio, setSucio] = useState(false)
   const [msg, setMsg] = useState<string | null>(null)
+  const [editando, setEditando] = useState<string | null>(null)
   const [pendiente, start] = useTransition()
+
+  // La lista local solo guarda el orden; el tipo se lee de lo que manda el servidor,
+  // para que el botón Guía/Plantilla se refresque tras cambiarlo.
+  const tipoDe = (r: Recurso) => inicial.find((x) => x.id === r.id)?.kind ?? r.kind
 
   function soltarSobre(id: string) {
     if (!arrastrado || arrastrado === id) return
@@ -79,15 +85,18 @@ export default function Lista({ inicial }: { inicial: Recurso[] }) {
             </span>
             <span className="flex-none text-[12px] font-bold tabular-nums text-white/35">{i + 1}</span>
 
-            <form action={renombrarRecurso} className="flex flex-1 flex-wrap items-center gap-2.5">
+            <form action={renombrarRecurso} onSubmit={() => setEditando(null)} className="flex flex-1 flex-wrap items-center gap-2.5">
               <input type="hidden" name="id" value={r.id} />
               <input
-                name="title" defaultValue={r.title}
+                name="title" defaultValue={r.title} title="Pulsa para cambiar el nombre"
+                onChange={(e) => setEditando(e.target.value.trim() && e.target.value !== r.title ? r.id : null)}
                 className="min-w-[200px] flex-1 rounded-lg border border-transparent bg-transparent px-2 py-1.5 text-[14.5px] transition hover:border-white/12 focus:border-gold/50 focus:bg-ink"
               />
-              <button className="rounded-full border border-white/16 px-3.5 py-1.5 text-[12px] font-semibold text-white/60 transition hover:border-gold/50 hover:text-white">
-                Guardar
-              </button>
+              {editando === r.id && (
+                <button className="rounded-full bg-gold px-3.5 py-1.5 text-[12px] font-bold text-ink">
+                  Guardar nombre
+                </button>
+              )}
             </form>
 
             {r.clase && (
@@ -95,11 +104,23 @@ export default function Lista({ inicial }: { inicial: Recurso[] }) {
                 Clase {r.clase}
               </span>
             )}
+            <form action={cambiarTipo} className="flex-none">
+              <input type="hidden" name="id" value={r.id} />
+              <input type="hidden" name="kind" value={tipoDe(r) === 'plantilla' ? 'recurso' : 'plantilla'} />
+              <button
+                title="Cambiar entre guía y plantilla"
+                className={`rounded-full px-2.5 py-1 text-[10.5px] font-bold uppercase tracking-wider transition ${
+                  tipoDe(r) === 'plantilla' ? 'bg-gold/15 text-gold hover:bg-gold/25' : 'bg-white/8 text-white/50 hover:bg-white/14'
+                }`}
+              >
+                {tipoDe(r) === 'plantilla' ? 'Plantilla' : 'Guía'}
+              </button>
+            </form>
             <span className="flex-none text-[12.5px] tabular-nums text-white/35">{peso(r.size_bytes)}</span>
 
             <a href={`/api/descargar/${r.id}`}
                className="flex-none rounded-full border border-white/16 px-3.5 py-1.5 text-[12px] font-semibold text-white/60 transition hover:border-gold/50 hover:text-white">
-              Ver
+              Descargar
             </a>
 
             <form action={borrarRecurso} className="flex-none">

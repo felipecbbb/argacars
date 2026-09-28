@@ -1,42 +1,35 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
-import { createClient } from '@/lib/supabase/server'
+import { obtenerSesion } from '@/lib/sesion'
+import { createAdminClient } from '@/lib/supabase/server'
+import { cancelarCita, reservarCita, type ResultadoCita } from '@/lib/reservar-cita'
+import { MENTORIAS_INCLUIDAS, mentoriasUsadas } from '@/lib/mentorias'
 
-export type EstadoReserva = { error?: string; ok?: string }
-
-export async function reservar(_prev: EstadoReserva, formData: FormData): Promise<EstadoReserva> {
-  const slotId = String(formData.get('slot_id') ?? '')
-  const tema = String(formData.get('topic') ?? '').trim()
-  if (!slotId) return { error: 'No se ha indicado el hueco.' }
-
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return { error: 'Vuelve a entrar.' }
-
-  // La reserva la frenan igualmente las políticas: hueco libre (slot_id es único),
-  // acceso activo y mentorías disponibles.
-  const { error } = await supabase
-    .from('bookings')
-    .insert({ slot_id: slotId, user_id: user.id, topic: tema || null })
-
-  if (error) {
-    if (error.code === '23505') return { error: 'Ese hueco lo acaban de coger. Elige otro.' }
-    return { error: 'No se ha podido reservar. ¿Te quedan mentorías disponibles?' }
+export async function reservarMentoria(_prev: ResultadoCita, fd: FormData): Promise<ResultadoCita> {
+  const { user, perfil, tieneAcceso } = await obtenerSesion()
+  if (!user || !tieneAcceso) return { error: 'Vuelve a entrar al campus.' }
+  if ((await mentoriasUsadas(user.id)) >= MENTORIAS_INCLUIDAS) {
+    return { error: 'Ya has usado tus tres mentorías.' }
   }
 
-  revalidatePath('/mentorias')
-  return { ok: 'Hueco reservado. Te escribiremos para confirmarlo.' }
+  const { data: ficha } = await createAdminClient().from('profiles').select('phone').eq('id', user.id).maybeSingle()
+  return reservarCita({
+    tipo: 'mentoria',
+    empieza: String(fd.get('empieza') ?? ''),
+    zona: String(fd.get('zona') ?? ''),
+    nombre: perfil?.full_name?.trim() || user.email!,
+    email: user.email!,
+    telefono: ficha?.phone ?? null,
+    mensaje: String(fd.get('mensaje') ?? '').trim().slice(0, 600),
+    userId: user.id,
+  })
 }
 
-export async function anular(formData: FormData): Promise<void> {
-  const id = String(formData.get('booking_id') ?? '')
-  if (!id) return
-
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return
-
-  await supabase.from('bookings').update({ status: 'cancelled' }).eq('id', id).eq('user_id', user.id)
-  revalidatePath('/mentorias')
+/** El alumno cancela una mentoría suya: vuelve a su saldo. */
+export async function anularMentoria(fd: FormData): Promise<void> {
+  const { user } = await obtenerSesion()
+  const id = String(fd.get('id') ?? '')
+  if (!user || !id) return
+  const { data } = await createAdminClient().from('citas').select('id').eq('id', id).eq('user_id', user.id).maybeSingle()
+  if (data) await cancelarCita({ id }, 'cliente')
 }

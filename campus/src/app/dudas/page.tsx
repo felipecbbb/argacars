@@ -12,7 +12,7 @@ export default async function Dudas() {
     <>
       <Cabecera esAdmin={esAdmin} />
       <main className="mx-auto max-w-3xl px-5 py-9 sm:py-14">
-        <p className="text-[11px] font-bold uppercase tracking-[.2em] text-gold">Zona de dudas</p>
+        <p className="text-[11px] font-bold uppercase tracking-[.2em] text-gold">Resuelve tus dudas</p>
         <h1 className="mt-3 text-[clamp(24px,4.6vw,36px)] font-black leading-tight tracking-[-.035em]">
           ¿Te has atascado? <span className="text-gold">Pregúntanos</span>
         </h1>

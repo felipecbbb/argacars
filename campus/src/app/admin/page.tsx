@@ -16,7 +16,7 @@ export default async function Resumen() {
       admin.from('lessons').select('id', { count: 'exact', head: true }).not('video_id', 'is', null),
       admin.from('lessons').select('id', { count: 'exact', head: true }).eq('published', true),
       admin.from('lesson_files').select('id', { count: 'exact', head: true }).eq('is_resource', true),
-      admin.from('bookings').select('id', { count: 'exact', head: true }).eq('status', 'booked'),
+      admin.from('citas').select('id', { count: 'exact', head: true }).eq('estado', 'reservada').gte('empieza', new Date().toISOString()),
       admin.from('profiles').select('full_name, email, created_at').order('created_at', { ascending: false }).limit(5),
     ])
 
@@ -28,7 +28,7 @@ export default async function Resumen() {
     { v: activos.count ?? 0, l: 'alumnos con acceso activo', href: '/admin/alumnos' },
     { v: `${nVideo}/${nLecciones}`, l: 'clases con vídeo subido', href: '/admin/contenido' },
     { v: recursos.count ?? 0, l: 'recursos descargables', href: '/admin/recursos' },
-    { v: porAtender.count ?? 0, l: 'mentorías por atender', href: '/admin/mentorias' },
+    { v: porAtender.count ?? 0, l: 'citas próximas en la agenda', href: '/admin/mentorias' },
   ]
 
   // Lo que impide abrir el campus con todo listo
