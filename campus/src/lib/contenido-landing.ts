@@ -135,7 +135,18 @@ export const RESENAS: Resena[] = [
  * Fotos verticales de entregas (con la reseña o el «entregado» encima) que pasa ARGA.
  * Van en public/entregas/. En cuanto haya alguna, sustituyen a las reseñas de texto.
  */
-export const ENTREGAS: { src: string; alt: string }[] = []
+export const ENTREGAS: { src: string; alt: string }[] = [
+  { src: '/entregas/entrega-01.jpg', alt: 'Entregado: BMW M2 CS. Reseña de Sergio Sánchez Marcos, 5 estrellas: «Importé un M2 CS con ellos, el trato, servicio, gestión y rapidez de 10. Totalmente recomendable y de confianza.»' },
+  { src: '/entregas/entrega-02.jpg', alt: 'Entregado: Porsche 991.1 GT3 RS' },
+  { src: '/entregas/entrega-03.jpg', alt: 'Entregado: Ferrari F430 F1 Spider. Reseña de A. V., 5 estrellas: «Verdaderos profesionales. Gente muy seria y en la que se puede confiar plenamente. Mi experiencia con ellos 10/10.»' },
+  { src: '/entregas/entrega-04.jpg', alt: 'Entregado: Porsche 911 GTS, con Alejandro y Rodrigo junto al cliente' },
+  { src: '/entregas/entrega-05.jpg', alt: 'Entregado: Lamborghini Urus S. Reseña de David Muñoz, 5 estrellas: «El trato con Rodrigo y con Alex fue excelente, muy comunicativos, transparentes y atentos.»' },
+  { src: '/entregas/entrega-06.jpg', alt: 'Entregado: BMW M4 Competition' },
+  { src: '/entregas/entrega-07.jpg', alt: 'Entregado: Porsche 911 Carrera 4S. Reseña de 5 estrellas: «Recomendables 100%. Me han guiado y asesorado en la importación de un coche de gama alta.»' },
+  { src: '/entregas/entrega-08.jpg', alt: 'Entregado: Mercedes G63 AMG' },
+  { src: '/entregas/entrega-09.jpg', alt: 'Entregado: Mercedes A45 S AMG. Reseña de Misae Guzmán, 5 estrellas: «Ellos son prueba fidedigna de que existe gente que sabe hacer las cosas bien.»' },
+  { src: '/entregas/entrega-10.jpg', alt: 'Entregado: BMW 330e. Reseña de Álvaro Luna Mariño, 5 estrellas: «Encontré el coche perfecto gracias a su profesionalidad y experiencia.»' },
+]
 
 /** Precio de la formación: 2.400 € + IVA (confirmado por ARGA el 28 sep 2026). */
 export const PRECIO_BASE_EUR = 2400

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Dossier · Formación de importación de vehículos · ARGA Premium Cars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 portrait; margin: 0 }
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  :root { --ink: #0a0a0a; --ink2: #141414; --ink3: #1b1b1b; --gold: #c5a572; --gold2: #d4b988; --cream: #f6f4f0 }
+  html, body { background: #555 }
+  body { font-family: Inter, -apple-system, 'Segoe UI', sans-serif; color: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; -webkit-font-smoothing: antialiased }
+  .page { width: 210mm; height: 297mm; position: relative; overflow: hidden; background: var(--ink); page-break-after: always; margin: 0 auto 10mm }
+  @media print { html, body { background: none } .page { margin: 0 } }
+  .pad { position: absolute; inset: 0; padding: 17mm 16mm 15mm; display: flex; flex-direction: column }
+  .cover-img, .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+  .shade { position: absolute; inset: 0 }
+
+  .eyebrow { font-size: 8.5pt; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--gold) }
+  h1 { font-weight: 900; letter-spacing: -.04em; line-height: 1.02 }
+  h2 { font-size: 27pt; font-weight: 900; letter-spacing: -.035em; line-height: 1.06; margin-top: 3.5mm }
+  .gold { color: var(--gold) }
+  p { font-size: 10.6pt; line-height: 1.55; color: rgba(255,255,255,.72) }
+  p + p { margin-top: 3mm }
+  strong { color: #fff; font-weight: 700 }
+  .num { position: absolute; bottom: 9mm; right: 16mm; font-size: 7.5pt; letter-spacing: .18em; color: rgba(255,255,255,.35); font-weight: 700 }
+  .num.dark { color: rgba(10,10,10,.35) }
+  .logo { height: 9mm; width: auto; align-self: flex-start; object-fit: contain }
+  .check { display: flex; gap: 3mm; align-items: flex-start; font-size: 10pt; color: rgba(255,255,255,.82); line-height: 1.4 }
+  .check::before { content: ''; flex: none; width: 4.2mm; height: 4.2mm; margin-top: .3mm; border-radius: 50%; background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z' fill='%230a0a0a'/%3E%3C/svg%3E") center/70% no-repeat }
+
+  /* Portada */
+  .p1 .shade { background: linear-gradient(180deg, rgba(10,10,10,.82) 0%, rgba(10,10,10,.15) 26%, rgba(10,10,10,.12) 44%, rgba(10,10,10,.9) 66%, rgba(10,10,10,.98) 100%) }
+  .p1 h1 { font-size: 40pt; margin-top: 5mm }
+  .p1 .sub { font-size: 12.5pt; color: rgba(255,255,255,.8); margin-top: 5mm; max-width: 150mm; line-height: 1.5 }
+  .pill { display: inline-block; border: 1px solid rgba(197,165,114,.6); color: var(--gold); border-radius: 99px; padding: 1.6mm 4mm; font-size: 8pt; font-weight: 800; letter-spacing: .16em; text-transform: uppercase }
+
+  /* Página clara */
+  .light { background: var(--cream); color: var(--ink) }
+  .light p { color: rgba(10,10,10,.7) }
+  .light strong { color: var(--ink) }
+  .light .eyebrow { color: #8a6d3b }
+  .light .gold { color: #a07f45 }
+
+  .q { display: flex; gap: 4mm; align-items: baseline; padding: 3.4mm 0; border-bottom: 1px solid rgba(10,10,10,.12); font-size: 11.5pt; font-weight: 700; letter-spacing: -.01em }
+  .q b { color: #a07f45; font-size: 8.5pt; width: 7mm; flex: none }
+  .quote { border-left: 3px solid var(--gold); padding: 1mm 0 1mm 5mm; font-size: 14pt; font-weight: 800; line-height: 1.3; letter-spacing: -.02em }
+
+  /* Proceso */
+  .grid6 { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; margin-top: 7mm; flex: 1 }
+  .step { position: relative; border-radius: 4mm; overflow: hidden; min-height: 0 }
+  .step img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+  .step .cap { position: absolute; inset: auto 0 0 0; padding: 12mm 4.5mm 4mm; background: linear-gradient(180deg, transparent, rgba(10,10,10,.92)) }
+  .step .cap b { display: block; font-size: 7.5pt; letter-spacing: .2em; color: var(--gold); text-transform: uppercase }
+  .step .cap span { display: block; margin-top: 1mm; font-size: 12pt; font-weight: 800; letter-spacing: -.02em }
+  .step .cap small { display: block; margin-top: .8mm; font-size: 8.5pt; color: rgba(255,255,255,.7); line-height: 1.35 }
+
+  /* Temario */
+  .mods { margin-top: 6mm; display: grid; gap: 2.3mm }
+  .mod { display: grid; grid-template-columns: 13mm 1fr; gap: 3mm; background: rgba(20,20,20,.78); border: 1px solid rgba(255,255,255,.1); border-radius: 3mm; padding: 3mm 4mm }
+  .mod .n { font-size: 20pt; font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -.04em }
+  .mod h3 { font-size: 11pt; font-weight: 800; letter-spacing: -.015em; line-height: 1.25 }
+  .mod .d { font-size: 8.6pt; color: rgba(255,255,255,.55); margin-top: .6mm }
+  .mod ul { list-style: none; margin-top: 1.4mm; display: grid; gap: .6mm }
+  .mod li { font-size: 8.8pt; color: rgba(255,255,255,.78); line-height: 1.35 }
+  .mod li i { font-style: normal; font-weight: 700; color: #fff; margin-right: 1.8mm }
+
+  /* Bonus */
+  .bonus { display: grid; gap: 2.6mm; margin-top: 6mm }
+  .b { border: 1px solid rgba(255,255,255,.1); background: var(--ink3); border-radius: 3.5mm; padding: 3.6mm 4.5mm }
+  .b .t { display: flex; align-items: center; gap: 3mm }
+  .b .tag { flex: none; background: var(--gold); color: var(--ink); font-size: 7pt; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; border-radius: 99px; padding: 1mm 2.6mm }
+  .b .tag.pronto { background: none; border: 1px solid rgba(197,165,114,.6); color: var(--gold) }
+  .b h3 { font-size: 10.8pt; font-weight: 800; letter-spacing: -.015em; line-height: 1.25 }
+  .b ul { list-style: none; margin-top: 1.8mm; display: grid; gap: .8mm; padding-left: 1mm }
+  .b li { position: relative; padding-left: 4mm; font-size: 8.8pt; line-height: 1.4; color: rgba(255,255,255,.7) }
+  .b li::before { content: ''; position: absolute; left: 0; top: 1.7mm; width: 1.4mm; height: 1.4mm; border-radius: 50%; background: var(--gold) }
+
+  /* Quiénes somos */
+  .stats { display: flex; gap: 10mm; margin-top: 6mm }
+  .stats dt { font-size: 22pt; font-weight: 900; color: var(--gold); letter-spacing: -.04em; line-height: 1 }
+  .stats dd { font-size: 8.5pt; color: rgba(255,255,255,.5); margin-top: 1.4mm }
+  .rev { background: #fff; color: var(--ink); border-radius: 3.5mm; padding: 4mm 4.5mm; display: flex; flex-direction: column }
+  .rev .st { color: #f5b400; letter-spacing: .1em; font-size: 9pt }
+  .rev q { display: block; margin-top: 2mm; font-size: 8.8pt; line-height: 1.45; color: rgba(10,10,10,.78); quotes: '«' '»'; flex: 1 }
+  .rev .a { margin-top: 2.5mm; font-size: 8pt; font-weight: 800 }
+  .rev .a span { font-weight: 500; color: rgba(10,10,10,.45) }
+
+  /* Cierre */
+  .price { font-size: 52pt; font-weight: 900; letter-spacing: -.05em; line-height: 1 }
+  .opt { border-radius: 4mm; padding: 5mm 5.5mm; border: 1px solid rgba(255,255,255,.14); background: rgba(20,20,20,.82) }
+  .opt.g { border-color: rgba(197,165,114,.55); background: linear-gradient(160deg, rgba(197,165,114,.2), rgba(20,20,20,.88) 70%) }
+  .opt h3 { font-size: 14pt; font-weight: 900; letter-spacing: -.02em; margin-top: 1.5mm }
+  .opt p { font-size: 9.5pt; margin-top: 1.6mm }
+  .url { display: inline-block; margin-top: 3mm; font-size: 10pt; font-weight: 800; color: var(--gold) }
+</style>
+</head>
+<body>
+
+<!-- ═════════ 1 · PORTADA ═════════ -->
+<section class="page p1">
+  <img class="cover-img" src="img/portada.jpg" style="object-position: center 60%" alt="">
+  <div class="shade"></div>
+  <div class="pad">
+    <div style="display:flex; justify-content:space-between; align-items:center">
+      <img class="logo" src="img/logo-blanco.png" alt="ARGA Premium Cars">
+      <span class="pill">Dossier 2026</span>
+    </div>
+    <div style="margin-top:auto">
+      <p class="eyebrow">Formación de importación de vehículos</p>
+      <h1>Aprende a importar coches del mercado europeo de forma <span class="gold">segura y rentable</span></h1>
+      <p class="sub">Con un método profesional, sin improvisar. El mismo proceso que usamos en ARGA Premium Cars después de más de 5 años, cientos de operaciones y +15 millones de euros en vehículos gestionados.</p>
+      <p style="margin-top:9mm; font-size:9pt; color:rgba(255,255,255,.5)">Alejandro y Rodrigo · ARGA Premium Cars</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 2 · LA PROMESA ═════════ -->
+<section class="page">
+  <img src="img/gt3rs.jpg" alt="" style="position:absolute; left:0; right:0; bottom:0; width:100%; height:112mm; object-fit:cover; object-position:center 62%">
+  <div class="shade" style="background:linear-gradient(180deg, var(--ink) 0%, var(--ink) 58%, rgba(10,10,10,.35) 76%, rgba(10,10,10,.1) 100%)"></div>
+  <div class="pad">
+    <img class="logo" src="img/logo-blanco.png" alt="" style="height:7mm">
+    <p class="eyebrow" style="margin-top:14mm">La formación</p>
+    <h2>La única formación que necesitarás para <span class="gold">importar como un profesional</span></h2>
+    <div style="margin-top:6mm; max-width:160mm">
+      <p>Aprenderás a buscar, analizar, comprar e importar vehículos paso a paso, entendiendo los <strong>costes, trámites y riesgos</strong> como un profesional.</p>
+      <p>Tanto si quieres importar un coche para ti como si quieres aprender el proceso para desarrollar una <strong>actividad profesional</strong>.</p>
+      <p>Nuestro método, perfeccionado tras más de <strong>5 años de experiencia</strong>, cientos de operaciones y <strong>+15 millones de euros</strong> en vehículos gestionados.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:3.2mm 8mm; margin-top:8mm; max-width:165mm">
+      <span class="check">Acceso inmediato al campus</span>
+      <span class="check">Formación paso a paso · teoría + práctica</span>
+      <span class="check">Plantillas y recursos clave</span>
+      <span class="check">Acceso a nuestros contactos</span>
+      <span class="check">Comunidad de profesionales</span>
+      <span class="check">Acceso a encargos reales</span>
+    </div>
+  </div>
+  <span class="num">02</span>
+</section>
+
+<!-- ═════════ 3 · FILOSOFÍA (clara) ═════════ -->
+<section class="page light">
+  <div class="pad">
+    <img class="logo" src="img/logo-negro.png" alt="" style="height:7mm">
+    <p class="eyebrow" style="margin-top:13mm">El punto de partida</p>
+    <h2>Importar un coche no consiste en encontrar un coche <span class="gold">barato</span></h2>
+    <p style="margin-top:5mm; max-width:165mm">Sobre el papel, muchas operaciones parecen rentables. Encuentras un coche a buen precio, comparas cuánto cuesta en España y las cuentas parecen salir. Hasta que aparecen las preguntas importantes:</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; column-gap:9mm; margin-top:5mm; border-top:1px solid rgba(10,10,10,.12)">
+      <div class="q"><b>01</b>¿El vendedor es fiable?</div>
+      <div class="q"><b>02</b>¿El coche tiene algún problema oculto?</div>
+      <div class="q"><b>03</b>¿Cuánto voy a pagar realmente entre gastos e impuestos?</div>
+      <div class="q"><b>04</b>¿Qué documentación necesito?</div>
+      <div class="q"><b>05</b>¿Y si me equivoco en una operación de miles de euros?</div>
+      <div class="q"><b>06</b>¿Cómo debo realizar la operación en términos fiscales?</div>
+    </div>
+    <p class="quote" style="margin-top:8mm; color:var(--ink)">El problema no suele ser encontrar coches. El problema es saber distinguir una operación realmente buena de una que <span class="gold">solo lo parece</span>.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 62mm; gap:8mm; margin-top:auto; align-items:end">
+      <div>
+        <p class="eyebrow">Nuestra filosofía</p>
+        <p style="margin-top:3mm">Hemos recopilado nuestros conocimientos y el proceso que utilizamos para analizar e importar vehículos, para nosotros y nuestros clientes, en una formación teórica y práctica que puedes seguir desde cero.</p>
+        <p>Un método que te permita saber <strong>qué comprobar, qué calcular y qué pasos seguir</strong> desde que encuentras un vehículo hasta que llega a España. Y sobre todo, qué operaciones seleccionar y cuáles evitar, haciendo de la importación un proceso seguro y rentable y no un juego de azar.</p>
+        <p><strong>No vas a encontrar una fórmula mágica ni una promesa de hacerte rico importando coches. Vas a aprender un método.</strong></p>
+      </div>
+      <div style="position:relative; height:88mm; border-radius:4mm; overflow:hidden">
+        <img class="bg" src="img/g63.jpg" alt="" style="object-position:center 65%">
+      </div>
+    </div>
+  </div>
+  <span class="num dark">03</span>
+</section>
+
+<!-- ═════════ 4 · EL PROCESO ═════════ -->
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">El método, de principio a fin</p>
+    <h2>Lo que hacemos nosotros, <span class="gold">paso a paso</span></h2>
+    <p style="margin-top:4mm; max-width:165mm">La formación sigue el mismo recorrido que cada coche que importamos. Estas fotos son de nuestras operaciones reales.</p>
+    <div class="grid6">
+      <div class="step"><img src="img/busqueda.jpg" alt=""><div class="cap"><b>01 · Búsqueda</b><span>Encontrar el coche correcto</span><small>Dónde buscar y cómo filtrar por rentabilidad.</small></div></div>
+      <div class="step"><img src="img/revision.jpg" alt=""><div class="cap"><b>02 · Revisión</b><span>Comprobar antes de pagar</span><small>Vendedor, documentación y estado real del coche.</small></div></div>
+      <div class="step"><img src="img/verificacion.jpg" alt="" style="object-position:center 40%"><div class="cap"><b>03 · Verificación</b><span>Diagnosis y datos</span><small>Lo que no se ve en el anuncio.</small></div></div>
+      <div class="step"><img src="img/compra.jpg" alt=""><div class="cap"><b>04 · Negociación y compra</b><span>Cerrar bien la operación</span><small>Régimen fiscal, contrato y pagos seguros.</small></div></div>
+      <div class="step"><img src="img/transporte.jpg" alt="" style="object-position:center 70%"><div class="cap"><b>05 · Logística</b><span>Traerlo a España</span><small>Matrículas, transporte y gastos de importación.</small></div></div>
+      <div class="step"><img src="img/matriculacion.jpg" alt=""><div class="cap"><b>06 · Matriculación</b><span>Con matrícula española</span><small>ITV, impuestos y trámites en España.</small></div></div>
+    </div>
+  </div>
+  <span class="num">04</span>
+</section>
+
+<!-- ═════════ 5 · TEMARIO ═════════ -->
+<section class="page">
+  <img class="bg" src="img/prao.jpg" alt="" style="opacity:.45; filter:saturate(1.2)">
+  <div class="shade" style="background:linear-gradient(180deg, rgba(10,10,10,.93) 0%, rgba(10,10,10,.6) 45%, rgba(10,10,10,.75) 100%)"></div>
+  <div class="pad">
+    <p class="eyebrow">Qué aprenderás · 9 módulos · 14 clases en vídeo</p>
+    <h2>De buscar el coche a tenerlo <span class="gold">matriculado en España</span></h2>
+    <div class="mods">
+      <div class="mod"><span class="n">01</span><div><h3>Introducción y contexto</h3><p class="d">Por dónde empieza todo y por qué el mercado alemán.</p><ul><li><i>1.1</i>Introducción</li><li><i>1.2</i>Contexto del mercado de coches en Alemania y ventajas de la importación</li></ul></div></div>
+      <div class="mod"><span class="n">02</span><div><h3>Búsqueda y selección</h3><p class="d">Dónde buscar y cómo elegir el coche correcto.</p><ul><li><i>2.1</i>Plataformas y buscadores de vehículos</li><li><i>2.2</i>Selección y rentabilidad</li></ul></div></div>
+      <div class="mod"><span class="n">03</span><div><h3>Comunicación con el vendedor y comprobaciones</h3><p class="d">Hablar con el vendedor y verificar antes de pagar.</p><ul><li><i>3.1</i>Contacto con vendedores y preguntas preliminares</li><li><i>3.2</i>Comprobaciones y revisión</li></ul></div></div>
+      <div class="mod"><span class="n">04</span><div><h3>Negociación y compra</h3><p class="d">Cerrar la operación y elegir bien el régimen fiscal.</p><ul><li><i>4.1</i>Negociación y tipos de operaciones de compra</li><li><i>4.2</i>Documentación de compra y pagos</li></ul></div></div>
+      <div class="mod"><span class="n">05</span><div><h3>Logística y transporte</h3><p class="d">Traer el coche a España sin sustos.</p><ul><li><i>5.1</i>Logística de compra y matrículas</li><li><i>5.2</i>Transporte y gastos de importación</li></ul></div></div>
+      <div class="mod"><span class="n">06</span><div><h3>Trámites de matriculación y registro en España</h3><p class="d">Del papeleo a la matrícula definitiva.</p><ul><li><i>6.1</i>Documentos de matriculación, trámites en España, organización y anticipación</li></ul></div></div>
+      <div class="mod"><span class="n">07</span><div><h3>Responsabilidad legal, fiscalidad y estafas</h3><p class="d">Lo que te protege y lo que te puede costar caro.</p><ul><li><i>7.1</i>Garantías, seguros, fiscalidad y estafas comunes</li></ul></div></div>
+      <div class="mod"><span class="n">08</span><div><h3>Monetización y ventas</h3><p class="d">Convertir el método en una actividad rentable.</p><ul><li><i>8.1</i>Opciones de monetización, venta y marketing, y relaciones clave del proceso</li></ul></div></div>
+      <div class="mod" style="border-color:rgba(197,165,114,.5)"><span class="n">09</span><div><h3>Caso práctico · Búsqueda, comprobaciones, negociación, compra y logística</h3><p class="d">Lo que hacemos nosotros desde la búsqueda hasta el transporte a España.</p><ul><li><i>9.1</i>Proceso de compra completo paso a paso, con un ejemplo real</li></ul></div></div>
+    </div>
+  </div>
+  <span class="num">05</span>
+</section>
+
+<!-- ═════════ 6 · BONUS ═════════ -->
+<section class="page">
+  <div class="pad">
+    <p class="eyebrow">Incluido sin coste</p>
+    <h2>Además te llevas estos <span class="gold">7 bonus</span></h2>
+    <div class="bonus">
+      <div class="b"><div class="t"><span class="tag">Bonus 1</span><h3>3 mentorías 1 a 1</h3></div><ul><li>30 minutos de llamada privada con nosotros, cuando lo necesites y sin plazo de caducidad.</li></ul></div>
+      <div class="b"><div class="t"><span class="tag">Bonus 2</span><h3>Guías y recursos para cada paso del proceso</h3></div><ul><li>Preguntas pre-compra, documentación alemana, revisión de un vehículo, negociación, regímenes de compra, impuesto de matriculación, documentos necesarios y 15 consejos clave.</li></ul></div>
+      <div class="b"><div class="t"><span class="tag">Bonus 3</span><h3>Plantillas necesarias</h3></div><ul><li>Contrato de importación / prestación de servicios y contrato de compraventa.</li><li>Autorización de transporte y autorización para realizar la importación y los trámites.</li></ul></div>
+      <div class="b"><div class="t"><span class="tag">Bonus 4</span><h3>Acceso de por vida a la comunidad de profesionales y alumnos</h3></div><ul><li>Comparte dudas y logros, recibe y envía ofertas exclusivas de vehículos o servicios, eventos, sorteos y premios.</li></ul></div>
+      <div class="b"><div class="t"><span class="tag">Bonus 5</span><h3>Recibe encargos reales de importación y matriculación en nuestra plataforma Car Revol</h3></div><ul><li>6 meses de acceso gratuito sin cuota mensual.</li><li>Plataforma creada por nosotros para que nuestros alumnos reciban encargos de clientes listos para importar un coche.</li><li>Formarse con nosotros es la única vía para ofrecer tus servicios como importador/matriculador en Car Revol.</li></ul></div>
+      <div class="b"><div class="t"><span class="tag">Bonus 6</span><h3>Nuestro listado de contactos y mejores profesionales</h3></div><ul><li>Revisores, transportistas, gestorías, homologadores, talleres… Quienes trabajan con nosotros, al alcance de tu mano.</li></ul></div>
+      <div class="b"><div class="t"><span class="tag pronto">Bonus 7 · Próximamente</span><h3>6 meses gratis en la comunidad VIP del motor</h3></div><ul><li>Comunidad privada de profesionales del sector: importadores, compraventas, talleres, detailing y PPF, gestorías, revisores… Ofertas, eventos y rutas, networking y noticias.</li></ul></div>
+    </div>
+  </div>
+  <span class="num">06</span>
+</section>
+
+<!-- ═════════ 7 · QUIÉNES SOMOS ═════════ -->
+<section class="page">
+  <img src="img/entrega.jpg" alt="" style="position:absolute; top:0; right:0; width:82mm; height:152mm; object-fit:cover; object-position:center 55%">
+  <div class="shade" style="background:linear-gradient(90deg, var(--ink) 0%, var(--ink) 56%, rgba(10,10,10,.2) 72%, transparent 100%); height:152mm"></div>
+  <div class="pad">
+    <p class="eyebrow">Quiénes somos</p>
+    <h2 style="max-width:105mm">Alejandro y Rodrigo, <span class="gold">ARGA Premium Cars</span></h2>
+    <div style="max-width:112mm; margin-top:5mm">
+      <p>Dos hermanos de Asturias con una pasión clara desde pequeños: los coches. Nuestra historia empieza en 2021, cuando invertimos todos nuestros ahorros en importar nuestro primer coche desde Alemania: un Golf 7 GTI Performance.</p>
+      <p>La experiencia con la empresa que nos ayudó dejó bastante que desear, pero despertó nuestra curiosidad por aprender y hacerlo mejor. Empezamos a importar por nuestra cuenta, a compartirlo en Instagram y, desde el primer cliente, el crecimiento fue imparable.</p>
+      <p>Hoy hemos perfeccionado un método calculado y optimizado que <strong>anula por completo la suerte y la incertidumbre</strong>. Es el que te enseñamos.</p>
+    </div>
+    <dl class="stats">
+      <div><dt>+5 años</dt><dd>en el sector</dd></div>
+      <div><dt>Cientos</dt><dd>de coches importados</dd></div>
+      <div><dt>+15 M€</dt><dd>en vehículos gestionados</dd></div>
+    </dl>
+
+    <p class="eyebrow" style="margin-top:auto">Lo que dicen nuestros clientes · Google</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:3.5mm; margin-top:3.5mm">
+      <img src="img/resena-01.jpg" alt="Entregado BMW M2 CS con la reseña de Sergio Sánchez Marcos" style="width:100%; aspect-ratio:9/16; object-fit:cover; border-radius:3mm">
+      <img src="img/resena-03.jpg" alt="Entregado Ferrari F430 F1 Spider con la reseña de A. V." style="width:100%; aspect-ratio:9/16; object-fit:cover; border-radius:3mm">
+      <img src="img/resena-05.jpg" alt="Entregado Lamborghini Urus S con la reseña de David Muñoz" style="width:100%; aspect-ratio:9/16; object-fit:cover; border-radius:3mm">
+    </div>
+  </div>
+  <span class="num">07</span>
+</section>
+
+<!-- ═════════ 8 · CÓMO EMPEZAR ═════════ -->
+<section class="page">
+  <img class="bg" src="img/urus.jpg" alt="" style="opacity:.5">
+  <div class="shade" style="background:linear-gradient(180deg, rgba(10,10,10,.96) 0%, rgba(10,10,10,.72) 40%, rgba(10,10,10,.9) 78%, rgba(10,10,10,.98) 100%)"></div>
+  <div class="pad">
+    <img class="logo" src="img/logo-blanco.png" alt="" style="height:7mm">
+    <p class="eyebrow" style="margin-top:14mm">Tu inversión</p>
+    <h2>Acceso completo a la formación</h2>
+    <div style="display:flex; align-items:baseline; gap:4mm; margin-top:7mm">
+      <span class="price">2.400 €</span><span style="font-size:14pt; font-weight:800; color:rgba(255,255,255,.75)">+ IVA</span>
+    </div>
+    <p style="margin-top:2mm; font-size:9.5pt">Pago único · 2.904 € IVA incluido · acceso inmediato al campus</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.6mm 8mm; margin-top:8mm; max-width:170mm">
+      <span class="check">9 módulos · 14 clases en vídeo</span>
+      <span class="check">3 mentorías 1 a 1</span>
+      <span class="check">Guías, recursos y plantillas</span>
+      <span class="check">Comunidad de por vida</span>
+      <span class="check">Encargos reales en Car Revol</span>
+      <span class="check">Nuestros contactos del sector</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:4mm; margin-top:auto">
+      <div class="opt">
+        <p class="eyebrow">Opción 1</p>
+        <h3>Agenda una llamada</h3>
+        <p>Habla con nosotros antes de hacer el pago para resolver tus dudas y que entendamos bien tu situación.</p>
+      </div>
+      <div class="opt g">
+        <p class="eyebrow">Opción 2</p>
+        <h3>¿Lo tienes claro?</h3>
+        <p>Accede directamente y empieza hoy mismo: en cuanto se confirma el pago tienes tu acceso.</p>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:6mm; margin-top:6mm; padding-top:5mm; border-top:1px solid rgba(255,255,255,.12)">
+      <div>
+        <p style="font-size:8.5pt; color:rgba(255,255,255,.5)">Las dos opciones, en</p>
+        <span class="url" style="font-size:15pt; margin-top:1mm">campus.argapremiumcars.es</span>
+      </div>
+      <p style="text-align:right; font-size:9pt; color:rgba(255,255,255,.6); line-height:1.6">info@argapremiumcars.com<br>@argapremiumcars</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

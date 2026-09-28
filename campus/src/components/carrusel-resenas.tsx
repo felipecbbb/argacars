@@ -17,7 +17,22 @@ const CADA_MS = 4500
 export default function CarruselResenas({ tarjetas }: { tarjetas: Tarjeta[] }) {
   const [i, setI] = useState(0)
   const [parado, setParado] = useState(false)
+  const [ampliada, setAmpliada] = useState<number | null>(null)
   const total = tarjetas.length
+  const fotos = tarjetas.flatMap((t, k) => (t.tipo === 'foto' ? [{ ...t, k }] : []))
+
+  // En el visor: Esc cierra y las flechas del teclado pasan de foto
+  useEffect(() => {
+    if (ampliada === null) return
+    const tecla = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setAmpliada(null)
+      if (e.key === 'ArrowRight') setAmpliada((n) => (n === null ? n : (n + 1) % fotos.length))
+      if (e.key === 'ArrowLeft') setAmpliada((n) => (n === null ? n : (n - 1 + fotos.length) % fotos.length))
+    }
+    document.addEventListener('keydown', tecla)
+    document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', tecla); document.body.style.overflow = '' }
+  }, [ampliada, fotos.length])
 
   useEffect(() => {
     if (parado || total < 3) return
@@ -48,9 +63,13 @@ export default function CarruselResenas({ tarjetas }: { tarjetas: Tarjeta[] }) {
             }`}
                 aria-hidden={k >= total || undefined}>
               {t.tipo === 'foto' ? (
-                <div className="relative h-full w-full">
-                  <Image src={t.src} alt={t.alt} fill className="object-cover" sizes="(max-width: 640px) 75vw, 300px" />
-                </div>
+                <button type="button" onClick={() => { setAmpliada(fotos.findIndex((f) => f.src === t.src)); setParado(true) }}
+                        className="group relative block h-full w-full cursor-zoom-in" aria-label={`Ampliar: ${t.alt}`} tabIndex={k >= total ? -1 : 0}>
+                  <Image src={t.src} alt={t.alt} fill className="object-cover transition duration-500 group-hover:scale-[1.03]" sizes="(max-width: 640px) 75vw, 320px" />
+                  <span aria-hidden className="absolute bottom-3 right-3 grid h-9 w-9 place-items-center rounded-full bg-black/60 text-white opacity-80 backdrop-blur transition group-hover:opacity-100">
+                    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" /></svg>
+                  </span>
+                </button>
               ) : (
                 <figure className="flex h-full min-h-[300px] flex-col p-6 sm:p-7">
                   <div className="flex items-center justify-between">
@@ -83,6 +102,23 @@ export default function CarruselResenas({ tarjetas }: { tarjetas: Tarjeta[] }) {
             <button onClick={() => { setI((n) => (n + 1) % total); setParado(true) }} aria-label="Siguiente"
                     className="grid h-10 w-10 place-items-center rounded-full border border-ink/15 text-ink/70 transition hover:border-ink/40 hover:text-ink">→</button>
           </div>
+        </div>
+      )}
+
+      {ampliada !== null && fotos[ampliada] && (
+        <div role="dialog" aria-modal="true" aria-label="Foto de la entrega"
+             className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+             onClick={() => setAmpliada(null)}>
+          <div className="relative h-full max-h-[92dvh] w-auto aspect-[9/16] max-w-full" onClick={(e) => e.stopPropagation()}>
+            <Image src={fotos[ampliada].src} alt={fotos[ampliada].alt} fill className="rounded-2xl object-contain" sizes="(max-width: 640px) 100vw, 60vh" priority />
+          </div>
+          <button type="button" onClick={() => setAmpliada(null)} aria-label="Cerrar"
+                  className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full bg-white/12 text-xl text-white hover:bg-white/20">✕</button>
+          <button type="button" aria-label="Anterior" onClick={(e) => { e.stopPropagation(); setAmpliada((ampliada - 1 + fotos.length) % fotos.length) }}
+                  className="absolute left-3 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/12 text-xl text-white hover:bg-white/20">←</button>
+          <button type="button" aria-label="Siguiente" onClick={(e) => { e.stopPropagation(); setAmpliada((ampliada + 1) % fotos.length) }}
+                  className="absolute right-3 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/12 text-xl text-white hover:bg-white/20">→</button>
+          <p className="absolute bottom-4 left-0 right-0 text-center text-[13px] text-white/60 tabular-nums">{ampliada + 1} / {fotos.length}</p>
         </div>
       )}
     </div>
