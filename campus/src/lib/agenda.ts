@@ -17,10 +17,20 @@ export type Franja = { id?: string; dia_semana: number; desde: string; hasta: st
 /**
  * Excepción de un día concreto:
  * - sin horas → día cerrado;
- * - con horas y `bloquea` → esas horas no se atienden, el resto del día sigue con el horario semanal;
- * - con horas y sin `bloquea` → horario especial (sustituye al semanal ese día).
+ * - con horas y motivo que empieza por MARCA_BLOQUEO → esas horas no se atienden y el
+ *   resto del día sigue con el horario semanal;
+ * - con horas y sin la marca → horario especial (sustituye al semanal ese día).
+ * El bloqueo de horas va marcado en el motivo, y no en una columna nueva, para no
+ * tener que tocar la base de datos.
  */
-export type Excepcion = { id?: string; fecha: string; desde: string | null; hasta: string | null; bloquea?: boolean | null; motivo?: string | null }
+export type Excepcion = { id?: string; fecha: string; desde: string | null; hasta: string | null; motivo?: string | null }
+
+export const MARCA_BLOQUEO = '[bloqueo]'
+export const esBloqueo = (e: { desde: string | null; motivo?: string | null }) =>
+  Boolean(e.desde && e.motivo?.startsWith(MARCA_BLOQUEO))
+/** El motivo tal como lo escribió el admin, sin la marca interna. */
+export const motivoVisible = (motivo: string | null | undefined) =>
+  motivo?.startsWith(MARCA_BLOQUEO) ? motivo.slice(MARCA_BLOQUEO.length).trim() || null : motivo ?? null
 type Ocupada = { empieza: string; termina: string; tipo?: Tipo }
 
 /** Lo que necesita el calendario del cliente para pintarse. */
@@ -71,12 +81,12 @@ export function calcularHuecos(
     // Día completo ya: el máximo limita las citas COGIDAS, no los huecos que se enseñan
     if (ajustes.max_dia && (porDia.get(dia) ?? 0) >= ajustes.max_dia) continue
 
-    const especiales = delDia.filter((e) => !e.bloquea)
+    const especiales = delDia.filter((e) => !esBloqueo(e))
     const franjas = especiales.length
       ? especiales.map((e) => ({ desde: e.desde!, hasta: e.hasta! }))
       : horario.filter((f) => f.dia_semana === diaSemana(dia))
     // Horas bloqueadas ese día (médico, un viaje…): se restan del horario
-    const bloqueadas = delDia.filter((e) => e.bloquea)
+    const bloqueadas = delDia.filter(esBloqueo)
       .map((e) => [aUtc(dia, hhmm(e.desde!), zona).getTime(), aUtc(dia, hhmm(e.hasta!), zona).getTime()])
 
     for (const f of [...franjas].sort((a, b) => a.desde.localeCompare(b.desde))) {
@@ -100,9 +110,7 @@ export async function cargarAgenda(tipo: Tipo): Promise<DatosAgenda & { ajustes:
   const [{ data: aj }, { data: horario }, { data: excepciones }, { data: ocupadas }] = await Promise.all([
     admin.from('agenda_ajustes').select('*').eq('tipo', tipo).maybeSingle(),
     admin.from('agenda_horario').select('dia_semana, desde, hasta').eq('tipo', tipo),
-    // '*' y no una lista de columnas: si falta la migración 0010 (columna «bloquea»), la
-    // consulta no debe fallar, porque entonces se ignorarían también los días cerrados.
-    admin.from('agenda_excepciones').select('*').eq('tipo', tipo).gte('fecha', desde.slice(0, 10)),
+    admin.from('agenda_excepciones').select('fecha, desde, hasta, motivo').eq('tipo', tipo).gte('fecha', desde.slice(0, 10)),
     // Todas las citas vivas, de las dos agendas: el tiempo de ARGA es uno solo
     admin.from('citas').select('empieza, termina, tipo').eq('estado', 'reservada').gte('termina', desde),
   ])

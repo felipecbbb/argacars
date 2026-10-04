@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { createAdminClient } from '@/lib/supabase/server'
-import { cargarAgenda, type Franja, type Tipo } from '@/lib/agenda'
+import { cargarAgenda, esBloqueo, motivoVisible, type Franja, type Tipo } from '@/lib/agenda'
 import { ahoraMs, claveDia, diaLargo, hora, nombreZona, ZONA_ARGA } from '@/lib/fechas'
 import { borrarExcepcion, cancelarCitaAdmin, marcarCitaHecha } from './actions'
 import { HorarioSemanal, NuevaExcepcion, Reglas, VistaPrevia } from './configuracion'
@@ -12,7 +12,7 @@ type Cita = {
   id: string; tipo: Tipo; empieza: string; termina: string; estado: string
   nombre: string; email: string; telefono: string | null; mensaje: string | null; zona_cliente: string
 }
-type Excepcion = { id: string; tipo: Tipo; fecha: string; desde: string | null; hasta: string | null; bloquea?: boolean | null; motivo: string | null }
+type Excepcion = { id: string; tipo: Tipo; fecha: string; desde: string | null; hasta: string | null; motivo: string | null }
 
 const ETIQUETA = { llamada: 'Llamada', mentoria: 'Mentoría' }
 
@@ -144,9 +144,9 @@ export default async function AdminAgenda({ searchParams }: { searchParams: Prom
               <li key={e.id} className="flex items-center gap-2.5 rounded-xl border border-white/12 bg-ink-3 px-4 py-2.5 text-[13px]">
                 <span className="font-semibold first-letter:uppercase">{diaLargo(e.fecha)}</span>
                 <span className="text-white/50">
-                  {!e.desde ? 'cerrado' : `${e.bloquea ? 'bloqueado' : 'solo'} ${e.desde.slice(0, 5)}–${e.hasta!.slice(0, 5)}`}
+                  {!e.desde ? 'cerrado' : `${esBloqueo(e) ? 'bloqueado' : 'solo'} ${e.desde.slice(0, 5)}–${e.hasta!.slice(0, 5)}`}
                 </span>
-                <span className="text-white/35">· {ETIQUETA[e.tipo]}{e.motivo ? ` · ${e.motivo}` : ''}</span>
+                <span className="text-white/35">· {ETIQUETA[e.tipo]}{motivoVisible(e.motivo) ? ` · ${motivoVisible(e.motivo)}` : ''}</span>
                 <form action={borrarExcepcion}>
                   <input type="hidden" name="id" value={e.id} />
                   <button className="text-white/35 hover:text-red-300" aria-label="Quitar">×</button>

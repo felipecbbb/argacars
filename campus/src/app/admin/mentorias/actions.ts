@@ -4,7 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/server'
 import { exigirAdmin } from '@/lib/sesion'
 import { cancelarCita } from '@/lib/reservar-cita'
-import type { Franja, Tipo } from '@/lib/agenda'
+import { MARCA_BLOQUEO, type Franja, type Tipo } from '@/lib/agenda'
 
 export type EstadoAdmin = { ok?: string; error?: string }
 
@@ -103,15 +103,15 @@ export async function anadirExcepcion(_prev: EstadoAdmin, fd: FormData): Promise
   for (let d = new Date(`${desdeFecha}T12:00:00Z`); d.toISOString().slice(0, 10) <= hastaFecha; d.setUTCDate(d.getUTCDate() + 1)) {
     if (filas.length > 400) return { error: 'Demasiados días de golpe.' }
     for (const tipo of tipos) {
-      // «bloquea» solo se manda cuando hace falta: así lo demás funciona aunque falte la migración 0010
-      filas.push({ tipo, fecha: d.toISOString().slice(0, 10), desde: cerrado ? null : desde, hasta: cerrado ? null : hasta, motivo, ...(modo === 'horas' && { bloquea: true }) })
+      filas.push({
+        tipo, fecha: d.toISOString().slice(0, 10), desde: cerrado ? null : desde, hasta: cerrado ? null : hasta,
+        // El bloqueo de horas se distingue del horario especial por la marca del motivo
+        motivo: modo === 'horas' ? `${MARCA_BLOQUEO} ${motivo ?? ''}`.trim() : motivo,
+      })
     }
   }
 
   const { error } = await createAdminClient().from('agenda_excepciones').insert(filas)
-  if (error && modo === 'horas' && /bloquea/.test(error.message)) {
-    return { error: 'Para bloquear horas falta aplicar la migración 0010 (agenda_bloqueos) en Supabase.' }
-  }
   if (error) return { error: `No se pudo guardar: ${error.message}` }
   refrescar()
   return { ok: { cerrado: 'Días bloqueados.', horas: 'Horas bloqueadas.', especial: 'Horario especial guardado.' }[modo] }
