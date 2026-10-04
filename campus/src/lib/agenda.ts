@@ -14,8 +14,14 @@ export type Ajustes = {
   activa: boolean
 }
 export type Franja = { id?: string; dia_semana: number; desde: string; hasta: string }
-export type Excepcion = { id?: string; fecha: string; desde: string | null; hasta: string | null; motivo?: string | null }
-type Ocupada = { empieza: string; termina: string }
+/**
+ * Excepción de un día concreto:
+ * - sin horas → día cerrado;
+ * - con horas y `bloquea` → esas horas no se atienden, el resto del día sigue con el horario semanal;
+ * - con horas y sin `bloquea` → horario especial (sustituye al semanal ese día).
+ */
+export type Excepcion = { id?: string; fecha: string; desde: string | null; hasta: string | null; bloquea?: boolean | null; motivo?: string | null }
+type Ocupada = { empieza: string; termina: string; tipo?: Tipo }
 
 /** Lo que necesita el calendario del cliente para pintarse. */
 export type DatosAgenda = {
@@ -48,30 +54,38 @@ export function calcularHuecos(
   const minimo = ahora.getTime() + ajustes.antelacion_horas * 3_600_000
   const hoy = claveDia(ahora, zona)
 
-  // Las citas ya cogidas, ensanchadas con el margen de descanso
+  // Las citas ya cogidas (de las dos agendas), ensanchadas con el margen de descanso
   const bloques = ocupadas.map((o) => [new Date(o.empieza).getTime() - margen, new Date(o.termina).getTime() + margen])
+  // El máximo al día cuenta solo las citas de ESTA agenda: «máximo de llamadas al día»
   const porDia = new Map<string, number>()
-  for (const o of ocupadas) porDia.set(claveDia(o.empieza, zona), (porDia.get(claveDia(o.empieza, zona)) ?? 0) + 1)
+  for (const o of ocupadas) {
+    if (o.tipo && o.tipo !== ajustes.tipo) continue
+    porDia.set(claveDia(o.empieza, zona), (porDia.get(claveDia(o.empieza, zona)) ?? 0) + 1)
+  }
 
   const huecos: string[] = []
   for (let i = 0; i <= ajustes.dias_vista; i++) {
     const dia = sumarDias(hoy, i)
     const delDia = excepciones.filter((e) => e.fecha === dia)
     if (delDia.some((e) => !e.desde)) continue // día cerrado
+    // Día completo ya: el máximo limita las citas COGIDAS, no los huecos que se enseñan
+    if (ajustes.max_dia && (porDia.get(dia) ?? 0) >= ajustes.max_dia) continue
 
-    const franjas = delDia.length
-      ? delDia.map((e) => ({ desde: e.desde!, hasta: e.hasta! }))
+    const especiales = delDia.filter((e) => !e.bloquea)
+    const franjas = especiales.length
+      ? especiales.map((e) => ({ desde: e.desde!, hasta: e.hasta! }))
       : horario.filter((f) => f.dia_semana === diaSemana(dia))
+    // Horas bloqueadas ese día (médico, un viaje…): se restan del horario
+    const bloqueadas = delDia.filter((e) => e.bloquea)
+      .map((e) => [aUtc(dia, hhmm(e.desde!), zona).getTime(), aUtc(dia, hhmm(e.hasta!), zona).getTime()])
 
-    let libresHoy = ajustes.max_dia ? ajustes.max_dia - (porDia.get(dia) ?? 0) : Infinity
     for (const f of [...franjas].sort((a, b) => a.desde.localeCompare(b.desde))) {
       const fin = aUtc(dia, hhmm(f.hasta), zona).getTime()
       for (let t = aUtc(dia, hhmm(f.desde), zona).getTime(); t + dur <= fin; t += dur) {
-        if (libresHoy <= 0) break
         if (t < minimo) continue
         if (bloques.some(([a, b]) => t < b && t + dur > a)) continue
+        if (bloqueadas.some(([a, b]) => t < b && t + dur > a)) continue
         huecos.push(new Date(t).toISOString())
-        libresHoy--
       }
     }
   }
@@ -86,9 +100,11 @@ export async function cargarAgenda(tipo: Tipo): Promise<DatosAgenda & { ajustes:
   const [{ data: aj }, { data: horario }, { data: excepciones }, { data: ocupadas }] = await Promise.all([
     admin.from('agenda_ajustes').select('*').eq('tipo', tipo).maybeSingle(),
     admin.from('agenda_horario').select('dia_semana, desde, hasta').eq('tipo', tipo),
-    admin.from('agenda_excepciones').select('fecha, desde, hasta').eq('tipo', tipo).gte('fecha', desde.slice(0, 10)),
+    // '*' y no una lista de columnas: si falta la migración 0010 (columna «bloquea»), la
+    // consulta no debe fallar, porque entonces se ignorarían también los días cerrados.
+    admin.from('agenda_excepciones').select('*').eq('tipo', tipo).gte('fecha', desde.slice(0, 10)),
     // Todas las citas vivas, de las dos agendas: el tiempo de ARGA es uno solo
-    admin.from('citas').select('empieza, termina').eq('estado', 'reservada').gte('termina', desde),
+    admin.from('citas').select('empieza, termina, tipo').eq('estado', 'reservada').gte('termina', desde),
   ])
 
   // Sin la migración 0008 aplicada no hay tablas: en producción la agenda sale

@@ -121,7 +121,7 @@ export function Reglas({ ajustes }: { ajustes: Ajustes }) {
           </select>
         </label>
         <label className={fila}>
-          <span><b>Máximo de citas al día</b><span className="block text-[12.5px] text-white/45">Vacío = sin límite.</span></span>
+          <span><b>Máximo de citas al día</b><span className="block text-[12.5px] text-white/45">Cuenta solo las de esta agenda. Al llegar al máximo, ese día deja de salir. Vacío = sin límite.</span></span>
           <input name="max_dia" type="number" min={1} max={50} defaultValue={ajustes.max_dia ?? ''} placeholder="Sin límite" className={`${CAMPO} w-28`} />
         </label>
       </div>
@@ -131,35 +131,41 @@ export function Reglas({ ajustes }: { ajustes: Ajustes }) {
   )
 }
 
-/** Bloquear días (vacaciones, festivos) o poner un horario especial un día concreto. */
+const MODOS = {
+  cerrado: { boton: 'Bloquear días', ayuda: 'Esos días no se puede reservar nada.' },
+  horas: { boton: 'Bloquear horas', ayuda: 'Esas horas no se pueden reservar; el resto del día sigue con el horario semanal.' },
+  especial: { boton: 'Horario especial un día', ayuda: 'Ese día solo se atiende en esta franja, en lugar del horario semanal.' },
+} as const
+
+/** Bloquear días (vacaciones, festivos), bloquear unas horas o poner un horario especial un día concreto. */
 export function NuevaExcepcion({ tipo }: { tipo: Tipo }) {
   const [estado, accion] = useActionState(anadirExcepcion, {})
-  const [modo, setModo] = useState<'cerrado' | 'especial'>('cerrado')
+  const [modo, setModo] = useState<keyof typeof MODOS>('cerrado')
   return (
     <form action={accion} className="rounded-2xl border border-white/12 bg-ink-3 p-5">
       <div className="flex flex-wrap gap-2 text-[13px] font-semibold">
-        {(['cerrado', 'especial'] as const).map((m) => (
+        {(Object.keys(MODOS) as (keyof typeof MODOS)[]).map((m) => (
           <label key={m} className={`cursor-pointer rounded-full border px-4 py-2 ${modo === m ? 'border-gold bg-gold/15 text-gold' : 'border-white/14 text-white/60'}`}>
             <input type="radio" name="modo" value={m} checked={modo === m} onChange={() => setModo(m)} className="sr-only" />
-            {m === 'cerrado' ? 'Bloquear días' : 'Horario especial un día'}
+            {MODOS[m].boton}
           </label>
         ))}
       </div>
+      <p className="mt-3 text-[12.5px] text-white/45">{MODOS[modo].ayuda}</p>
       <div className="mt-4 flex flex-wrap items-end gap-3 text-[11px] font-bold uppercase tracking-wider text-white/45">
         <label>Desde<input type="date" name="fecha" required className={`mt-1 block ${CAMPO}`} /></label>
-        {modo === 'cerrado'
-          ? <label>Hasta (opcional)<input type="date" name="fecha_fin" className={`mt-1 block ${CAMPO}`} /></label>
-          : <>
-              <label>De<input type="time" name="desde" defaultValue="10:00" required className={`mt-1 block ${CAMPO}`} /></label>
-              <label>A<input type="time" name="hasta" defaultValue="14:00" required className={`mt-1 block ${CAMPO}`} /></label>
-            </>}
+        {modo !== 'especial' && <label>Hasta (opcional)<input type="date" name="fecha_fin" className={`mt-1 block ${CAMPO}`} /></label>}
+        {modo !== 'cerrado' && <>
+          <label>De<input type="time" name="desde" defaultValue="10:00" required className={`mt-1 block ${CAMPO}`} /></label>
+          <label>A<input type="time" name="hasta" defaultValue={modo === 'horas' ? '12:00' : '14:00'} required className={`mt-1 block ${CAMPO}`} /></label>
+        </>}
         <label>Aplicar a
           <select name="tipo" defaultValue="ambas" className={`mt-1 block ${CAMPO}`}>
             <option value="ambas">Las dos agendas</option>
             <option value={tipo}>Solo {tipo === 'llamada' ? 'llamadas' : 'mentorías'}</option>
           </select>
         </label>
-        <label className="min-w-40 flex-1">Motivo (opcional)<input name="motivo" placeholder="Vacaciones, festivo…" className={`mt-1 block w-full ${CAMPO}`} /></label>
+        <label className="min-w-40 flex-1">Motivo (opcional)<input name="motivo" placeholder={modo === 'horas' ? 'Médico, reunión…' : 'Vacaciones, festivo…'} className={`mt-1 block w-full ${CAMPO}`} /></label>
         <button className="rounded-full bg-gold px-5 py-2.5 text-[12.5px] font-extrabold uppercase text-ink">Añadir</button>
       </div>
       <Aviso e={estado} />

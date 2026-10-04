@@ -12,7 +12,7 @@ type Cita = {
   id: string; tipo: Tipo; empieza: string; termina: string; estado: string
   nombre: string; email: string; telefono: string | null; mensaje: string | null; zona_cliente: string
 }
-type Excepcion = { id: string; tipo: Tipo; fecha: string; desde: string | null; hasta: string | null; motivo: string | null }
+type Excepcion = { id: string; tipo: Tipo; fecha: string; desde: string | null; hasta: string | null; bloquea?: boolean | null; motivo: string | null }
 
 const ETIQUETA = { llamada: 'Llamada', mentoria: 'Mentoría' }
 
@@ -132,15 +132,20 @@ export default async function AdminAgenda({ searchParams }: { searchParams: Prom
       </div>
 
       <section className="mt-10">
-        <h2 className="text-[15px] font-extrabold">Días bloqueados y horarios especiales</h2>
-        <p className="mt-1 text-[13px] text-white/45">Vacaciones, festivos o un día que atendéis en otro horario.</p>
+        <h2 className="text-[15px] font-extrabold">Días y horas bloqueados</h2>
+        <p className="mt-1 text-[13px] text-white/45">
+          Vacaciones, festivos, unas horas que no estáis o un día que atendéis en otro horario. El horario semanal no se toca:
+          esto manda solo en las fechas que elijáis.
+        </p>
         <div className="mt-4"><NuevaExcepcion tipo={tipo} /></div>
         {(excepciones?.length ?? 0) > 0 && (
           <ul className="mt-3 flex flex-wrap gap-2">
             {(excepciones as Excepcion[]).map((e) => (
               <li key={e.id} className="flex items-center gap-2.5 rounded-xl border border-white/12 bg-ink-3 px-4 py-2.5 text-[13px]">
                 <span className="font-semibold first-letter:uppercase">{diaLargo(e.fecha)}</span>
-                <span className="text-white/50">{e.desde ? `solo ${e.desde.slice(0, 5)}–${e.hasta!.slice(0, 5)}` : 'cerrado'}</span>
+                <span className="text-white/50">
+                  {!e.desde ? 'cerrado' : `${e.bloquea ? 'bloqueado' : 'solo'} ${e.desde.slice(0, 5)}–${e.hasta!.slice(0, 5)}`}
+                </span>
                 <span className="text-white/35">· {ETIQUETA[e.tipo]}{e.motivo ? ` · ${e.motivo}` : ''}</span>
                 <form action={borrarExcepcion}>
                   <input type="hidden" name="id" value={e.id} />
