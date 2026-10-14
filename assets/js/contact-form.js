@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modelo: val('modelo'),
         anio: val('anio'),
         km: val('km'),
+        combustible: val('combustible'),
         equipamiento: val('equipamiento'),
         presupuesto: val('presupuesto'),
         enlaces: val('enlaces'),

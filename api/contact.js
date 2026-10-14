@@ -24,7 +24,7 @@ function esc(s) {
     .replace(/"/g, '&quot;');
 }
 
-function buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupuesto, enlaces }) {
+function buildHtml({ name, email, phone, modelo, anio, km, combustible, equipamiento, presupuesto, enlaces }) {
   const wa = toWhatsApp(phone);
   const firstName = (name || '').trim().split(/\s+/)[0] || '';
   // Resumen de la solicitud del cliente a partir de los campos rellenados
@@ -32,6 +32,7 @@ function buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupu
   if ((modelo || '').trim()) parts.push(modelo.trim());
   if ((anio || '').trim()) parts.push(`año ${anio.trim()}`);
   if ((km || '').trim()) parts.push(`máx. ${km.trim()}`);
+  if ((combustible || '').trim()) parts.push(combustible.trim());
   if ((equipamiento || '').trim()) parts.push(equipamiento.trim());
   if ((presupuesto || '').trim()) parts.push(`presupuesto ${presupuesto.trim()}`);
   const clientRequest = parts.join(', ');
@@ -75,6 +76,7 @@ function buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupu
               ${row('Marca / modelo / motor', (esc(modelo) || '—').replace(/\n/g, '<br>'))}
               ${optRow('Año', anio)}
               ${optRow('Km máximo', km)}
+              ${optRow('Combustible', combustible)}
               ${optRow('Equipamiento', equipamiento)}
               ${optRow('Presupuesto', presupuesto)}
               ${optRow('Enlaces u observaciones', enlaces)}
@@ -138,6 +140,7 @@ async function handler(req, res) {
     const modelo = (body.modelo || '').toString().trim();
     const anio = (body.anio || '').toString().trim();
     const km = (body.km || '').toString().trim();
+    const combustible = (body.combustible || '').toString().trim();
     const equipamiento = (body.equipamiento || '').toString().trim();
     const presupuesto = (body.presupuesto || '').toString().trim();
     const enlaces = (body.enlaces || '').toString().trim();
@@ -148,7 +151,8 @@ async function handler(req, res) {
       return;
     }
 
-    if (!name || !email || !phone) {
+    // Todo obligatorio salvo enlaces/observaciones
+    if (!name || !email || !phone || !modelo || !anio || !km || !combustible || !equipamiento || !presupuesto) {
       res.status(400).json({ ok: false, error: 'Faltan campos obligatorios' });
       return;
     }
@@ -159,7 +163,7 @@ async function handler(req, res) {
       to: TO_EMAIL,
       replyTo: email,
       subject: `Nueva solicitud — ${name}${modelo ? ' · ' + modelo : ''} (${phone})`,
-      html: buildHtml({ name, email, phone, modelo, anio, km, equipamiento, presupuesto, enlaces }),
+      html: buildHtml({ name, email, phone, modelo, anio, km, combustible, equipamiento, presupuesto, enlaces }),
     });
 
     if (error) {
